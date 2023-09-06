@@ -1,0 +1,24 @@
+.logo{
+    height: 150px;
+}
+
+.header-bg {
+    background-image: url("img/img_portada.webp");
+
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    padding: 7rem 0;
+}
+
+.border-text {
+    
+    color: #fff; 
+    text-shadow:
+               -1px -1px 0 #000, /* Sombra superior izquierda (color negro) */
+                1px -1px 0 #000,  /* Sombra superior derecha (color negro) */
+               -1px 1px 0 #000,  /* Sombra inferior izquierda (color negro) */
+                1px 1px 0 #000;   /* Sombra inferior derecha (color negro) */
+    
+}
+
