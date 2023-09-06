@@ -1,10 +1,30 @@
 .logo{
-    height: 150px;
+    height: 100px;
+}
+.d-block{
+    color: #FFF;
+}
+.dropdown-item{
+    color: #fff;
+}
+.dropdown-item:hover{
+    background-color: #CCC;
+    color: #000;
+}
+.user .nav-link{
+    color: #CCC;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: font-size .2s ease;
+}
+.user .nav-link:hover{
+    font-size: 1.2rem;
+    text-decoration: none;
+
 }
 
 .header-bg {
     background-image: url("img/img_portada.webp");
-
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
     background-position: center; /* Centra la imagen de fondo */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -14,11 +34,7 @@
 .border-text {
     
     color: #fff; 
-    text-shadow:
-               -1px -1px 0 #000, /* Sombra superior izquierda (color negro) */
-                1px -1px 0 #000,  /* Sombra superior derecha (color negro) */
-               -1px 1px 0 #000,  /* Sombra inferior izquierda (color negro) */
-                1px 1px 0 #000;   /* Sombra inferior derecha (color negro) */
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; 
     
 }
 
