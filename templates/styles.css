@@ -11,18 +11,24 @@
     background-color: #CCC;
     color: #000;
 }
-.user .nav-link{
+.nav__link {
     color: #CCC;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: font-size .2s ease;
-}
-.user .nav-link:hover{
-    font-size: 1.2rem;
-    text-decoration: none;
 
 }
 
+.nav__link:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px #FFF;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.nav__link:hover:after {
+    transform: scaleX(1);
+}
 .header-bg {
     background-image: url("img/img_portada.webp");
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
