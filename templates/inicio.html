@@ -1,7 +1,7 @@
 {% extends 'plantilla.html' %}
 {% block titulo %} Inicio {% endblock %}
 {% block contenido %} 
-
+{% load static %}
     <!-- Encabezado de la página -->
     <header class="bg-primary text-white text-center py-7 header-bg ">
         <h1 class="border-text">Una experiencia inigualable en materia de hoteleria</h1>
@@ -14,7 +14,7 @@
                 <div class="col-md-6">
                     <div class="my-4">
                         <!-- Agrega la ruta de la imagen en el atributo "src" -->
-                        <img src="img/img_portada.webp" alt="Descripción de la imagen" class="img-fluid">
+                        <img src="{% static 'img/img_portada.webp'%}" alt="Descripción de la imagen" class="img-fluid">
                     </div>
                 </div>
                 <!-- Columna de la descripción (col-md-6) -->
@@ -49,7 +49,7 @@
             <!-- Tarjeta de habitación 1 -->
             <div class="col-md-4">
                 <div class="card">
-                    <img src="img/habitacion_prueba.webp" class="card-img-top" alt="Habitación de lujo">
+                    <img src="{% static 'img/habitacion_prueba.webp'%}" class="card-img-top" alt="Habitación de lujo">
                     <div class="card-body">
                         <h5 class="card-title">Habitación de Lujo</h5>
                         <p class="card-text">Disfruta de una estancia de lujo con vistas espectaculares.</p>
@@ -60,7 +60,7 @@
             <!-- Tarjeta de habitación 2 -->
             <div class="col-md-4">
                 <div class="card">
-                    <img src="img/habitacion_prueba.webp" class="card-img-top" alt="Habitación Estándar">
+                    <img src="{% static 'img/habitacion_prueba.webp'%}" class="card-img-top" alt="Habitación Estándar">
                     <div class="card-body">
                         <h5 class="card-title">Habitación Estándar</h5>
                         <p class="card-text">Una habitación cómoda y acogedora para tu estancia.</p>
@@ -71,7 +71,7 @@
             <!-- Tarjeta de habitación 3 -->
             <div class="col-md-4">
                 <div class="card">
-                    <img src="img/habitacion_prueba.webp" class="card-img-top" alt="Suite Familiar">
+                    <img src="{% static 'img/habitacion_prueba.webp'%}" class="card-img-top" alt="Suite Familiar">
                     <div class="card-body">
                         <h5 class="card-title">Suite Familiar</h5>
                         <p class="card-text">Ideal para familias que desean espacio adicional.</p>

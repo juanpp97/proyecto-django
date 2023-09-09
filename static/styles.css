@@ -17,7 +17,10 @@
     text-decoration: none;
 
 }
+.nav__link:hover{
+    text-decoration: none;
 
+}
 .nav__link:after {
     display: block;
     content: '';
@@ -28,6 +31,8 @@
 
 .nav__link:hover:after {
     transform: scaleX(1);
+        text-decoration: none;
+
 }
 .header-bg {
     background-image: url("img/img_portada.webp");
