@@ -1,0 +1,54 @@
+.logo{
+    height: 100px;
+}
+.d-block{
+    color: #FFF;
+}
+.dropdown-item{
+    color: #fff;
+}
+.dropdown-item:hover{
+    background-color: #CCC;
+    color: #000;
+}
+.nav__link {
+    color: #CCC;
+    font-size: 1.1rem;
+    text-decoration: none;
+
+}
+.nav__link:hover{
+    text-decoration: none;
+
+}
+.nav__link:after {
+    display: block;
+    content: '';
+    border-bottom: solid 2px #FFF;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.nav__link:hover:after {
+    transform: scaleX(1);
+        text-decoration: none;
+
+}
+.header-bg {
+    background-image: url("img/img_portada.webp");
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
+    background-position: center; /* Centra la imagen de fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    padding: 7rem 0;
+}
+
+.border-text {
+    
+    color: #fff; 
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; 
+    
+}
+
+
+
+

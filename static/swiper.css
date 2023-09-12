@@ -1,0 +1,23 @@
+
+.swiper-slide {width: 100%}
+.swiper-slide > img{
+    position:relative;
+    width: 100%;
+    height: 90vh;
+    padding: 0 16px;
+    padding-top: 16px;
+    object-fit: contain;
+}
+.slide-title{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    width: 20%;
+    z-index: 99;
+    padding: 16px;
+    background-color: rgb(33,37,41) !important;
+    text-align: center;
+}
+section{background-color: rgba(123, 123, 123, 0);}
