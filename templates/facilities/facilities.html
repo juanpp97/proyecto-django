@@ -1,0 +1,24 @@
+{% extends 'plantilla.html' %}
+{% block titulo %} Instalaciones {% endblock %}
+
+{% block contenido %}
+{% load static %}
+
+<section></section>
+<section class="facilities_section02">
+    <div class="swiper-container" loop="true" style="overflow: hidden;">
+        <div class="swiper-wrapper">
+        {% for dato in imagenes%}
+            <div class="swiper-slide">
+                <img src="{% static dato.img %}" alt="{{ dato.titulo }}" />
+                <p class="slide-title">{{ dato.titulo }}</p>
+            </div> 
+        {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+<script src="{% static 'scripts/SwiperSetup.js' %}"></script>  
+
+{% endblock  %}
