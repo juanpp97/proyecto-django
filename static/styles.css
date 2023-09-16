@@ -29,16 +29,19 @@
     transition: transform 0.2s ease;
 }
 
-.nav__link:hover:after {
+.nav__link:hover:not(#active):after{
     transform: scaleX(1);
-        text-decoration: none;
+    text-decoration: none;
 
+}
+#active{
+    border-bottom: 2px solid #CCC;
 }
 .header-bg {
     background-image: url("img/img_portada.webp");
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
-    background-position: center; /* Centra la imagen de fondo */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
     padding: 7rem 0;
 }
 
@@ -48,7 +51,37 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; 
     
 }
-
-
+/* Habitaciones */
+.hero_habitaciones{
+    background-image: url("img/hero_habitaciones.webp");
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    padding: 7rem 0;
+    box-shadow: inset 10px 10px 10000px #000;
+}
+.imagen_card{
+   height: 250px;
+   object-fit: cover; 
+}
+.price{
+    font-size: 1.2rem;
+    color: #060;
+}
+.card_carousel .carousel-indicators button{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    opacity: 0;
+}
+.card_carousel:hover .carousel-indicators button:not(.active){
+    opacity: 0.5;
+}
+.card_carousel:hover .carousel-indicators button.active{
+    opacity: 1;
+}
+.description{
+    font-size: 1.1rem;
+}
 
 
