@@ -1,14 +1,24 @@
 from django.shortcuts import render
 from datetime import datetime
-# Create your views here.
+
 def index(request):
-    return render(request, "inicio.html", {"ahora": datetime.now()} )
+    context = {
+        "date": datetime.now(),
+        "active": "index",
+    }
+    return render(request, "reservas/inicio.html", context)
 
 def rooms(request):
-    return render(request, 'habitaciones.html')
+    context = {
+        "date": datetime.now(),
+        "active": "rooms",
+    }
+    return render(request, 'reservas/habitaciones.html')
 
 def facilities(request):
     context = {
+        "date": datetime.now(),
+        "active": "rooms",
         "imagenes": [
             {"img":"img/facilities/instalaciones_01.webp","titulo":"example 1"},
             {"img":"img/facilities/instalaciones_02.webp","titulo":"example 2"},
