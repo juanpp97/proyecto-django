@@ -116,5 +116,10 @@ def facilities(request):
             ]
     }
     return render(request, "./facilities/facilities.html", context)
+
 def contact(request):
-    return "Pagina de contacto"
+    context = {
+        "date": datetime.now(),
+        "active": "contact",
+        }
+    return render(request, "reservas/contacto.html", context)
