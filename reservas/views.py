@@ -106,16 +106,17 @@ def rooms(request):
 
 def facilities(request):
     context = {
-        "hero":{"title":"Instalaciones","content":"Queremos que tu estancia en nuestro exuberante hotel sea realmente inolvidable. Por eso prestamos especial atención a todas tus necesidades para que podamos asegurarte una experiencia única."},
+        "hero":{"title":"DSH","content":"Queremos que tu estancia en nuestro exuberante hotel sea realmente inolvidable. Por eso prestamos especial atención a todas tus necesidades para que podamos asegurarte una experiencia única. habitaciones exquisitamente diseñadas, piscina y jacuzzi, un restaurante que celebra sabores auténticos, y servicios personalizados, en Django Hotel Suites creamos experiencias inolvidables. Únete a nosotros y sumérgete en un mundo donde la elegancia y la comodidad danzan en armonía."},
         "date": datetime.now(),
         "active": "facilities",
         "imagenes": [
-            {"img":"img/facilities/instalaciones_01.webp","titulo":"example 1"},
-            {"img":"img/facilities/instalaciones_02.webp","titulo":"example 2"},
-            {"img":"img/facilities/instalaciones_03.webp","titulo":"example 3"},
-            {"img":"img/facilities/instalaciones_04.webp","titulo":"example 4"},
-            {"img":"img/facilities/instalaciones_05.webp","titulo":"example 5"},
-            {"img":"img/facilities/instalaciones_06.webp","titulo":"example 5"},
+            {"img":"img/facilities/instalacion_general.jpg"},
+            {"img":"img/facilities/instalaciones_01.webp"},
+            {"img":"img/facilities/instalaciones_02.webp"},
+            {"img":"img/facilities/instalaciones_03.webp"},
+            {"img":"img/facilities/instalaciones_04.webp"},
+            {"img":"img/facilities/instalaciones_05.webp"},
+            {"img":"img/facilities/instalaciones_06.webp"},
             ],
         "cards":[
             {"title":"Sevicios nauticos","img":"img/facilities/instalaciones_01.webp","comentario":"¡Explora las maravillas del mar con nuestra gama de servicios náuticos! Desde emocionantes paseos en motos acuáticas hasta relajantes viajes en lancha y barco, tenemos todo lo que necesitas para una experiencia inolvidable en el agua. ¡Prepárate para navegar hacia la diversión y la aventura!"},

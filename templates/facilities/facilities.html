@@ -21,7 +21,6 @@
     </div>
 </div>
 <section class="facilities_hero">
-    <img src="{% static 'img/facilities/instalacion_general.webp' %}"/>
     <article>
         <h1>
             {{hero.title}}
@@ -31,12 +30,12 @@
         </p>
     </article>
 </section>
-<section class="facilities_list">
+<section class="facilities_list observables">
     {% for card in cards  %}
         <div class="facilities_card">
             <img src="{% static card.img %}"/>
             <h3>{{ card.title }}</h3>
-            {% comment %} <p>{{ card.comentario }}</p> {% endcomment %}
+            <div class="facilities_comment"><h4>{{ card.comentario }}</h4></div>
         </div>
     {% endfor %}
 </section>
