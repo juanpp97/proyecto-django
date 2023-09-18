@@ -1,0 +1,189 @@
+{% extends 'plantilla.html' %}
+{% block titulo %} Inicio {% endblock %}
+{% block contenido %} 
+{% load static %}
+<main>
+    <section class="hero_inicio text-white text-center py-7">
+        <h1 class="border-text">Una experiencia inigualable de hotelería</h1>
+    </section>
+    <section class="seccion-intro">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Columna de la imagen (col-md-6) -->
+                <div class="col-md-6">
+                    <div class="my-4">
+                        <!-- Agrega la ruta de la imagen en el atributo "src" -->
+                        <img src="{% static "img/portada.webp" %}" alt="Descripción de la imagen" class="img-fluid rounded">
+                    </div>
+                </div>
+                <!-- Columna de la descripción (col-md-6) -->
+                <div class="col-md-6">
+                    <div class="my-4">
+                        <!-- Agrega tu descripción aquí -->
+                        <h2 class="text-center ">Django Suites Hotel</h2>
+                        <p class="">Bienvenido a Django Hotel Suites, donde el confort se convierte en armonía
+
+                            Descubre la fusión perfecta de lujo y comodidad en el corazón de la ciudad. Con seis tipos
+                            de habitaciones exquisitamente diseñadas, piscina y jacuzzi, un restaurante que celebra
+                            sabores auténticos, y servicios personalizados, en Django Hotel Suites creamos experiencias
+                            inolvidables. Únete a nosotros y sumérgete en un mundo donde la elegancia y la comodidad
+                            danzan en armonía.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sección de habitaciones -->
+    <section class="seccion_habitaciones container-fluid py-3 d-flex align-items-center flex-column row-gap-3">
+        <h2 class="text-center">Nuestras Habitaciones</h2>
+        <div class="row container">
+
+
+            <!-- Tarjeta de habitación 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <img src="{% static "img/rooms/individual1.webp" %}" class="imagen_hab card-img-top" alt="Habitación de lujo">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center border-bottom py-1">Habitación Individual</h5>
+                        <p class="card-text">La clase de habitación ideal para viajeros solitarios.</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Tarjeta de habitación 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <img src="{% static "img/rooms/familiar1.webp" %}" class="imagen_hab card-img-top" alt="Habitación Estándar">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center border-bottom py-1">Habitación Familiar</h5>
+                        <p class="card-text">El tipo de habitación diseñada para disfrutar al máximo de tus vacaciones
+                            en familia.</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Tarjeta de habitación 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    <img src="{% static "img/rooms/suite1.webp" %}" class="imagen_hab card-img-top" alt="Suite Familiar">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title text-center border-bottom py-1">Suite</h5>
+                        <p class="card-text">Una habitación especialmente pensada para viajeros más exigentes.</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Boton "Ver mas" -->
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-dark fs-5" type="button">Conocé todas nuestras suites</button>
+            </div>
+    </section>
+
+
+    <!-- Carrousel -->
+    <section class="seccion_carousel h-100">
+
+        <div id="carouselExampleIndicators" class="carousel slide py-2">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner py-2" style="height: 500px">
+                <div class="carousel-item active">
+                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
+    <!-- Sección de adicionales -->
+    <section class="d-flex flex-column row-gap-3 align-items-center border-bottom py-2 text-center seccion_add container-fluid py-3">
+        <h2 class="text-center">Nuestros servicios</h2>
+        <div class="row container">
+
+
+            <!-- Tarjeta de habitación 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg h-100">
+                    <img src="{% static "img/card_spa.webp" %}" class="card-img-top" alt="Zona de relajación">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title border-bottom py-2 text-center">Vení a relajarte</h5>
+                        <p class="card-text text-start">Nuestro Spa Acqua Di Django, cuenta con piscina climatizada, sala de relax,
+                            sauna, vestuarios, y servicio de masajes (arancelados).También te esperamos en nuestro SUM y
+                            gimnasio con amplia variedad de maquinas a tú disposición</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Tarjeta de habitación 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg h-100">
+                    <img src="{% static "img/card_resto.webp" %}" class="card-img-top" alt="Restorant">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title border-bottom py-2 text-center">Restó Django Suites</h5>
+                        <p class="card-text text-start">En nuestro Restaurante "DjangoSuites" podés disfrutar no sólo de un
+                            completo desayuno buffet, sino de múltiples opciones para almuerzo, merienda y cena y una
+                            completa carta de vinos.</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Tarjeta de habitación 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg h-100">
+                    <img src="{% static "img/card_asist.webp" %}" class="card-img-top" alt="Suite Familiar">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title border-bottom py-2 text-center">Asistencia online</h5>
+                        <p class="card-text text-start">En cada habitación vas a poder
+                            consultar sobre tu reserva, servicios adicionales, solicitar servicio a la habitación y
+                            conocer todos los aranceles con comodidad y rapidez.</p>
+                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Boton "Ver mas" -->
+            <div class="d-grid gap-2 col-12 mx-auto">
+                <button class="btn btn-dark fs-5" type="button">Conocé nuestros servicios</button>
+            </div>
+    </section>
+
+
+</main>
+{% endblock %}
