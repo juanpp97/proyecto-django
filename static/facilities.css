@@ -1,0 +1,125 @@
+html{
+    --color-base: rgb(33,37,41); 
+}
+
+.swiper-container{
+    width: 100vw;
+    overflow: hidden;
+    height: calc(275px * 2);
+    user-select: none;
+}
+
+.swiper-slide {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+.swiper-slide > img{
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    transform: translateY(-20%);
+    transition: all 20s ease;
+}
+.swiper-slide > img:hover{
+    transform: scale(1.1);
+    transition: all 20s ease;
+}
+.slide-title{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    width: 20%;
+    z-index: 99;
+    padding: 16px;
+    background-color: var(--color-base) !important;
+    text-align: center;
+}
+
+.swiper-title{
+    position: absolute;
+    left: 50%;
+    z-index: 99;
+    transform: translateX(-50%);
+    color: white;
+    top: calc(275px*1.5);
+}
+
+
+
+.facilities_hero{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;   
+    align-items: center;
+    background-color:  var(--color-base) ;
+    margin-top: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.facilities_hero article{
+    max-width: 70%;
+    color: white;
+    position: absolute;
+    left: 50%;
+}
+.facilities_hero article h1 ,.facilities_hero article p {
+    background-blend-mode: difference;
+}
+@media screen and (max-width: 768px) {
+ 
+    .swiper-container{
+        display: none;
+    }
+    
+}
+
+
+
+
+.facilities_list{
+    max-width: 80%;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-areas: repeat(1,1fr);
+    grid-gap: 48px;
+
+}
+.facilities_card{
+    width: 100%;
+    background-color:  var(--color-base) ;
+}
+.facilities_card  img{
+    width: 100%;
+    object-fit: contain;
+}
+/* .facilities_card  h3{
+
+} */
+.facilities_card {
+    & h3{
+        position: absolute;
+        z-index: 99;
+        left: 50%;
+        transform: translate(-50%,-80%);
+        color:   white;
+        background-color: var(--color-base) ;
+        width: 30%;
+        padding: 8px 16px;
+        text-align: center;  
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .facilities_list{
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+   
+}

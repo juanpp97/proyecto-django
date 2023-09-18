@@ -9,7 +9,7 @@
     <!-- Renderiza elementos específicos para dispositivos móviles aquí -->
     <p>Estás en un dispositivo móvil.</p>
 {% else %}
-  
+
 <div class="swiper-container" loop="true" style="overflow: hidden;">
     <h1 class="swiper-title">Conoce nuestras instalaciones</h1>
     <div class="swiper-wrapper">
@@ -20,16 +20,23 @@
     {% endfor %}
     </div>
 </div>
+<section class="facilities_hero">
+    <img src="{% static 'img/facilities/instalacion_general.webp' %}"/>
+    <article>
+        <h1>
+            {{hero.title}}
+        </h1>
+        <p>
+            {{hero.content}}
+        </p>
+    </article>
+</section>
 <section class="facilities_list">
     {% for card in cards  %}
         <div class="facilities_card">
-            <header>
-                <img src="{% static card.img %}"/>
-            </header>
-            <main>
-                <h3>{{ card.title }}</h3>
-                <p>{{ card.comentario }}</p>
-            </main>
+            <img src="{% static card.img %}"/>
+            <h3>{{ card.title }}</h3>
+            {% comment %} <p>{{ card.comentario }}</p> {% endcomment %}
         </div>
     {% endfor %}
 </section>
