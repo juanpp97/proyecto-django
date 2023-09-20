@@ -11,10 +11,10 @@
 {% else %}
 
 <div class="swiper-container" loop="true" style="overflow: hidden;">
-    <h1 class="swiper-title">Conoce nuestras instalaciones</h1>
+    <h1 class="swiper_title">Conoce nuestras instalaciones</h1>
     <div class="swiper-wrapper">
     {% for dato in imagenes%}
-        <div class="swiper-slide">
+        <div class="swiper-slide ">
             <img  src="{% static dato.img %}" alt="{{ dato.titulo }}" />
         </div> 
     {% endfor %}
@@ -22,7 +22,7 @@
 </div>
 <section class="facilities_hero">
     <article>
-        <h1>
+        <h1 class="facilities_card_title">
             {{hero.title}}
         </h1>
         <p>
@@ -32,9 +32,9 @@
 </section>
 <section class="facilities_list observables">
     {% for card in cards  %}
-        <div class="facilities_card">
+        <div class="facilities_card snap">
             <img src="{% static card.img %}"/>
-            <h3>{{ card.title }}</h3>
+            <h4 class="facilities_title">{{ card.title|upper }}</h4>
             <div class="facilities_comment"><h4>{{ card.comentario }}</h4></div>
         </div>
     {% endfor %}
