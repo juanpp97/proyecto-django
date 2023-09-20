@@ -58,7 +58,7 @@
                             <select class="form-select" id="room_view" name="room_view" required>
                                 <option value="frente" selected>Frente</option>
                                 <option value="playa">Playa</option>
-                            </select>
+                            </select> 
                             {% endif %}
 
 
@@ -72,8 +72,7 @@
                         <label for="date_in">Fecha de Ingreso:</label>
                         <div>
                             <input type="date" class="form-control" name="date_in" id="date_in"
-                                placeholder="Ingrese fecha de Ingreso" required min="{{min_date_check_in|date:"
-                                Y-m-d"}}" max="{{max_date_check_in|date:" Y-m-d"}}" value="">
+                                placeholder="Ingrese fecha de Ingreso" required min="{{min_date_check_in|date:"Y-m-d"}}" max="{{max_date_check_in|date:"Y-m-d"}}">
                         </div>
 
                     </div>
@@ -147,8 +146,7 @@
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="date_in">Fecha de Ingreso:</label>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_in}}"
-                                name="date_in" id="date_in" required>
+                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_in}}" name="date_in" id="date_in" required>
 
                         </div>
 

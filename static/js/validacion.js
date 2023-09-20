@@ -11,6 +11,8 @@ let dateInMin = dateIn.min;
 
 /* Cambio las fechas mínimas y máximas según selección*/
 dateIn.addEventListener('change', (e) => {
+  console.log(dateIn.value);
+  console.log(dateInMax);
   if(dateIn.value > dateInMin && dateIn.value < dateInMax){
     dateOut.value = ""
     let minDateOut = new Date(dateIn.value);
