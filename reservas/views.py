@@ -242,8 +242,10 @@ def reservation(request, id_hab):
         name = request.POST.getlist("room_type")[0]
         num_people = request.POST["num_people"]
         room_view = request.POST.getlist("room_view")[0]
-        date_in = request.POST["date_in"]
-        date_out = request.POST["date_out"]
+        date_in = request.POST["date_in"].split("-")
+        date_in = date_in[2] + "/" + date_in[1] + "/" + date_in[0]
+        date_out = request.POST["date_out"].split("-")
+        date_out = date_out[2] + "/" + date_out[1] + "/" + date_out[0]
         comment = request.POST["comment"]
         form = {"name": name, "num_people": num_people, "room_view": room_view, "date_in": date_in, "date_out": date_out, "comment": comment}
 
