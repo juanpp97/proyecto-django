@@ -129,6 +129,32 @@
 body{
     overflow-x: hidden;
 }
+/* Reserva */
+legend, label {
+    font-weight:550;
+}
+
+#form_comment{
+    position: relative;
+
+}
+.comment { 
+    min-height: 60px;
+    width: 80%;
+
+}
+.word-counter {
+    position: absolute;
+    bottom: -18px;
+    right: 6%;
+    color: #AAA;
+}
+
+@media screen and (max-width: 768px) {
+    .word-counter{
+        right: 14%;
+    }    
+}
 @media screen and (min-width: 990px) {
     .carousel-item img{
         width: 100%;
