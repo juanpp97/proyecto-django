@@ -239,9 +239,9 @@ def reservation(request, id_hab):
             "available": False,
         }
     if request.method == "POST":
-        name = request.POST.getlist("room_type")
+        name = request.POST.getlist("room_type")[0]
         num_people = request.POST["num_people"]
-        room_view = request.POST.getlist("room_view")
+        room_view = request.POST.getlist("room_view")[0]
         date_in = request.POST["date_in"]
         date_out = request.POST["date_out"]
         comment = request.POST["comment"]
