@@ -5,8 +5,8 @@ const comentario = document.querySelector("#comment")
 const maxLength = 1000;
 comentario.maxLength = maxLength;
 contador.innerHTML = maxLength
-dateInMax = dateIn.max;
-dateInMin = dateIn.min;
+let dateInMax = dateIn.max;
+let dateInMin = dateIn.min;
 
 
 /* Cambio las fechas mínimas y máximas según selección*/
