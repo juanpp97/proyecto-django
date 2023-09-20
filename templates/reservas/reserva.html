@@ -12,10 +12,13 @@
 
     <div class="container mt-4">
 
-         {% if available == False %}
-         
-        <form name="disp" id="disp" action="{% url 'reservation' room.id %}" method="POST" enctype="application/x-www-form-urlencoded">
+        {% if available == False %}
+
+        <form name="disp" id="disp" action="{% url 'reservation' room.id %}" method="POST"
+            enctype="application/x-www-form-urlencoded">
+
             {% csrf_token %}
+
             <!-- Campos de la reserva -->
             <fieldset class="section border border-black p-2 mb-4">
                 <legend class="float-none w-auto px-2 fs-4 text-center">Datos de la reserva</legend>
@@ -25,28 +28,32 @@
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <div>
                             <label for="room_type" class="col-form-label">Tipo de habitación: </label>
-
                         </div>
-                            <div>
-                                <input type="text" readonly class="form-control-plaintext" value="{{room.name}}" name="room_type" id="room_type" required>
-                            </div>
+                        <div>
+                            <input type="text" readonly class="form-control-plaintext" value="{{room.name}}"
+                                name="room_type" id="room_type" required>
+                        </div>
                     </div>
+
                     <!-- Número de personas -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="num_people" class="col-form-label">Número de personas (Max. {{room.capacity}}): </label>
+                        <label for="num_people" class="col-form-label">Número de personas (Max. {{room.capacity}}):
+                        </label>
                         <div>
                             <!-- Cambiar máximos y minimos de acuerdo a la habitación -->
-                            <input type="number" class="form-control" id="num_people" name="num_people" max="{{room.capacity}}"
-                                min="1" value="1" required>
+                            <input type="number" class="form-control" id="num_people" name="num_people"
+                                max="{{room.capacity}}" min="1" value="1" required>
 
                         </div>
                     </div>
-                    <!-- Vista (Las opciones dependerán del tipo de habitación) -->
+
+                    <!-- Vista -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="room_view" class="col-form-label">Vista: </label>
                         <div>
                             {% if room.view|lower != "ambas" %}
-                                <input type="text" readonly class="form-control-plaintext" value="{{room.view}}" name="room_view" id="room_view" required>
+                            <input type="text" readonly class="form-control-plaintext" value="{{room.view}}"
+                                name="room_view" id="room_view" required>
                             {% else %}
                             <select class="form-select" id="room_view" name="room_view" required>
                                 <option value="frente" selected>Frente</option>
@@ -54,33 +61,35 @@
                             </select>
                             {% endif %}
 
-                            
+
                         </div>
                     </div>
                 </div>
 
+                <!-- Fecha de Check In  -->
                 <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
-                    <!-- Fecha de Check In (Modificar minimo de acuerdo a la fecha de hoy con filtros) -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="date_in">Fecha de Ingreso:</label>
                         <div>
                             <input type="date" class="form-control" name="date_in" id="date_in"
-                                placeholder="Ingrese fecha de Ingreso" required min="{{min_date_check_in|date:"Y-m-d"}}" max="{{max_date_check_in|date:"Y-m-d"}}">
+                                placeholder="Ingrese fecha de Ingreso" required min="{{min_date_check_in|date:"
+                                Y-m-d"}}" max="{{max_date_check_in|date:" Y-m-d"}}" value="">
                         </div>
 
                     </div>
+
                     <!-- Fecha de Check Out -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="date_out">Fecha de Salida:</label>
                         <div>
                             <input type="date" class="form-control" name="date_out" id="date_out"
-                                placeholder="Ingrese fecha de salida" required
-                                disabled>
+                                placeholder="Ingrese fecha de salida" required disabled>
                         </div>
                     </div>
 
                 </div>
 
+                <!-- Comentarios -->
                 <div class="d-flex justify-content-center flex-md-row flex-column align align-items-center align-items-md-start gap-md-3 gap-2 mb-3"
                     id="form_comment">
                     <label for="comment">Comentarios:</label>
@@ -91,25 +100,26 @@
                 <button class="btn btn-success d-block mx-auto" type="submit"> Verificar disponibilidad </button>
 
             </fieldset>
-     
-         </form>
-    
+
+        </form>
+
         {% else %}
 
         <form name="fact" id="fact" action="" method="POST" enctype="application/x-www-form-urlencoded">
             {% csrf_token %}
+
             <!-- Campos de la reserva -->
             <fieldset class="section border border-black p-2 mb-4">
                 <legend class="float-none w-auto px-2 fs-4 text-center">Datos de la reserva</legend>
-
                 <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
-                    <!-- Tipo de Habitacion (de la url parametrizada) -->
+                    <!-- Tipo de Habitacion -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <div>
                             <label for="room_type" class="col-form-label">Tipo de habitación: </label>
                         </div>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.name}}" name="room_type" id="room_type" required>
+                            <input type="text" readonly class="form-control-plaintext" value="{{form.name}}"
+                                name="room_type" id="room_type" required>
 
                         </div>
                     </div>
@@ -117,7 +127,8 @@
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="num_people" class="col-form-label">Número de personas: </label>
                         <div>
-                            <input type="number" readonly class="form-control-plaintext" value="{{form.num_people}}" name="num_people" id="num_people" required>
+                            <input type="number" readonly class="form-control-plaintext" value="{{form.num_people}}"
+                                name="num_people" id="num_people" required>
 
                         </div>
                     </div>
@@ -125,7 +136,8 @@
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="room_view" class="col-form-label">Vista: </label>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.room_view|capfirst}}" name="room_view" id="room_view" required>
+                            <input type="text" readonly class="form-control-plaintext"
+                                value="{{form.room_view|capfirst}}" name="room_view" id="room_view" required>
                         </div>
                     </div>
                 </div>
@@ -135,16 +147,18 @@
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="date_in">Fecha de Ingreso:</label>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_in}}" name="date_in" id="date_in" required>
+                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_in}}"
+                                name="date_in" id="date_in" required>
 
-                         </div>
+                        </div>
 
                     </div>
                     <!-- Fecha de Check Out -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
                         <label for="date_out">Fecha de Salida:</label>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_out}}" name="date_out" id="date_out" required>
+                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_out}}"
+                                name="date_out" id="date_out" required>
                         </div>
                     </div>
 
@@ -160,8 +174,8 @@
                 <button class="btn btn-success d-block mx-auto" type="submit"> Verificar disponibilidad </button>
 
             </fieldset>
-     
-         <!-- Datos de facturación -->
+
+            <!-- Datos de facturación -->
             <fieldset class="section border border-black p-2 mb-4">
                 <legend class="float-none w-auto px-2 fs-4 text-center">Datos de facturación</legend>
 
@@ -236,11 +250,11 @@
                 <button class="btn btn-danger" type="reset"> Borrar </button>
             </div>
         </form>
-         {% endif %}
-        
+        {% endif %}
+
     </div>
 
-       
+
 </main>
 <script src="{% static 'js/validacion.js' %}"></script>
 {% endblock contenido %}
