@@ -126,8 +126,9 @@
     font-size: 1.1rem;
 }
 
-
-
+body{
+    overflow-x: hidden;
+}
 @media screen and (min-width: 990px) {
     .carousel-item img{
         width: 100%;

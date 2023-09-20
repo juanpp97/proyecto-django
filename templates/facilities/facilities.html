@@ -4,21 +4,43 @@
 {% block contenido %}
 {% load static %}
 
-<section></section>
-<section class="facilities_section02">
-    <div class="swiper-container" loop="true" style="overflow: hidden;">
-        <div class="swiper-wrapper">
-        {% for dato in imagenes%}
-            <div class="swiper-slide">
-                <img src="{% static dato.img %}" alt="{{ dato.titulo }}" />
-                <p class="slide-title">{{ dato.titulo }}</p>
-            </div> 
-        {% endfor %}
-        </div>
-    </div>
 
+{% if 'Mobile' in request.user_agent.string %}
+    <!-- Renderiza elementos específicos para dispositivos móviles aquí -->
+    <p>Estás en un dispositivo móvil.</p>
+{% else %}
+
+<div class="swiper-container" loop="true" style="overflow: hidden;">
+    <h1 class="swiper_title">Conoce nuestras instalaciones</h1>
+    <div class="swiper-wrapper">
+    {% for dato in imagenes%}
+        <div class="swiper-slide ">
+            <img  src="{% static dato.img %}" alt="{{ dato.titulo }}" />
+        </div> 
+    {% endfor %}
+    </div>
+</div>
+<section class="facilities_hero">
+    <article>
+        <h1 class="facilities_card_title">
+            {{hero.title}}
+        </h1>
+        <p>
+            {{hero.content}}
+        </p>
+    </article>
+</section>
+<section class="facilities_list observables">
+    {% for card in cards  %}
+        <div class="facilities_card snap">
+            <img src="{% static card.img %}"/>
+            <h4 class="facilities_title">{{ card.title|upper }}</h4>
+            <div class="facilities_comment"><h4>{{ card.comentario }}</h4></div>
+        </div>
+    {% endfor %}
 </section>
 
+{% endif %}
 <script src="{% static 'scripts/SwiperSetup.js' %}"></script>  
 
 {% endblock  %}
