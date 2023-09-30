@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+#TEST GIT BOT
 urlpatterns = [
     path('', views.index, name="index"),
     path('habitaciones/', views.rooms, name="rooms"),
