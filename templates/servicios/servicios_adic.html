@@ -8,8 +8,72 @@
 
     {% include 'header.html' %}
     
-    
-    
+    <!--Comienzo FrontEnd del body servicios-->
+
+    <section class="hero_habitaciones text-white text-center py-7">
+      <h1 class="border-text">Servicio a la habitación</h1>
+    </section>
+
+<!--En la siguiente section hay dos columnas, la de la izquierda tiene un carousel de tres imagenes y la derecha un list-group de opciones-->
+    <section>
+      <div class="container">
+          <div class="row justify-content-between">
+              <!-- Columna de la imagen (col-md-6) -->
+                <div class="col-md-6">
+                  <!--Inicio carousel-->
+                    <div id="carouselExample" class="carousel slide">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img src="{% static "img/roomservice/comida" %}{{image}}" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="{% static "img/roomservice/cafeteria" %}{{image}}" class="d-block w-100" alt="">
+                        </div>
+                        <div class="carousel-item">
+                          <img src="{% static "img/roomservice/cocktails" %}{{image}}" class="d-block w-100" alt="">
+                        </div>
+                      </div>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  <!--Fin carousel-->
+                </div>
+
+              <!-- Columna de la descripción (col-md-6) -->
+                <div class="col-md-6">
+                  <div class="my-4">
+                    <!-- Agrega tu descripción aquí -->
+                      <h2 class="text-center">¿Qué desea pedir?</h2>
+
+                      <!--Inicio List-group de Bootstrap-->
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
+                          <label class="form-check-label" for="firstCheckbox">Comida</label>
+                        </li>
+                        <li class="list-group-item">
+                          <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
+                          <label class="form-check-label" for="secondCheckbox">Cafetería</label>
+                        </li>
+                        <li class="list-group-item">
+                          <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
+                          <label class="form-check-label" for="thirdCheckbox">Cocktails</label>
+                        </li>
+                      </ul>
+                      <!--Fin list-group de Bootstrap-->
+                  </div>
+                </div>
+
+          </div>
+      </div>
+    </section>
+    <!--Fin FrontEnd del body servicios-->
     {% include 'footer.html' %}
   
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
