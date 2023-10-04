@@ -48,7 +48,11 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center border-bottom py-1">Habitación Individual</h5>
                         <p class="card-text">La clase de habitación ideal para viajeros solitarios.</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                        <form  class="align-self-end" action="{% url 'rooms' %}" method="get">
+                            <button class="btn btn-outline-secondary mt-auto" type="submit">Ver más</button>
+                        </form>
+                        
+                        <!-- <button type="submit" class="btn btn-outline-secondary mt-auto align-self-end" >Ver más</button> -->
                     </div>
                 </div>
             </div>
@@ -63,7 +67,9 @@
                         <h5 class="card-title text-center border-bottom py-1">Habitación Familiar</h5>
                         <p class="card-text">El tipo de habitación diseñada para disfrutar al máximo de tus vacaciones
                             en familia.</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                            <form  class="align-self-end" action="{% url 'rooms' %}" method="get">
+                                <button class="btn btn-outline-secondary mt-auto" type="submit">Ver más</button>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -76,15 +82,18 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center border-bottom py-1">Suite</h5>
                         <p class="card-text">Una habitación especialmente pensada para viajeros más exigentes.</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+                        <form  class="align-self-end" action="{% url 'rooms' %}" method="get">
+                            <button class="btn btn-outline-secondary mt-auto" type="submit">Ver más</button>
+                        </form>
                     </div>
                 </div>
             </div>
 
 
             <!-- Boton "Ver mas" -->
-            <div class="d-grid gap-2 col-12 mx-auto">
-                <button class="btn btn-dark fs-5" type="button">Conocé todas nuestras suites</button>
+            <div class="d-grid gap-2 col-12 mx-auto fs-5">
+                
+                <button class="btn btn-dark fs-5" type="submit" ><a class="text-white text-decoration-none"  href="{% url 'rooms' %}">Conocé todas nuestras suites</button></a>
             </div>
     </section>
 
