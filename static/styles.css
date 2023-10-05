@@ -134,10 +134,6 @@ legend, label {
     font-weight:550;
 }
 
-#form_comment{
-    position: relative;
-
-}
 .comment { 
     min-height: 60px;
     width: 80%;
