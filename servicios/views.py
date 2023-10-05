@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 def servicios_adicionales (request):
-
-    return render (request, 'servicios/servicios_adic.html')
+    contexto = {}
+    return render (request, 'servicios/servicios_adic.html',contexto)
 
 
 
