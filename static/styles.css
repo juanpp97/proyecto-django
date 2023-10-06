@@ -1,3 +1,4 @@
+
 .logo{
     height: 100px;
 }
@@ -129,6 +130,16 @@
 body{
     overflow-x: hidden;
 }
+.error_list{
+    list-style: none;
+    font-size: 1.1rem;
+}
+.error_list_field{
+    font-weight: 700;
+}
+.text__error{
+    font-size: 1.1rem;
+}
 /* Reserva */
 legend, label {
     font-weight:550;
@@ -137,13 +148,6 @@ legend, label {
 .comment { 
     min-height: 60px;
     width: 80%;
-
-}
-.word-counter {
-    position: absolute;
-    bottom: -18px;
-    right: 1%;
-    color: #AAA;
 }
 
 @media screen and (max-width: 768px) {

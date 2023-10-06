@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ValidationError
 from datetime import date
+from dateutil.relativedelta import relativedelta
 
 #Sobreescribo los mensajes de error por defecto del form
 default_errors = {
@@ -18,23 +19,54 @@ class ReservationForm(forms.Form):
 
     num_people = forms.IntegerField(label="Número de personas", widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'value': 1}), error_messages=default_errors)
 
-    room_view = forms.CharField(label="Vista", widget=forms.Select(attrs={'class': 'form-control'}, choices=choices), error_messages=default_errors)
+    room_view = forms.CharField(label="Vista", widget=forms.Select(attrs={'class': 'form-select'}, choices=choices), error_messages=default_errors)
 
     date_in = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), label="Fecha de Ingreso", error_messages=default_errors)
 
     date_out = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), label="Fecha de Salida", error_messages=default_errors)
 
+    comments = forms.CharField(widget=forms.Textarea(attrs={'class': 'comment form-control'}), label="Comentarios", max_length=1000, error_messages=default_errors, required=False)
+
     def clean_id_hab(self):
         data = self.cleaned_data["id_hab"]
-        if data != self.fields["id"].widget.attrs["value"]:
+        if data != self.fields["id_hab"].widget.attrs["value"]:
             raise ValidationError("Tipo de habitación no válido")
-        
+        return data
+    
     def clean_num_people(self):
-        num_people = self.cleaned_data["num_people"]
+        data = self.cleaned_data["num_people"]
         min = self.fields["num_people"].widget.attrs["min"]
         max = self.fields["num_people"].widget.attrs["max"]
-        if num_people < min or num_people > max:
+        if data < min or data > max:
             raise ValidationError("El número ingresado no es válido")
+        return data
+    
+    def clean_room_view(self):
+        data = self.cleaned_data["room_view"]
+        if not any(data == choice[0] for choice in self.fields['room_view'].widget.choices):
+            raise ValidationError("Se seleccionó una opción no válida")
+        return data
+
+    def clean_date_in(self):
+        data = self.cleaned_data["date_in"]
+        min_date = self.fields["date_in"].widget.attrs["min"]
+        max_date = self.fields["date_in"].widget.attrs["max"]
+        if data > max_date or data < min_date:
+            raise ValidationError("La fecha seleccionada es inválida")
+        return data
+    
+    def clean_date_out(self):
+        data = self.cleaned_data["date_out"]
+        date_in = self.cleaned_data["date_in"]
+        if data <= date_in or data > (date_in + relativedelta(months=2)):
+            raise ValidationError("Fecha de Salida no válida")
+        return data
+    
+    def clean_comments(self):
+        data = self.cleaned_data["comments"]
+        if len(data) > self.fields["comments"].max_length:
+            raise ValidationError("Se supero el número máximo de caracteres")
+        
 
 
     def __init__(self, *args, **kwargs):
@@ -43,15 +75,18 @@ class ReservationForm(forms.Form):
         room_view = kwargs.pop("room_view", None)
         min_date_in = kwargs.pop("min_date_in", None)
         max_date_in = kwargs.pop("max_date_in", None)
-        max_date_out = kwargs.pop("max_date_out", None)
         
         super(ReservationForm, self).__init__(*args, **kwargs)
         if id_hab:
             self.fields['id_hab'].widget.attrs['value'] = id_hab
+
         if capacity:
-            self.fields['room_view'].widget.attrs['max'] = capacity
+            self.fields['num_people'].widget.attrs['max'] = capacity
+
         if room_view:
-            self.fields['room_view'] = forms.CharField(label="Vista", widget=forms.TextInput(attrs={'class': 'form-control-plaintext', 'readonly': 'True', 'value': room_view}), error_messages=default_errors)
+            self.fields['room_view'].widget.choices = ((room_view.lower(), room_view),)
+            self.fields['room_view'].widget.attrs['readonly'] = True
+
         if max_date_in and min_date_in:
             self.fields['date_in'].widget.attrs['max'] = max_date_in
             self.fields['date_in'].widget.attrs['min'] = min_date_in

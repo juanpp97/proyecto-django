@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-
-
+from .forms import ReservationForm
+from django.contrib import messages
 
 
 def index(request):
@@ -228,35 +228,39 @@ def reservation(request, id_hab):
          },
          
          ]
-    if request.method == "GET":
-        room = list(filter(lambda room: room["id"] == id_hab, rooms))[0]
-        context = {
-            "date": datetime.now(),
-            "min_date_check_in": datetime.now() + timedelta(days=1),
-            "max_date_check_in": datetime.now() + relativedelta(years=1),
-            "date_check_out": datetime.now() + relativedelta(months=2),
-            "room": room,
-            "available": False,
-        }
-    if request.method == "POST":
-        name = request.POST.getlist("room_type")[0]
-        num_people = request.POST["num_people"]
-        room_view = request.POST.getlist("room_view")[0]
-        date_in = request.POST["date_in"].split("-")
-        date_in = date_in[2] + "/" + date_in[1] + "/" + date_in[0]
-        date_out = request.POST["date_out"].split("-")
-        date_out = date_out[2] + "/" + date_out[1] + "/" + date_out[0]
-        comment = request.POST["comment"]
-        form = {"name": name, "num_people": num_people, "room_view": room_view, "date_in": date_in, "date_out": date_out, "comment": comment}
+    room = list(filter(lambda room: room["id"] == id_hab, rooms))[0]
+    min_date_check_in = datetime.now() + timedelta(days=1)
+    max_date_check_in = datetime.now() + relativedelta(years=1)
+    available = None
 
-        context = {
-            "date": datetime.now(),
-            "min_date_check_in": datetime.now() + timedelta(days=1),
-            "max_date_check_in": datetime.now() + relativedelta(years=1),
-            "date_check_out": datetime.now() + relativedelta(months=2),
-            "available": True,
-            "form": form,
-        }
+    if request.method == "GET":
+
+        if room["view"].lower() == "ambas":
+            form = ReservationForm(id_hab = id_hab, capacity = room["capacity"], min_date_in = min_date_check_in.date(), max_date_in = max_date_check_in.date())
+        else:
+            form = ReservationForm(id_hab = id_hab, capacity = room["capacity"], room_view = room["view"], min_date_in = min_date_check_in.date(), max_date_in = max_date_check_in.date())
+        
+
+    elif request.method == "POST":
+
+        if room["view"].lower() == "ambas":
+            form = ReservationForm(request.POST, id_hab = id_hab, capacity = room["capacity"], min_date_in = min_date_check_in.date(), max_date_in = max_date_check_in.date())
+        else:
+            form = ReservationForm(request.POST, id_hab = id_hab, capacity = room["capacity"], room_view = room["view"], min_date_in = min_date_check_in.date(), max_date_in = max_date_check_in.date())
+        
+        if form.is_valid():    
+            available = False
+            messages.success(request, "Datos validados correctamente")
+        else:
+            messages.error(request, "Verifica los errores en el formulario")
+
+    context = {
+        "date": datetime.now(),
+        "form": form,
+        "available": available,
+        "room": room,
+        "active": "reservation",
+    }
     
     return render(request, "reservas/reserva.html", context)
 
