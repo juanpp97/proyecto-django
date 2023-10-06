@@ -1,0 +1,135 @@
+html {
+    --color-base:rgb(33,37,41);
+}
+.contenido-actividades{
+    margin: 32px 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    min-height: 100vh;
+    gap: 32px;
+}
+
+
+.swiper-container{
+    position: relative;
+    background-color: red;
+    width: 80vw;
+    height: 70vh;
+}
+.swiper-slide{
+    position: relative;
+}
+.swiper-imagen{
+    width: 100%;
+}
+.slide-content-actividades{
+    position: absolute;
+    z-index: 99;
+    background-color: white;
+    top: 50%;
+    left: 85%;
+    height: 90%;
+    width: 20%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    padding: 16px;
+    flex-flow: column nowrap ;
+}
+
+.slide-content-actividades .buttons{
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    position: relative;
+    padding: 2px;
+}
+
+.slide-content-actividades .buttons a {
+    padding: 10px 8px;
+    background-color: rgb(33,37,41);
+    width: 50%;
+    color: white;
+    text-align: center;
+    border: 1px solid rgb(33,37,41);
+    transition: all 0.5s ease;
+}
+
+.slide-content-actividades .buttons a:hover{
+    color: white;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.slide-content-actividades .buttons a:active{
+    padding: 9px 8px;
+
+    transition: all 0.1s ease;
+    transform: scale(0.9);
+    background-color: snow;
+    border: 1px solid rgb(33,37,41);
+    color: rgb(33,37,41);
+    z-index: 99;
+    margin: 0;
+}
+
+
+.facilities_hero{
+    width: 100%;
+}
+.facilities_hero  h3{
+    position: relative;
+    text-align: center;
+    font-family: fantasy;
+    background-color: white;
+    z-index: 99;
+    font-size: 2vh;
+}
+.facilities_hero  h3::after, .facilities_hero  h3::before{
+    content: " ";
+    position: absolute;
+    height: 1px;
+    width:45%;
+    top: 50%;
+    background-color: var(--color-base);
+}
+.facilities_hero  h3::before{
+    left: 0;
+    transform: translateY(-50%);
+}
+.facilities_hero  h3::after {
+    right: 0;
+    transform: translateY(-50%);
+}
+
+
+.gp_section{
+    height: calc(50vh - 32px);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+}
+.gp-section-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gp-section-img{
+    min-width: 60vw;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gp-section-card{
+    width: 20vw;
+    color: white;
+    background-color: var(--color-base);
+    display: flex;
+    padding: 16px;
+    flex-flow: column nowrap ;
+    padding: 16px;
+}

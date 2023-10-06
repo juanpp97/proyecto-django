@@ -1,15 +1,16 @@
 {% extends 'plantilla.html' %}
-{% block titulo %} Instalaciones {% endblock %}
-
-{% block contenido %}
 {% load static %}
 
+{% block titulo %} Instalaciones {% endblock %}
 
+{% block extracss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'facilities.css' %}"> 
+{% endblock %}
+
+{% block contenido %}
 {% if 'Mobile' in request.user_agent.string %}
-    <!-- Renderiza elementos específicos para dispositivos móviles aquí -->
     <p>Estás en un dispositivo móvil.</p>
 {% else %}
-
 <div class="swiper-container" loop="true" style="overflow: hidden;">
     <h1 class="swiper_title">Conoce nuestras instalaciones</h1>
     <div class="swiper-wrapper">
@@ -39,8 +40,8 @@
         </div>
     {% endfor %}
 </section>
-
 {% endif %}
+
 <script src="{% static 'scripts/SwiperSetup.js' %}"></script>  
 
 {% endblock  %}

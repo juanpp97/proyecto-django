@@ -1,3 +1,6 @@
+html {
+    --color-base: rgb(33,37,41); 
+}
 .logo{
     height: 100px;
 }
