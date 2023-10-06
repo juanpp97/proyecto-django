@@ -1,0 +1,67 @@
+{% extends 'plantilla.html' %} 
+{% load static %} 
+{% block titulo %} Inicio {% endblock %} 
+
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'actividades.css' %}" />
+{% endblock %} 
+
+{% block contenido %}
+<div class="contenido-actividades">
+  <section class="facilities_hero">
+    <h3 class="facilities_card_title">EVENTOS</h3>
+  </section>
+  {% if list_eventos %}
+  <div class="swiper-container" loop="true" style="overflow: hidden">
+    <div class="swiper-wrapper">
+      {% for evento in list_eventos%}
+      <div class="swiper-slide">
+        <img
+          class="swiper-imagen"
+          src="{{evento.imagen}}"
+          alt="{{ dato.titulo }}"
+        />
+        <section class="slide-content-actividades">
+          <h2>{{evento.titulo}}</h2>
+          <p>{{evento.fecha}}</p>
+          <p>{{evento.informacion}}</p>
+          <div class="buttons">
+            <a>Detalles</a>
+            <a>Anotarse</a>
+          </div>
+        </section>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+    <h1>NO HAY NUEVOS EVENTOS</h1>
+  {% endif %}
+  <section class="facilities_hero">
+    <h3 class="facilities_card_title">GYN & ESPA</h3>
+  </section>
+
+  <section class="gp_section">
+    <section class="gp-section-img">
+      <img src="{% static 'img/actividades/gym_actividades.jpg' %}" />
+    </section>
+    <div class="gp-section-card">
+      <h2>GYM</h2>
+      <a></a>
+    </div>
+  </section>
+
+  <section class="gp_section">
+    <div class="gp-section-card">
+      <h2>ESPA</h2>
+      <a></a>
+    </div>
+    <section class="gp-section-img">
+      <img src="{% static 'img/facilities/instalaciones_ESPA.webp' %}" />
+    </section>
+  </section>
+</div>
+
+<script src="{% static 'scripts/SwiperSetup.js' %}"></script>
+
+{% endblock %}
