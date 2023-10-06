@@ -2,6 +2,7 @@
 {% block titulo %} Reservaciones {% endblock titulo %}
 {% block contenido %}
 {% load static %}
+
 <main>
 
     <!-- Encabezado de la página -->
@@ -12,8 +13,30 @@
 
     <div class="container mt-4">
 
-        {% if available == False %}
+  
 
+        
+        {% if available == None or available == False %}
+        {% if messages %}
+        {% for message in messages  %}
+        <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+        <ul class="error_list">
+            {% for field in form %}
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <li><span class="error_list_field">{{field.label}}:</span> {{error|escape}}</li>
+                {% endfor %}
+
+                {% endif %}
+            {% endfor %}
+        </ul>
         <form name="disp" id="disp" action="{% url 'reservation' room.id %}" method="POST"
             enctype="application/x-www-form-urlencoded">
 
@@ -24,44 +47,24 @@
                 <legend class="float-none w-auto px-2 fs-4 text-center">Datos de la reserva</legend>
 
                 <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
-                    <!-- Tipo de Habitacion (de la url parametrizada) -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="room_type" class="col-form-label">Tipo de habitación: </label>
-                        </div>
-                        <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{room.name}}"
-                                name="room_type" id="room_type" required>
-                        </div>
-                    </div>
-
+                    <!-- Tipo de Habitacion -->
+       
+                    <p> <strong>Tipo de Habitación: </strong> {{room.name}}</p>
+                    
                     <!-- Número de personas -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="num_people" class="col-form-label">Número de personas (Max. {{room.capacity}}):
+                        <label for="{{form.num_people.id_for_label}}" class="col-form-label">{{form.num_people.label}} (Max. {{room.capacity}}):
                         </label>
                         <div>
-                            <!-- Cambiar máximos y minimos de acuerdo a la habitación -->
-                            <input type="number" class="form-control" id="num_people" name="num_people"
-                                max="{{room.capacity}}" min="1" value="1" required>
-
+                            {{form.num_people}}                            
                         </div>
                     </div>
 
                     <!-- Vista -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="room_view" class="col-form-label">Vista: </label>
+                        <label for="{{form.room_view.id_for_label}}" class="col-form-label">{{form.room_view.label}} </label>
                         <div>
-                            {% if room.view|lower != "ambas" %}
-                            <input type="text" readonly class="form-control-plaintext" value="{{room.view}}"
-                                name="room_view" id="room_view" required>
-                            {% else %}
-                            <select class="form-select" id="room_view" name="room_view" required>
-                                <option value="frente" selected>Frente</option>
-                                <option value="playa">Playa</option>
-                            </select> 
-                            {% endif %}
-
-
+                            {{form.room_view}}
                         </div>
                     </div>
                 </div>
@@ -69,32 +72,29 @@
                 <!-- Fecha de Check In  -->
                 <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="date_in">Fecha de Ingreso:</label>
+                        <label for="{{form.date_in.id_for_label}}" class="col-form-label">{{form.date_in.label}}</label>
                         <div>
-                            <input type="date" class="form-control" name="date_in" id="date_in"
-                                placeholder="Ingrese fecha de Ingreso" required min="{{min_date_check_in|date:"Y-m-d"}}" max="{{max_date_check_in|date:"Y-m-d"}}">
+                           {{form.date_in}}
                         </div>
 
                     </div>
 
                     <!-- Fecha de Check Out -->
                     <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="date_out">Fecha de Salida:</label>
+                        <label for="{{form.date_out.id_for_label}}" class="col-form-label"> {{form.date_out.label}} </label>
                         <div>
-                            <input type="date" class="form-control" name="date_out" id="date_out"
-                                placeholder="Ingrese fecha de salida" required disabled>
+                            {{form.date_out}}
                         </div>
                     </div>
 
                 </div>
+                {{form.id_hab}}
 
                 <!-- Comentarios -->
                 <div class="d-flex justify-content-center flex-md-row flex-column align align-items-center align-items-md-start gap-md-3 gap-2 mb-3"
                     id="form_comment">
-                    <label for="comment">Comentarios:</label>
-                    <textarea class="comment form-control" name="comment" id="comment" rows="3"
-                        placeholder="Cualquier comentario adicional aqui..."></textarea>
-                    <p class="word-counter"></p>
+                    <label for="{{form.comments.id_for_label}}" class="col-form-label"> {{form.comments.label}} </label>
+                    {{form.comments}}
                 </div>
                 <button class="btn btn-success d-block mx-auto" type="submit"> Verificar disponibilidad </button>
 
@@ -104,155 +104,11 @@
 
         {% else %}
 
-        <form name="fact" id="fact" action="" method="POST" enctype="application/x-www-form-urlencoded">
-            {% csrf_token %}
-
-            <!-- Campos de la reserva -->
-            <fieldset class="section border border-black p-2 mb-4">
-                <legend class="float-none w-auto px-2 fs-4 text-center">Datos de la reserva</legend>
-                <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
-                    <!-- Tipo de Habitacion -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="room_type" class="col-form-label">Tipo de habitación: </label>
-                        </div>
-                        <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.name}}"
-                                name="room_type" id="room_type" required>
-
-                        </div>
-                    </div>
-                    <!-- Número de personas -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="num_people" class="col-form-label">Número de personas: </label>
-                        <div>
-                            <input type="number" readonly class="form-control-plaintext" value="{{form.num_people}}"
-                                name="num_people" id="num_people" required>
-
-                        </div>
-                    </div>
-                    <!-- Vista (Las opciones dependerán del tipo de habitación) -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="room_view" class="col-form-label">Vista: </label>
-                        <div>
-                            <input type="text" readonly class="form-control-plaintext"
-                                value="{{form.room_view|capfirst}}" name="room_view" id="room_view" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center align-items-center gap-md-5 gap-3 flex-wrap mb-3">
-                    <!-- Fecha de Check In (Modificar minimo de acuerdo a la fecha de hoy con filtros) -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="date_in">Fecha de Ingreso:</label>
-                        <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_in}}" name="date_in" id="date_in" required>
-
-                        </div>
-
-                    </div>
-                    <!-- Fecha de Check Out -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="date_out">Fecha de Salida:</label>
-                        <div>
-                            <input type="text" readonly class="form-control-plaintext" value="{{form.date_out}}"
-                                name="date_out" id="date_out" required>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="d-flex justify-content-center flex-md-row flex-column align align-items-center align-items-md-start gap-md-3 gap-2 mb-3"
-                    id="form_comment">
-                    <label for="comment">Comentarios:</label>
-                    <textarea class="comment form-control" name="comment" id="comment" rows="3"
-                        placeholder="Cualquier comentario adicional aqui..." value="{{form.comment}}"></textarea>
-                    <p class="word-counter"></p>
-                </div>
-                <button class="btn btn-success d-block mx-auto" type="submit"> Verificar disponibilidad </button>
-
-            </fieldset>
-
-            <!-- Datos de facturación -->
-            <fieldset class="section border border-black p-2 mb-4">
-                <legend class="float-none w-auto px-2 fs-4 text-center">Datos de facturación</legend>
-
-                <div class="d-flex justify-content-center align-items-center gap-md-3 gap-3 flex-wrap mb-3">
-
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="name" class="col-form-label">Nombre completo: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="name" id="name" class="form-control">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="last_name" class="col-form-label">Apellido: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="last_name" id="last_name" class="form-control">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="phone" class="col-form-label">Telefono: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="phone" id="phone" class="form-control">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="dni" class="col-form-label">DNI: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="dni" id="dni" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Fecha de Nacimiento (colocar máximo hace 18 años de hoy) -->
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <label for="birth_date">Fecha de Nacimiento:</label>
-                        <div>
-                            <input type="date" class="form-control" name="birth_date" id="birth_date"
-                                placeholder="Ingrese fecha de Ingreso" required>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center gap-md-3 gap-3 flex-wrap">
-
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="targ_num" class="col-form-label">Número de tarjeta: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="targ_num" id="targ_num" class="form-control mx-auto">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-                        <div>
-                            <label for="cod" class="col-form-label">Código de seguridad: </label>
-                        </div>
-                        <div>
-                            <input type="text" name="cod" id="cod" class="form-control w-50 mx-auto" max="999">
-                        </div>
-                    </div>
-                </div>
-
-            </fieldset>
-            <div class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-3">
-
-                <button class="btn btn-dark" type="submit"> Enviar </button>
-                <button class="btn btn-danger" type="reset"> Borrar </button>
-            </div>
-        </form>
+       
         {% endif %}
 
     </div>
 
 
 </main>
-<script src="{% static 'js/validacion.js' %}"></script>
 {% endblock contenido %}

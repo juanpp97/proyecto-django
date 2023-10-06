@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+<<<<<<< HEAD
 import os
+=======
+>>>>>>> 7cbfc52be12f7931e09553f6040813af5c490ce2
 from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'django_hotel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,6 +80,7 @@ WSGI_APPLICATION = 'django_hotel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
+<<<<<<< HEAD
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "HostelDB",
@@ -85,6 +89,15 @@ DATABASES = {
         "PASSWORD": config("PASSWORD"),
         "HOST": config("HOST"),
         "PORT": config("PORT"),
+=======
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
+>>>>>>> 7cbfc52be12f7931e09553f6040813af5c490ce2
     }
 }
 
@@ -125,7 +138,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

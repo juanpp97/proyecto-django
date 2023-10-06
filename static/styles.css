@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 html {
     --color-base: rgb(33,37,41); 
 }
+=======
+
+>>>>>>> 7cbfc52be12f7931e09553f6040813af5c490ce2
 .logo{
     height: 100px;
 }
@@ -132,25 +136,24 @@ html {
 body{
     overflow-x: hidden;
 }
+.error_list{
+    list-style: none;
+    font-size: 1.1rem;
+}
+.error_list_field{
+    font-weight: 700;
+}
+.text__error{
+    font-size: 1.1rem;
+}
 /* Reserva */
 legend, label {
     font-weight:550;
 }
 
-#form_comment{
-    position: relative;
-
-}
 .comment { 
     min-height: 60px;
     width: 80%;
-
-}
-.word-counter {
-    position: absolute;
-    bottom: -18px;
-    right: 1%;
-    color: #AAA;
 }
 
 @media screen and (max-width: 768px) {
