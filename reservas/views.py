@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from .forms import ReservationForm
+from .forms import ReservationForm, ContactForm
 from django.contrib import messages
 
 
@@ -134,9 +134,19 @@ def facilities(request):
     return render(request, "reservas/facilities.html", context)
 
 def contact(request):
+    if request.method == "GET":
+        form = ContactForm()
+    elif request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            #Enviar mail, si se envia correctamente dar el mensaje de success
+            messages.success(request, "Tu consulta se ha enviado correctamente. En breve un asesor se contactará contigo")
+        else:
+            messages.error(request, "Revisa los errores del formulario")
     context = {
         "date": datetime.now(),
         "active": "contact",
+        'form': form,
         }
     return render(request, "reservas/contacto.html", context)
 
