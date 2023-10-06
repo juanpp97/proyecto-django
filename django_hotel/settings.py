@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-<<<<<<< HEAD
-import os
-=======
->>>>>>> 7cbfc52be12f7931e09553f6040813af5c490ce2
 from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,16 +76,6 @@ WSGI_APPLICATION = 'django_hotel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
-<<<<<<< HEAD
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "HostelDB",
-        # "USER": config("USER"), personalmente tengo un error con "USER" por eso uso "USERS"
-        "USER": config("USERS"),
-        "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST"),
-        "PORT": config("PORT"),
-=======
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DATABASE_NAME'),
@@ -97,7 +83,6 @@ DATABASES = {
         'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
->>>>>>> 7cbfc52be12f7931e09553f6040813af5c490ce2
     }
 }
 
