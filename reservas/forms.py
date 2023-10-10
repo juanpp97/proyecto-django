@@ -2,11 +2,12 @@ from django import forms
 from django.forms import ValidationError
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from re import match
 
 #Sobreescribo los mensajes de error por defecto del form
 default_errors = {
     'required': 'Este campo es obligatorio',
-    'invalid': 'Debe ingresar un dato válido',
+    'invalid': 'El dato ingresado es inválido',
     'max_length': 'Se superó el número máximo de caracteres',
     'min_length': 'Ha ingresado muy pocos caracteres',
 }
@@ -15,17 +16,42 @@ choices = (('frente', 'Frente'), ('playa', 'Playa'))
 
 
 class ReservationForm(forms.Form):
-    id_hab = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'form-control', 'type': 'hidden'}), error_messages=default_errors)
+    id_hab = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'type': 'hidden'}), 
+        error_messages=default_errors
+        )
 
-    num_people = forms.IntegerField(label="Número de personas", widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'value': 1}), error_messages=default_errors)
+    num_people = forms.IntegerField(
+        label="Número de personas", 
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'value': 1}), 
+        error_messages=default_errors
+        )
 
-    room_view = forms.CharField(label="Vista", widget=forms.Select(attrs={'class': 'form-select'}, choices=choices), error_messages=default_errors)
+    room_view = forms.CharField(
+        label="Vista", 
+        widget=forms.Select(attrs={'class': 'form-select'}, choices=choices), 
+        error_messages=default_errors
+        )
 
-    date_in = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), label="Fecha de Ingreso", error_messages=default_errors)
+    date_in = forms.DateField(
+        widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
+        label="Fecha de Ingreso", 
+        error_messages=default_errors
+        )
 
-    date_out = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), label="Fecha de Salida", error_messages=default_errors)
+    date_out = forms.DateField(
+        widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
+        label="Fecha de Salida", 
+        error_messages=default_errors
+        )
 
-    comments = forms.CharField(widget=forms.Textarea(attrs={'class': 'comment form-control'}), label="Comentarios", max_length=1000, error_messages=default_errors, required=False)
+    comments = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'comment form-control', 'rows': '4'}), 
+        label="Comentarios", 
+        max_length=1000, 
+        error_messages=default_errors, 
+        required=False
+        )
 
     def clean_id_hab(self):
         data = self.cleaned_data["id_hab"]
@@ -67,8 +93,6 @@ class ReservationForm(forms.Form):
         if len(data) > self.fields["comments"].max_length:
             raise ValidationError("Se supero el número máximo de caracteres")
         
-
-
     def __init__(self, *args, **kwargs):
         id_hab = kwargs.pop("id_hab", None)
         capacity = kwargs.pop("capacity", None)
@@ -91,10 +115,51 @@ class ReservationForm(forms.Form):
             self.fields['date_in'].widget.attrs['max'] = max_date_in
             self.fields['date_in'].widget.attrs['min'] = min_date_in
             
+def alfabetico(data):
+    reg_exp = r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$'
+    if not match(reg_exp, data):
+        raise ValidationError('El campo solo puede contener letras ')
 
 
+class ContactForm(forms.Form):
+    nombre = forms.CharField(
+        max_length=100,
+        required=True,
+        label="Nombre",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu nombre'}),
+        error_messages=default_errors,
+        validators = (alfabetico, )
+        )
+    apellido = forms.CharField(
+        max_length=100,
+        required=True,
+        label="Apellido",
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu apellido'}),
+        error_messages=default_errors,
+        validators = (alfabetico, )
+    )
+    email = forms.EmailField(
+        max_length=100,
+        required=True,
+        label="Email",
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa tu correo electrónico'}),
+        error_messages=default_errors
+    )
+    comentario = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escribe tu comentario aquí', 'rows': 4}),
+        required=True,
+        max_length=1000,
+        label="Comentario",
+        error_messages=default_errors
+    )
+    def clean_email(self):
+        data = self.cleaned_data["email"]
+        reg_exp = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        if not match(reg_exp, data):
+            raise ValidationError('El correo ingresado no es válido')
+        return data
+    
 
-
-        
+            
 
     

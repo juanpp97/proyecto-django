@@ -14,69 +14,207 @@
       <h1 class="border-text">Servicio a la habitación</h1>
     </section>
 
-<!--En la siguiente section hay dos columnas, la de la izquierda tiene un carousel de tres imagenes y la derecha un list-group de opciones-->
     <section>
-      <div class="container">
-          <div class="row justify-content-between">
-              <!-- Columna de la imagen (col-md-6) -->
-                <div class="col-md-6">
-                  <!--Inicio carousel-->
-                    <div id="carouselExample" class="carousel slide">
-                      <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img src="{% static 'img/roomservice/comidas.webp' %}" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                          <img src="{% static 'img/roomservice/cafeteria.webp' %}" class="d-block w-100" alt="">
-                        </div>
-                        <div class="carousel-item">
-                          <img src="{% static 'img/roomservice/cocktails.webp' %}" class="d-block w-100" alt="">
-                        </div>
-                      </div>
-                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    </div>
-                  <!--Fin carousel-->
-                </div>
-
-              <!-- Columna de la descripción (col-md-6) -->
-                <div class="col-md-6">
-                  <div class="my-4">
-                    <!-- Agrega tu descripción aquí -->
-                      <h2 class="text-center">¿Qué desea pedir?</h2>
-
-                      <!--Inicio List-group de Bootstrap-->
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                          <label class="form-check-label" for="firstCheckbox">Comida</label>
-                        </li>
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                          <label class="form-check-label" for="secondCheckbox">Cafetería</label>
-                        </li>
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                          <label class="form-check-label" for="thirdCheckbox">Cocktails</label>
-                        </li>
-                      </ul>
-                      <!--Fin list-group de Bootstrap-->
-                  </div>
-                </div>
-
+    <div class="container mt-3 ">
+      <div class="row">
+          <div class="col-sm-4  bg-dark text-white p-4 rounded ">
+              <img src="{%static 'img/roomservice/comidas.webp' %}" class="img-fluid rounded" alt="Carta de Comidas">
+          </div>
+          <div class="col-sm-4   bg-dark text-white p-4 rounded ">
+              <img src="{%static 'img/roomservice/cafeteria.webp' %}" class="img-fluid rounded" alt="Carta de Cafetería">
+          </div>
+          <div class="col-sm-4  bg-dark text-white p-4 rounded ">
+              <img src="{%static 'img/roomservice/cocktails.webp' %}" class="img-fluid rounded" alt="Carta de Bebidas y Cócteles">
           </div>
       </div>
-    </section>
-    <!--Fin FrontEnd del body servicios-->
+  </div>
+  </section>
+
+<!-- Breve comentario de la cartilla -->
+<div class="container mt-5 card-body">
+<h3 class="text -center">Explora nuestra cartilla de platos, tragos/bebida y cafetería, realiza tu selección y sera procesada para ser enviada a tu habitación(*).</h3>
+
+<small>(*)Tener en cuenta el  horario actual en el que se realiza el pedido, algunos servicios no estan disponibles en ciertos horarios.</small>
+</div>
+
+
+
+  <!--  Cards Comidas -->
+<Section>
+  <h2 class="text-center mt-5">Comidas</h2>
+
+<div class="container mt-4 shadow-lg">
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_comidas/comida_1.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Platos de Autor</h5>
+          <p class="card-text">Platos con la variedad de comidas directo de nuestra cocina a tu habitación</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Bistec de Costilla</li>
+            <li class="list-group-item">Bistec de Solomillo de Primera</li>
+            <li class="list-group-item">Bistec de Lomo de Primera</li>
+            <li class="list-group-item">Bistec de Solomillo de Wagyu</li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_comidas/comida_2.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Opciones rápidas</h5>
+          <p class="card-text">Minutas y comida al paso</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sándwich de pollo/carne a la parrilla con lechuga, tomate y mayonesa</li>
+            <li class="list-group-item">Wrap vegano con hummus, espinacas, pimientos asados y aguacate</li>
+            <li class="list-group-item">Pizza Margherita con masa fina y tomate fresco</li>
+            <li class="list-group-item">Pasta al pesto con piñones y queso parmesano</li>
+            <li class="list-group-item">Papas fritas caseras</li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</Section>
+
+<!-- Simplificado de tragos -->
+<Section>
+  <h2 class="text-center mt-3">Tragos y Whiskeys</h2>
+
+<div class="container mt-4 shadow-lg">
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_bebidas/bebida_6.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Cocteles y Tragos</h5>
+          <p class="card-text">Explora nuestra cartilla con los mejores tragos para acompañar la estadiía.</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Classic Mojito</li>
+            <li class="list-group-item">Royal Martini</li>
+            <li class="list-group-item">Fernet con Coca</li>
+            <li class="list-group-item">Daiquiri</li>
+            <li class="list-group-item">Retro Margarita</li>
+            <li class="list-group-item">Dry Fruit Mojito</li>
+            <li class="list-group-item">Classic Margarita</li>
+            <li class="list-group-item">Manhattan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_bebidas/bebida_9.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Whiskeys</h5>
+          <p class="card-text">Apartado dedicado a los amantes del whisky y sus variedades</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Whiskey Sour</li>
+            <li class="list-group-item">Bourbon Flip</li>
+            <li class="list-group-item">Old Fashioned</li>
+            <li class="list-group-item">Paper Plane</li>
+            <li class="list-group-item">Gin FIzz</li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</Section>
+
+
   
-    {% comment %} <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script> {% endcomment %}
-    {% comment %} <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> {% endcomment %}
+
+
+  <!-- Cafeteria -->
+<section>
+  <h2 class="text-center mt-3">Cafetería</h2>
+    <div class="container mt-4 shadow-lg">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{%static 'img/roomservice/img_cafe/coffee.webp'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Coffee</h5>
+                        <p class="card-text">En esta categoría encontrarás bebidas calientes que contienen café</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Espresso</li>
+                        <li class="list-group-item">Double Espresso</li>
+                        <li class="list-group-item">Cafe Latte</li>
+                        <li class="list-group-item">Americano</li>
+                        <li class="list-group-item">Cappuccino</li>
+                        <li class="list-group-item">Macchiato</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{%static 'img/roomservice/img_cafe/noncoffee.webp'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Non Coffee</h5>
+                        <p class="card-text">También te podemos ofrecer té, refrescos y agua</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Green Tea</li>
+                        <li class="list-group-item">Hazelnut Mocha</li>
+                        <li class="list-group-item">Matcha Cream</li>
+                        <li class="list-group-item">Lemon Tea</li>
+                        <li class="list-group-item">Gaseosa</li>
+                        <li class="list-group-item">Agua Mineral</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{%static 'img/roomservice/img_cafe/smoothie.webp'%}" class="card-img-top" alt="..." height="170px">
+                    <div class="card-body">
+                        <h5 class="card-title">Smoothie</h5>
+                        <p class="card-text">Batidos cremosos elaborados a partir de fruta o vegetal, natural o congelados, con yogur, helado o leche</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Pink Smoothie</li>
+                        <li class="list-group-item">Banana Smoothie</li>
+                        <li class="list-group-item">Matcha Cream</li>
+                        <li class="list-group-item">Lettuce Smoothie</li>
+                        <li class="list-group-item">Apple smoothie</li>
+                        <li class="list-group-item">Berry Smoothie</li>
+                        <li class="list-group-item">Lemon Smoothie</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{%static 'img/roomservice/img_cafe/bakery.webp'%}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Bakery and pastry</h5>
+                        <p class="card-text">Podés agregar a tu pedido algún producto de panadería y pastelería como tostadas, facturas o tortas.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Medialuna</li>
+                        <li class="list-group-item">Croissant</li>
+                        <li class="list-group-item">Macaron</li>
+                        <li class="list-group-item">Pastafrola</li>
+                        <li class="list-group-item">Apple crumble</li>
+                        <li class="list-group-item">Lemon Pie</li>
+                        <li class="list-group-item">Tostadas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+    
+  
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   
   
  {% endblock %}

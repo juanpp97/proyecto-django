@@ -135,6 +135,8 @@ body{
 .error_list{
     list-style: none;
     font-size: 1.1rem;
+    color: rgba(255,0,0,0.8);
+    text-align: center;
 }
 .error_list_field{
     font-weight: 700;
