@@ -15,7 +15,7 @@
     </section>
 
     <section>
-    <div class="container mt-2 ">
+    <div class="container mt-3 ">
       <div class="row">
           <div class="col-sm-4  bg-dark text-white p-4 rounded ">
               <img src="{%static 'img/roomservice/comidas.webp' %}" class="img-fluid rounded" alt="Carta de Comidas">
@@ -30,56 +30,63 @@
   </div>
   </section>
 
+<!-- Breve comentario de la cartilla -->
+<div class="container mt-5 card-body">
+<h3 class="text -center">Explora nuestra cartilla de platos, tragos/bebida y cafetería, realiza tu selección y sera procesada para ser enviada a tu habitación(*).</h3>
+
+<small>(*)Tener en cuenta el  horario actual en el que se realiza el pedido, algunos servicios no estan disponibles en ciertos horarios.</small>
+</div>
+
+
+
   <!--  Cards Comidas -->
 <Section>
-  <h2 class="text-center">Comidas</h2>
-  <div class="container mt-4">
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="{%static 'img/roomservice/img_comidas/comida_1.webp'%}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Rib eye Steak</h5>
-            <p class="card-text">Jugoso corte de carne premium con marmoleo excepcional y sabor robusto. Perfectamente asado para una experiencia culinaria inigualable.</p>
-          </div>
+  <h2 class="text-center mt-5">Comidas</h2>
+
+<div class="container mt-4 shadow-lg">
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_comidas/comida_1.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Platos de Autor</h5>
+          <p class="card-text">Platos con la variedad de comidas directo de nuestra cocina a tu habitación</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Bistec de Costilla</li>
+            <li class="list-group-item">Bistec de Solomillo de Primera</li>
+            <li class="list-group-item">Bistec de Lomo de Primera</li>
+            <li class="list-group-item">Bistec de Solomillo de Wagyu</li>
+            
+          </ul>
         </div>
       </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="{%static 'img/roomservice/img_comidas/comida_2.webp'%}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Prime Sirloin Steak</h5>
-            <p class="card-text">Nuestro exclusivo corte Prime Sirloin, meticulosamente seleccionado y sazonado, ofrece una fusión de terneza y sabor inigualables, brindando una experiencia única para los amantes de la carne de calidad.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="{%static 'img/roomservice/img_comidas/comida_3.webp'%}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Prime Tenderloin Steak</h5>
-            <p class="card-text">Corte de ternera excepcionalmente tierno y magro, reconocido por su suavidad incomparable. Asado a la perfección para resaltar su sabor natural y jugosidad.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="{%static 'img/roomservice/img_comidas/comida_4.webp'%}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Wagyu Sirloin Steak</h5>
-            <p class="card-text">Con su marmoleo excepcional, cada bocado es una sinfonía de sabores intensos y una terneza que se deshace en el paladar. Asado a la perfección para preservar su textura sedosa y su sabor divinamente indulgente. </p>
-          </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <img src="{%static 'img/roomservice/img_comidas/comida_2.webp'%}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Opciones rápidas</h5>
+          <p class="card-text">Minutas y comida al paso</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Sándwich de pollo/carne a la parrilla con lechuga, tomate y mayonesa</li>
+            <li class="list-group-item">Wrap vegano con hummus, espinacas, pimientos asados y aguacate</li>
+            <li class="list-group-item">Pizza Margherita con masa fina y tomate fresco</li>
+            <li class="list-group-item">Pasta al pesto con piñones y queso parmesano</li>
+            <li class="list-group-item">Papas fritas caseras</li>
+            
+          </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
 </Section>
 
 <!-- Simplificado de tragos -->
 <Section>
-  <h2 class="text-center">Tragos y Whiskeys</h2>
+  <h2 class="text-center mt-3">Tragos y Whiskeys</h2>
 
-<div class="container mt-4">
+<div class="container mt-4 shadow-lg">
   <div class="row">
     <div class="col-md-6 mb-4">
       <div class="card">
@@ -105,7 +112,7 @@
         <img src="{%static 'img/roomservice/img_bebidas/bebida_9.webp'%}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Whiskeys</h5>
-          <p class="card-text">Apartado dedicado a los amantes de la bebida fina como el whisky</p>
+          <p class="card-text">Apartado dedicado a los amantes del whisky y sus variedades</p>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Whiskey Sour</li>
             <li class="list-group-item">Bourbon Flip</li>
@@ -127,8 +134,8 @@
 
   <!-- Cafeteria -->
 <section>
-  <h2 class="text-center">Cafetería</h2>
-    <div class="container mt-4">
+  <h2 class="text-center mt-3">Cafetería</h2>
+    <div class="container mt-4 shadow-lg">
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="card">
