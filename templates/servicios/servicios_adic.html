@@ -41,6 +41,7 @@
 
   <!--  Cards Comidas -->
 <Section>
+
   <h2 class="text-center mt-5">Comidas</h2>
 
 <div class="container mt-4 shadow-lg">
@@ -49,10 +50,10 @@
       <div class="card">
         <img src="{%static 'img/roomservice/img_comidas/comida_1.webp'%}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Platos de Autor</h5>
+          <h5 class="card-title">{{lista.0.categoria}}</h5>
           <p class="card-text">Platos con la variedad de comidas directo de nuestra cocina a tu habitación</p>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Bistec de Costilla</li>
+            <li class="list-group-item">Bistec de Costilla </li>
             <li class="list-group-item">Bistec de Solomillo de Primera</li>
             <li class="list-group-item">Bistec de Lomo de Primera</li>
             <li class="list-group-item">Bistec de Solomillo de Wagyu</li>
@@ -71,7 +72,7 @@
             <li class="list-group-item">Sándwich de pollo/carne a la parrilla con lechuga, tomate y mayonesa</li>
             <li class="list-group-item">Wrap vegano con hummus, espinacas, pimientos asados y aguacate</li>
             <li class="list-group-item">Pizza Margherita con masa fina y tomate fresco</li>
-            <li class="list-group-item">Pasta al pesto con piñones y queso parmesano</li>
+            <li class="list-group-item">Pasta al pesto con champiñones y queso parmesano</li>
             <li class="list-group-item">Papas fritas caseras</li>
             
           </ul>
@@ -80,6 +81,7 @@
     </div>
   </div>
 </div>
+
 </Section>
 
 <!-- Simplificado de tragos -->
