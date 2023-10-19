@@ -19,7 +19,7 @@ class Producto(models.Model):
 
     nombre = models.CharField(verbose_name="nombre", max_length=100 , null= False, blank=False)
     categoria = models.CharField(verbose_name="categoria", max_length=100 , null= False, blank=False , choices= opciones_categoria)
-    precio = models.IntegerField(verbose_name="precio", max_length=100 , null= False, blank=False)
+    precio = models.IntegerField(verbose_name="precio", null= False, blank=False)
    
 
     def __str__(self):

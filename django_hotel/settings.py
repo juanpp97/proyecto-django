@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+RATELIMIT_VIEW = 'reservas.views.contact'
 
 # Application definition
 

@@ -140,6 +140,7 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             #Enviar mail, si se envia correctamente dar el mensaje de success
+            form = ContactForm()
             messages.success(request, "Tu consulta se ha enviado correctamente. En breve un asesor se contactará contigo")
         else:
             messages.error(request, "Revisa los errores del formulario")
