@@ -15,7 +15,7 @@ class Eventos(models.Model):
 
 class Producto(models.Model):
 
-    opciones_categoria = [('Platos de Autor','Platos de Autor'),('Opciones rapidas','Opciones rapidas'),('Cocteles y tragos','Cocteles y tragos'),('Whiskeys','Whiskeys'),('Cofee','Cofee'),('Non Cofee','Non Cofee'), ('Smoothie','Smoothie'),('Bakery and pastry','Bakery and pastry')]
+    opciones_categoria = [('Comidas','Comidas'),('Cafeteria','Cafeteria' ),('Bebidas','Bebidas'),('Platos de Autor','Platos de Autor'),('Opciones rapidas','Opciones rapidas'),('Cocteles y tragos','Cocteles y tragos'),('Whiskeys','Whiskeys'),('Cofee','Cofee'),('Non Cofee','Non Cofee'), ('Smoothie','Smoothie'),('Bakery and pastry','Bakery and pastry')]
 
     nombre = models.CharField(verbose_name="nombre", max_length=100 , null= False, blank=False)
     categoria = models.CharField(verbose_name="categoria", max_length=100 , null= False, blank=False , choices= opciones_categoria)
