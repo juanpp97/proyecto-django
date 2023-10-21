@@ -53,7 +53,13 @@
           <h5 class="card-title">{{lista.0.categoria}}</h5>
           <p class="card-text">Platos con la variedad de comidas directo de nuestra cocina a tu habitación</p>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Bistec de Costilla </li>
+            <div class="d-flex justify-content-between align-items-center">
+              Bistec de Costilla 
+              <form class="input-group" action="" method="POST">
+                <span class="input-group-text">Cantidad</span>
+                <input type="number" class="form-control" value="0">
+              </form>
+            </div>
             <li class="list-group-item">Bistec de Solomillo de Primera</li>
             <li class="list-group-item">Bistec de Lomo de Primera</li>
             <li class="list-group-item">Bistec de Solomillo de Wagyu</li>
