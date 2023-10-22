@@ -1,0 +1,63 @@
+{% extends "servicios/habitacion/base_carrito.html" %}
+{% load static %}
+
+{% block sub_contenido %}
+
+<table class="table"  >
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody id="lista_de_tareas">
+
+    </tbody>
+  </table>
+  
+<script>
+
+    class listaTareas {
+        constructor(){
+            this.lista_productos = JSON.parse(localStorage.getItem('lista_productos')) || []
+            this.cargarTareas();
+        }
+    
+        cargarTareas(){
+            localStorage.setItem('lista_productos', JSON.stringify(this.lista_productos));
+            if (this.lista_productos.length >= 1){
+                let htmlTareas = this.lista_productos.reduce((html, tarea, index)=> html += this.generarTareaHTML(producto,index), '')
+                document.getElementById("lista_de_tareas").innerHTML = htmlTareas
+            } else {
+                document.getElementById("lista_de_tareas").innerHTML = "<h1>No hay productos</h1>"
+            }
+        }
+    
+        generarTareaHTML(producto,indice){
+            return `
+            <tr>
+                <th scope="row">#</th>
+                <td>${producto.nombre}</td>
+                <td>${producto.precio}</td>
+              </tr>
+            `
+        }
+
+        eliminarTarea(evento, indice){
+            evento.preventDefault();
+            this.tareas.splice(indice,1);
+            this.cargarTareas();
+        }
+    };
+    
+    let ListaTareas;
+    window.addEventListener('load', () => {
+        ListaTareas = new listaTareas()
+        console.log(ListaTareas)
+    
+    })
+</script>
+{% endblock sub_contenido %}
+

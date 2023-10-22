@@ -8,6 +8,7 @@
   <title>{% block titulo %} {% endblock %}</title>  
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
+  <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
   
   {% comment %} framework de sliders {% endcomment %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
@@ -27,6 +28,7 @@
   {% if active == "reservation" %}
   <script src="{% static 'js/validacion.js' %}"></script>
   {% endif %}
+  <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
 
 </body>
 

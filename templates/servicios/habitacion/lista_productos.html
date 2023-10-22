@@ -1,0 +1,31 @@
+{% extends "servicios/habitacion/base_carrito.html" %}
+
+
+{% block sub_contenido %}
+
+{% for producto in list_productos  %}
+<div class="card text-center mb-3" style="width: 18rem;">
+    <img src="https://placehold.co/600x400/webp" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{producto.nombre}}</h5>
+      <p class="card-text">{{producto.precio}}</p>
+      <a href="#" class="btn btn-primary datita">Agregar</a>
+    </div>
+</div>
+{% endfor %}
+
+
+
+<script>
+  let listener_buttons = document.querySelectorAll('.datita')
+  listener_buttons.forEach((e)=>{
+    e.addEventListener('click',function(event){
+      console.log(this)
+      alertify.success('Success message');
+    })
+  })
+
+  function cargar_producto() {}
+ 
+</script>
+{% endblock sub_contenido %}
