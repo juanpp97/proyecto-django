@@ -153,7 +153,12 @@ legend, label {
     min-height: 60px;
     width: 80%;
 }
-
+.card-body{
+    display: flex !important;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
 @media screen and (max-width: 768px) {
     .word-counter{
         right: 14%;

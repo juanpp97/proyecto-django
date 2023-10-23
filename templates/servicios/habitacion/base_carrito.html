@@ -1,15 +1,15 @@
 {% extends "plantilla.html" %}
 {% load static %}
 {% block contenido %}
-<nav class="nav nav-pills flex-column flex-sm-row">
+<nav class="nav nav-pills flex-column flex-sm-row mt-3">
     <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'comidas' %}active{% endif %}" aria-current="page" href="{% url 'serv-producto' tipo='comidas' %}">Comidas</a>
     <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'cafeteria' %}active{% endif %}" href="{% url 'serv-producto' tipo='cafeteria' %}">Cafeteria</a>
     <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'bebidas' %}active{% endif %}" href="{% url 'serv-producto' tipo='bebidas' %}">Bebidas</a>
     <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'carrito' %}active{% endif %}" href="{% url 'serv-producto' tipo='carrito'  %}">Carrito</a>
 
 </nav>
-<section class="container">
-    <div class="row row-cols-auto">
+<section class="container mt-3">
+    <div class="row row-cols-auto gap-3 justify-content-center">
         {% block sub_contenido %}
         {% endblock sub_contenido %}
     </div>

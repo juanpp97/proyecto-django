@@ -3,19 +3,10 @@
 
 {% block sub_contenido %}
 
-<table class="table"  >
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody id="lista_de_tareas">
 
-    </tbody>
-  </table>
+    <ul id="lista_de_tareas" class="list-group w-100">
+
+    </ul>
   
 <script>
 
@@ -27,21 +18,23 @@
     
         cargarTareas(){
             localStorage.setItem('lista_productos', JSON.stringify(this.lista_productos));
+            console.log(localStorage.setItem('lista_productos', JSON.stringify(this.lista_productos)))
             if (this.lista_productos.length >= 1){
-                let htmlTareas = this.lista_productos.reduce((html, tarea, index)=> html += this.generarTareaHTML(producto,index), '')
+                let htmlTareas = this.lista_productos.reduce((html, producto, index)=> html += this.generarTareaHTML(producto,index), '')
                 document.getElementById("lista_de_tareas").innerHTML = htmlTareas
             } else {
                 document.getElementById("lista_de_tareas").innerHTML = "<h1>No hay productos</h1>"
             }
         }
     
-        generarTareaHTML(producto,indice){
+        generarTareaHTML(producto,index){
             return `
-            <tr>
-                <th scope="row">#</th>
-                <td>${producto.nombre}</td>
-                <td>${producto.precio}</td>
-              </tr>
+            <li class="w-100 list-group-item d-flex flex-row justify-content-between align-items-center">
+                <button class="btn btn-danger me-auto">X</button>
+                <div>${producto["nombre"]}</div>
+                <div>${producto["categoria"]}</div>
+                <div class="ms-auto">$${producto["precio"]}</div>
+            </li>
             `
         }
 

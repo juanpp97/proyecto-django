@@ -5,7 +5,7 @@ from .models import Eventos,Producto
 
 def habitacion (request, tipo=None):
     categorias_disponibles = Producto.objects.values_list('categoria', flat=True).distinct()
-    
+    contexto ={"tipo":tipo,}
     if tipo in categorias_disponibles:
         list_productos = Producto.objects.filter(categoria= tipo)
         contexto ={
@@ -14,9 +14,9 @@ def habitacion (request, tipo=None):
         }
         return render(request,'servicios/habitacion/lista_productos.html',contexto)
     elif tipo == 'carrito':
-        return render(request,'servicios/habitacion/carrito.html',context={})
+        return render(request,'servicios/habitacion/carrito.html',contexto)
     else:
-        return render(request,'servicios/habitacion/carrito.html',context={})
+        return render(request,'servicios/habitacion/carrito.html',contexto)
     
 
 # def carrito (request):
