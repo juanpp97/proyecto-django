@@ -171,7 +171,9 @@ legend, label {
     border-radius: 0 10px 10px 0;
 
 }
-
+#menu_admin{
+    z-index: 1000000;
+}
 @media screen and (max-width: 768px) {
     .word-counter{
         right: 14%;

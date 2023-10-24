@@ -15,7 +15,9 @@ default_errors = {
 
 class RoomForm(forms.ModelForm):
     view = forms.ModelMultipleChoiceField(queryset=RoomView.objects.all(), widget=forms.CheckboxSelectMultiple(), error_messages = default_errors, label="Vista de la habitacion")
+    
     imgs = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True}), required=False, label="Imagenes de la habitacion")
+    
     imgs_delete = forms.ModelMultipleChoiceField(queryset=RoomImg.objects.none(), widget = forms.CheckboxSelectMultiple(), error_messages = default_errors, required = False, label="Seleccione la imagen que quiera eliminar")
     
     class Meta:
@@ -38,7 +40,12 @@ class RoomForm(forms.ModelForm):
             self.fields["imgs_delete"].queryset = RoomImg.objects.filter(room = self.instance)
         else:
             del self.fields["imgs_delete"]
-    
+    def clean_name(self):
+        if not all(char.isalpha() or char.isspace() for char in self.cleaned_data["name"]):
+            raise ValidationError("El nombre ingresado no es correcto")
+        if RoomType.objects.exclude(name = self.instance.name).filter(name__icontains = self.cleaned_data["name"]).exists():
+            raise ValidationError("La habitación ingresada ya existe en la base de datos")
+        return self.cleaned_data["name"]
     def clean_capacity(self):
         if self.cleaned_data["capacity"] <= 0:
             raise ValidationError("El número no puede ser menor a 0")
@@ -58,6 +65,6 @@ class RoomViewForm(forms.ModelForm):
     def clean_name(self):
         if not all(char.isalpha() or char.isspace() for char in self.cleaned_data["name"]):
             raise ValidationError("El nombre ingresado no es correcto")
-        if RoomView.objects.filter(name__icontains = self.cleaned_data["name"]).exists():
+        if RoomView.objects.exclude(name = self.instance.name).filter(name__icontains = self.cleaned_data["name"]).exists():
             raise ValidationError("La vista ingresada ya existe en la base de datos")
         return self.cleaned_data["name"]

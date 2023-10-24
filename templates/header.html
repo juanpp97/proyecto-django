@@ -20,13 +20,23 @@
           <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
              Administracion
           </a>
-          <ul class="dropdown-menu text-small text-light">
+          <ul class="dropdown-menu text-small text-light" id="menu_admin">
+            
             <li><h5 class="dropdown-header">Habitaciones</h5></li>
             <li><a class="dropdown-item" href="{% url "listar_hab" %}">Gestionar Habitaciones</a></li>
             <li><a class="dropdown-item" href="{% url "crear_hab" %}">Crear habitación</a></li>
-          
+
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Reservas</h5></li>
+            <li><h5 class="dropdown-header">Vista de habitación</h5></li>
+            <li><a class="dropdown-item" href="#">Gestionar Vistas</a></li>
+            <li><a class="dropdown-item" href="#">Nueva Vista</a></li>
+
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Tarifas</h5></li>
+            <li><a class="dropdown-item" href="#">Gestionar Tarifas</a></li>
+
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Reserva</h5></li>
             <li><a class="dropdown-item" href="#">Gestionar Reservas</a></li>
             <li><a class="dropdown-item" href="#">Nueva Reserva</a></li>
           

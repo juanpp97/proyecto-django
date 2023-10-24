@@ -12,6 +12,7 @@ class RoomListView(ListView):
     model = RoomType
     context_object_name = 'rooms_list'
     template_name = 'administracion/listar_hab.html'
+    ordering = ['capacity']
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["date"] = datetime.now()
@@ -27,16 +28,13 @@ class RoomCreateView(CreateView):
     form_class = RoomForm
     template_name = 'administracion/form_hab.html'
     success_url = reverse_lazy('listar_hab')
+
     def form_valid(self, form):
-        if RoomType.objects.filter(name__icontains = form.cleaned_data["name"]).exists():
-            form.add_error("name", "El valor ingresado ya existe en la base de datos")
-            return self.form_invalid(form)
         self.object = form.save()
         if self.request.FILES:
-            for indice, image in enumerate(self.request.FILES.getlist('imgs')):
-                rename_image(image, f"{self.object.name}_{indice}")
+            for index, image in enumerate(self.request.FILES.getlist('imgs')):
+                rename_image(image, f"{self.object.name}_{index}")
                 RoomImg.objects.create(img = image, room = self.object)
-        
         messages.success(self.request, "Habitación guardada con éxito")
         return super().form_valid(form)
     def form_invalid(self, form):
@@ -45,6 +43,8 @@ class RoomCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Crear Nueva Habitación"
+        context["boton"] = "Crear"
+        
         context["date"] = datetime.now()
         return context
     
@@ -110,7 +110,7 @@ class RoomUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Editar Habitación"
         context["date"] = datetime.now()
-
+        context["boton"] = "Editar"
         return context
     
         
