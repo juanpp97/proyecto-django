@@ -27,7 +27,6 @@
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <!--Inicio Formulario de Bootstrap-->
                     <form action="{% url "contact" %}" method = "POST" enctype="application/x-www-form-urlencoded">
                         {% csrf_token %}
                         {% for field in form %}
@@ -52,7 +51,6 @@
                           </div>
                         
                       </form>
-                      <!--Fin Formulario de Bootstrap-->
 
                 </div>
             </div>

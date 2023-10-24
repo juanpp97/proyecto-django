@@ -1,0 +1,78 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Administracion | Habitaciones {% endblock titulo %}
+{% block contenido %}
+{% load static %}
+
+<main>
+
+    <div class="container mt-4">
+        {% if messages %}
+        {% for message in messages  %}
+        <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h4 class="h4 text-center py-2"> {{titulo}} </h4>
+        
+        <section class="pt-1 pb-3 row">
+            
+            <form action="" method = "POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name != "imgs_delete" %}
+                <div class="form-group mb-4">
+                    <label for="{{field.id_for_label}}" class="col-form-label">{{field.label}}</label>
+                    {{ field }}
+
+                    {% if field.errors %}
+                    {% for error in field.errors %}
+                    <div class="form-text text-danger">
+                        {{error|escape}}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+          
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="row justify-content-center">
+
+                    {% for image in form.imgs_delete  %}
+                    <div class="col-3">
+            
+                        <div class="d-flex flex-wrap gap-5">
+                            <label for="{{ image.id_for_label }}">
+                                <img src="/media/{{image.choice_label}}" alt="" width="100" height="100">
+                
+                                {{ image.tag }}
+                                Eliminar
+                            </label>
+                            {% if image.errors %}
+                            {% for error in image.errors %}
+                            <div class="form-text text-danger">
+                                {{error|escape}}
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+            
+                    {% endfor %}
+            
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start py-3">
+                    <button class="btn btn-success py-2 rounded-4" type="submit">Crear</button>
+                    <a class="btn btn-secondary py-2 rounded-4" href="{% url "listar_hab" %}">Cancelar</a>
+                </div>
+                
+              </form>
+      
+
+        </section>
+    </div>
+
+
+</main>
+{% endblock contenido %}

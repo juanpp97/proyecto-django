@@ -1,0 +1,62 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Administracion | Habitaciones {% endblock titulo %}
+{% block contenido %}
+{% load static %}
+
+<main>
+    {% if messages %}
+    {% for message in messages  %}
+    <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="container mt-4">
+        <h4 class="h4 text-center py-2"> Listado de Habitaciones </h4>
+        <div class="d-flex gap-4">
+
+            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_hab" %}">+ Nueva Habitacion</a>
+            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_vista" %}">+ Nueva Vista</a>
+            
+        </div>
+        <section class="pt-1 pb-3">
+            <table class="table table-hover table-striped">
+                <thead class="table-light">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Capacidad</th>
+                    <th>Vista</th>
+                    <th>Camas</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for room in rooms_list %}
+                    <tr>
+                        <td>{{room.name}}</td>
+                        <td>{{room.capacity}}</td>
+                        <td>
+                        {% for view in room.view.all  %}
+                        {% if forloop.counter0 == 0 %}{{view}}{% else %}, {{view}}{% endif %}
+                        {% endfor %}
+                    </td>
+                        <td>{{room.num_beds}}</td>
+                        <td>
+
+                        <a href="" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
+                        </a>
+                        <a href="" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
+                        
+                    </td>
+                        </tr>
+                    {% endfor %}
+    
+                </tbody>
+              </table>
+        </section>
+    </div>
+
+
+</main>
+{% endblock contenido %}

@@ -1,9 +1,7 @@
 from django import forms
-from django.forms import ValidationError
-from datetime import date
+from django.forms import ValidationError 
 from dateutil.relativedelta import relativedelta
 from re import match
-
 #Sobreescribo los mensajes de error por defecto del form
 default_errors = {
     'required': 'Este campo es obligatorio',
@@ -160,6 +158,3 @@ class ContactForm(forms.Form):
         return data
     
 
-            
-
-    
