@@ -3,8 +3,7 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from .forms import ReservationForm, ContactForm
 from django.contrib import messages
-
-
+from administracion.models import RoomType, RoomView, RoomImg
 def index(request):
     context = {
         "date": datetime.now(),
@@ -13,97 +12,12 @@ def index(request):
     return render(request, "reservas/inicio.html", context)
 
 def rooms(request):
-    rooms = [
-        {
-        "id": 1,
-        "name": "Habitación Individual", 
-         "capacity": 1, 
-         "num_beds": "1 cama simple", 
-         "view": "Frente", 
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 30_000, 
-         "price_med": 40_000, 
-         "price_high": 50_000, 
-         "imgs": ["individual1.webp", "individual2.webp", "individual3.webp", "individual4.webp"],
-         "range": range(0,4),
-         },
-
-         {"id": 2,
-          "name": "Habitación Doble Clásica", 
-         "capacity": 2, 
-         "num_beds": "2 camas simples", 
-         "view": "Playa",
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 40_000, 
-         "price_med": 50_000, 
-         "price_high": 60_000, 
-         "imgs": ["doble1.webp", "doble2.webp", "doble3.webp"],
-         "range": range(0,3),
-         },
-
-         {"id": 3,
-        "name": "Habitación Matrimonial", 
-         "capacity": 2, 
-         "num_beds": "1 cama doble", 
-         "view": "Ambas", 
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 30_000, 
-         "price_med": 40_000, 
-         "price_high": 50_000, 
-         "imgs": ["matrimonial1.webp", "matrimonial2.webp", "matrimonial3.webp"],
-         "range": range(0,3),
-         },
-
-         {"id": 4,
-        "name": "Habitación Triple",
-         "capacity": 3, 
-         "num_beds": "3 camas simples", 
-         "view": "Ambas",
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 40_000, 
-         "price_med": 50_000, 
-         "price_high": 60_000, 
-         "imgs": ["triple1.webp", "triple2.webp", "triple3.webp"],
-         "range": range(0,3),
-         },
-
-         {"id": 5,
-        "name": "Habitación Familiar", 
-         "capacity": 4, 
-         "num_beds": "1 cama doble - 2 camas simples", 
-         "view": "Ambas",
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 50_000, 
-         "price_med": 60_000, 
-         "price_high": 70_000, 
-         "imgs": ["familiar1.webp", "familiar2.webp", "familiar3.webp", "familiar4.webp"],
-         "range": range(0,4),
-         },
-
-         {"id": 6,
-        "name": "Suite", 
-         "capacity": 3, 
-         "num_beds": "1 cama doble - 1 sillón cama", 
-         "view": "Ambas",
-         "AC": "Si",
-         "TV": "Si",
-         "price_low": 60_000, 
-         "price_med": 70_000, 
-         "price_high": 80_000, 
-         "imgs": ["suite1.webp", "suite2.webp", "suite3.webp", "suite4.webp"],
-         "range": range(0,4),
-         },
-         
-         ]
+    if request.method == "GET":
+        rooms_list = RoomType.objects.all().order_by('capacity')
     context = {
             "date": datetime.now(),
             "active": "rooms",
-            "rooms_list": rooms,
+            "rooms_list": rooms_list,
         }
     return render(request, 'reservas/habitaciones.html', context)
 
@@ -274,4 +188,3 @@ def reservation(request, id_hab):
     }
     
     return render(request, "reservas/reserva.html", context)
-

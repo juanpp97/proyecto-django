@@ -159,6 +159,27 @@ legend, label {
     flex-wrap: nowrap;
     justify-content: space-between;
 }
+.edit {
+    padding: 5px 10px;
+    background-color: #0C8CE9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px 0 0 10px;
+}
+
+.delete {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: #F85149;
+    border-radius: 0 10px 10px 0;
+
+}
+#menu_admin{
+    z-index: 1000000;
+}
 @media screen and (max-width: 768px) {
     .word-counter{
         right: 14%;
