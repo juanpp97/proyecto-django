@@ -3,6 +3,7 @@ from django.forms import ValidationError
 from dateutil.relativedelta import relativedelta
 from re import match
 from .models import RoomView, RoomImg, RoomType
+from os import path
 
 default_errors = {
     'required': 'Este campo es obligatorio',
@@ -37,6 +38,12 @@ class RoomForm(forms.ModelForm):
             self.fields["imgs_delete"].queryset = RoomImg.objects.filter(room = self.instance)
         else:
             del self.fields["imgs_delete"]
+    
+    def clean_capacity(self):
+        if self.cleaned_data["capacity"] <= 0:
+            raise ValidationError("El número no puede ser menor a 0")
+        return self.cleaned_data["capacity"]
+
 
 class RoomViewForm(forms.ModelForm):
     class Meta:

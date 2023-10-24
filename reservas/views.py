@@ -13,7 +13,7 @@ def index(request):
 
 def rooms(request):
     if request.method == "GET":
-        rooms_list = RoomType.objects.all()
+        rooms_list = RoomType.objects.all().order_by('capacity')
     context = {
             "date": datetime.now(),
             "active": "rooms",

@@ -44,9 +44,9 @@
                         <td>{{room.num_beds}}</td>
                         <td>
 
-                        <a href="" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
+                        <a href="{% url "editar_hab" room.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
-                        <a href="" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
+                        <a href="{% url "eliminar_hab" room.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
                         
                     </td>
                         </tr>

@@ -104,7 +104,7 @@
                 <div class="d-flex flex-column p-3 h-75 align-content-center">
                     <h5 class="h5 text-center">{{room.name}}</h5>
                     <div class="mt-3 text-start">
-                        <p class="description"><strong>Capacidad: </strong> {{room.capacity}} persona{% if room.capacidad > 1 %}s{% endif %}</p>
+                        <p class="description"><strong>Capacidad: </strong> {{room.capacity}} persona{% if room.capacity > 1 %}s{% endif %}</p>
                         <p class="description"><strong>Camas: </strong> {{room.num_beds}}</p>
                         <p class="description"><strong>Vista: </strong> {% for view in room.view.all %}{% if forloop.counter0 == 0 %}{{view}}{% else %}, {{view}}{% endif %}{% endfor %} </p>
                     </div>
