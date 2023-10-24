@@ -169,3 +169,31 @@ legend, label {
         width: 100%;
     }    
 }
+.btn_producto{
+    transition: all 2 ease-in-out ;
+    transition: all 0.5s ease;
+}
+.btn_producto:hover{
+    transform: scale(1.01);
+    transition: all 0.5s ease;
+
+}
+.btn_producto:active{
+    transform: scale(1.1);
+    transition: all 0.5s ease;
+}
+
+
+
+.btn-pedilo{
+    width: 100%;
+}
+
+#lista_de_tareas{
+    height: 100%;
+}
+
+
+.height-100{
+    height: 100%;
+}
