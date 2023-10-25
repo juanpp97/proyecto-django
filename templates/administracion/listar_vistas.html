@@ -1,0 +1,49 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Administracion | Vistas {% endblock titulo %}
+{% block contenido %}
+{% load static %}
+
+<main>
+    {% if messages %}
+    {% for message in messages  %}
+    <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="container mt-4">
+        <h4 class="h4 text-center py-2"> Listado de Vistas de habitaciones </h4>
+        <div class="d-flex gap-4">
+            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_vista" %}">+ Nueva Vista</a>
+        </div>
+        <section class="pt-1 pb-3">
+            <table class="table table-hover table-striped ">
+                <thead class="table-light">
+                  <tr>
+                    <th>Vista</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for view in views_list %}
+                    <tr>
+                        <td>{{view.name}}</td>
+                        <td class="text-center">
+
+                        <a href="" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
+                        </a>
+                        <a href="" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
+                        
+                    </td>
+                        </tr>
+                    {% endfor %}
+    
+                </tbody>
+              </table>
+        </section>
+    </div>
+
+
+</main>
+{% endblock contenido %}

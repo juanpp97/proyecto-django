@@ -11,10 +11,10 @@
 
         <form action="" method="POST" name="form" enctype="multipart/form-data">
             {% csrf_token %}
-            <p class="fs-5"> ¿Está seguro que desea eliminar permanentemente la habitacion {{room.name}}? </p>
+            <p class="fs-5">{{aviso}} </p>
             <div class="d-grid gap-5 d-md-flex justify-content-md-center py-3 ">
                 <button class="btn btn-warning p-2 px-3 rounded-3" type="submit">Si</button>
-                <a class="btn btn-secondary p-2 px-2 px-3 rounded-3" href="{% url "listar_hab" %}">No</a>
+                <a class="btn btn-secondary p-2 px-2 px-3 rounded-3" href="{{url}}">No</a>
               </div>
         </form>
         
