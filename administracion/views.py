@@ -128,12 +128,21 @@ class RoomDeleteView(DeleteView):
     context_object_name = 'room'
 
     def form_valid(self, form):
-        if RoomImg.objects.filter(room = self.object).exists():
-            for image in RoomImg.objects.filter(room = self.object):
-                if path.exists(image.img.path):
-                    remove(image.img.path)
+        try:
+            if RoomImg.objects.filter(room = self.object).exists():
+                for image in RoomImg.objects.filter(room = self.object):
+                    if path.exists(image.img.path):
+                        remove(image.img.path)
+        except:
+            return self.form_invalid(form)
+        messages.success(self.request, "Habitación eliminada correctamente")
         return super().form_valid(form)
     
+    def form_invalid(self, form):
+        messages.error(self.request, "Error al borrar la habitación")
+        return super().form_invalid(form)
+    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["date"] = datetime.now()
@@ -156,8 +165,8 @@ class RoomViewListView(ListView):
 class RoomViewCreateView(CreateView):
     model = RoomView
     form_class = RoomViewForm
-    template_name = 'administracion/crear_vista.html'
-    success_url = reverse_lazy('listar_hab')
+    template_name = 'administracion/form_vista.html'
+    success_url = reverse_lazy('listar_vista')
     def form_valid(self, form):
         messages.success(self.request, "Vista Añadida con éxito")
         return super().form_valid(form)
@@ -170,7 +179,9 @@ class RoomViewCreateView(CreateView):
         context["date"] = datetime.now()
 
         return context
-    
+
+
+
         
         
     
