@@ -71,8 +71,6 @@ class RoomUpdateView(UpdateView):
                 borrar_imgs = form.cleaned_data['imgs_delete']
                 if borrar_imgs:        
                     for image in borrar_imgs:
-                        if path.exists(image.img.path):
-                            remove(image.img.path)
                         image.delete()
 
             orig_room = RoomType.objects.get(pk = self.object.pk)
@@ -80,15 +78,14 @@ class RoomUpdateView(UpdateView):
             #Si cambio el nombre del producto cambio los nombres de las imagenes almacenadas
             if orig_room.name != room.name:
                 for index, imagen in enumerate(exist_imgs):
-                    ruta = imagen.img.name.split("/")
-                    nombre = ruta.pop()
-                    nombre, extension = path.splitext(nombre)
-                    nuevo_nombre = f"{room.name.replace(' ', '_')}_{index}" + extension
-                    ruta.append(nuevo_nombre)
-                    path_ant = imagen.img.path
-                    imagen.img.name =  "/".join(ruta)
-                    rename(path_ant, imagen.img.path)
-                    imagen.save()
+                    try:
+                        nuevo_nombre = f"habitaciones/{room.name.replace(' ', '_')}_{index}"
+                        old_path = imagen.img.path
+                        rename_image(imagen.img, nuevo_nombre)             
+                        rename(old_path, imagen.img.path)
+                        imagen = imagen.save()
+                    except Exception as e:
+                        return self.form_invalid(form)
 
             if self.request.FILES.getlist('imgs'):
                 indice_max = 0
@@ -105,7 +102,6 @@ class RoomUpdateView(UpdateView):
             room.save()
             messages.success(self.request, "Los datos se han modificado correctamente")
         except BaseException as e:
-            print(e)
             return self.form_invalid(form)
         return super().form_valid(form)
     
@@ -131,9 +127,8 @@ class RoomDeleteView(DeleteView):
         try:
             if RoomImg.objects.filter(room = self.object).exists():
                 for image in RoomImg.objects.filter(room = self.object):
-                    if path.exists(image.img.path):
-                        remove(image.img.path)
-        except:
+                    image.delete()
+        except Exception as e:
             return self.form_invalid(form)
         messages.success(self.request, "Habitación eliminada correctamente")
         return super().form_valid(form)

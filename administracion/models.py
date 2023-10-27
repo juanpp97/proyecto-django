@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 
 # Create your models here.
@@ -21,3 +22,6 @@ class RoomImg(models.Model):
     room = models.ForeignKey(RoomType,on_delete=models.CASCADE, related_name="room_imgs")
     def __str__(self) -> str:
         return f"{self.img}"
+    def delete(self, using=None, keep_parents=False):
+        self.img.storage.delete(self.img.name)
+        super().delete()
