@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+from typing import Any
+>>>>>>> a1529cbcdd7469fa57e868ff8062cfbd74b2a22b
 from django.db import models
 
 # Create your models here.
@@ -20,4 +24,11 @@ class RoomImg(models.Model):
     img = models.ImageField(upload_to="habitaciones/", verbose_name="Imagen de la habitacion", null=True)
     room = models.ForeignKey(RoomType,on_delete=models.CASCADE, related_name="room_imgs")
     def __str__(self) -> str:
+<<<<<<< HEAD
         return f"{self.img}"
+=======
+        return f"{self.img}"
+    def delete(self, using=None, keep_parents=False):
+        self.img.storage.delete(self.img.name)
+        super().delete()
+>>>>>>> a1529cbcdd7469fa57e868ff8062cfbd74b2a22b

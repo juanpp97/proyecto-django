@@ -4,6 +4,5 @@
 ## Integrantes:
 * Gabriel Etchegoyen
 * Juan Pablo Peñaloza
-* Maria Grehan
 * Lautaro Marcelo Rivadero Aquino
-* Arenz Ana Jorgelina
+

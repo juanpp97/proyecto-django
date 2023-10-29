@@ -6,15 +6,33 @@
 <main>
 
     <div class="container mt-4 text-center">
+<<<<<<< HEAD
 
+=======
+        {% if messages %}
+        {% for message in messages  %}
+        <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+>>>>>>> a1529cbcdd7469fa57e868ff8062cfbd74b2a22b
         <h4 class="h4 text-center py-2"> {{titulo}} </h4>
 
         <form action="" method="POST" name="form" enctype="multipart/form-data">
             {% csrf_token %}
+<<<<<<< HEAD
             <p class="fs-5"> ¿Está seguro que desea eliminar permanentemente la habitacion {{room.name}}? </p>
             <div class="d-grid gap-5 d-md-flex justify-content-md-center py-3 ">
                 <button class="btn btn-warning p-2 px-3 rounded-3" type="submit">Si</button>
                 <a class="btn btn-secondary p-2 px-2 px-3 rounded-3" href="{% url "listar_hab" %}">No</a>
+=======
+            <p class="fs-5">{{aviso}} </p>
+            <div class="d-grid gap-5 d-md-flex justify-content-md-center py-3 ">
+                <button class="btn btn-warning p-2 px-3 rounded-3" type="submit">Si</button>
+                <a class="btn btn-secondary p-2 px-2 px-3 rounded-3" href="{{url}}">No</a>
+>>>>>>> a1529cbcdd7469fa57e868ff8062cfbd74b2a22b
               </div>
         </form>
         
