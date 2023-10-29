@@ -153,15 +153,12 @@ legend, label {
     min-height: 60px;
     width: 80%;
 }
-<<<<<<< HEAD
 .card-body{
     display: flex !important;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-=======
->>>>>>> a1529cbcdd7469fa57e868ff8062cfbd74b2a22b
 .edit {
     padding: 5px 10px;
     background-color: #0C8CE9;
