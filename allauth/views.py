@@ -56,51 +56,24 @@ class Handler_Login_Registration(TemplateView):
     def post(self, request):
         print(request.POST)
         if 'login_form' in request.POST:
-            print("si es login")
-
             login_form = InicioSesionForm(request,data=request.POST)
-         
             if login_form.clean():
-                username = login_form.cleaned_data['username']
-                password = login_form.cleaned_data['password']
-                print(f"es valido {username} {password}")
-   
-                user = authenticate(request, username=username, password=password)
+                user = authenticate(request, username=login_form.cleaned_data['username'], password=login_form.cleaned_data['password'])
                 if user is not None: 
-                    print("si Existe")
                     login(request,user)
                     return redirect('index')
                 else:
-                    print("no Existe")
                     login_form.add_error(None,'Credenciales incorrectas!.')
             else:
-                print("no es valido")
                 pass
         else:
-            print("no es login")
             login_form = InicioSesionForm()
-
-        # if 'registrarion_form' in request.POST:
-        #     print("si es registro")
-
-        #     registration_form = InicioSesionForm(request.POST)
-        #     if registration_form.is_valid():
-        #         usuario = registration_form.save()
-        #         login(request, usuario)  # Iniciar sesión después del registro
-        #         return redirect('index')  # Redirigir a la página de perfil u otra página después del registro
-        #     else:
-        #          registration_form.add_error(None, "Credenciales incorrectas")
-        # else:
-        #     registration_form = RegistroForm()
-
         if 'registration_form' in request.POST:
-            print("si es registro")
-
             registration_form = RegistroForm(request.POST)
-           
+            if registration_form.is_valid():
+                registration_form.save()
+                return redirect('index')
         else:
             registration_form = RegistroForm()
         
         return render(request,'accounts/combined_registration_login.html', {'registration_form': registration_form, 'login_form': login_form})
-
-    # return render(request, 'combined_registration_login.html', {'login_form': login_form, 'registration_form': registration_form})
