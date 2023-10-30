@@ -172,12 +172,50 @@ class RoomViewCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Crear Vista de Habitación"
         context["date"] = datetime.now()
+        context["boton"] = "Crear"
 
         return context
 
-
-
+class RoomViewUpdateView(UpdateView):
+    model = RoomView
+    form_class = RoomViewForm
+    template_name = 'administracion/form_vista.html'
+    success_url = reverse_lazy('listar_vista')
+    def form_valid(self, form):
+        messages.success(self.request, 'La vista se ha actualizado correctamente')
+        return super().form_valid(form)
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error al actualizar la vista')
+        return super().form_invalid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Editar Vista"
+        context["date"] = datetime.now()
+        context["boton"] = "Editar"
+        return context
+    
+    
+class RoomViewDeleteView(DeleteView):
+    model = RoomView
+    template_name = 'administracion/eliminar.html'
+    success_url = reverse_lazy('listar_vista')
+    def form_valid(self, form):
+        messages.success(self.request, 'La vista se ha borrado correctamente')
+        return super().form_valid(form)
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error al borrar la vista')
+        return super().form_invalid(form)
         
-        
+    
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["date"] = datetime.now()
+        context["titulo"] = "Eliminar Vista"
+        context["url"] = reverse_lazy("listar_vista")
+        context["aviso"] = f"¿Está seguro que desea eliminar permanentemente la vista {self.object.name}?"
+        return context
+    
     
 
