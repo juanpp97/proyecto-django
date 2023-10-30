@@ -5,8 +5,11 @@
 {% endblock %}
 
 {% block contenido %}
+{% comment %} {% if user.is_authenticated %}
+<h1>User: {{ user.get_username }}</h1>
+{% endif %} {% endcomment %}
 <section class="contenedor">
-  <div class="formulario-container " id="container">
+  <div class="formulario-container {% if LoginOrRegister %}right-panel-active{% endif %}" id="container">
     <div class="form-container sign-up-container">
       <form method="post" action="{% url 'accounts-hanfler' %}">
         <h3>Registro</h3>
@@ -16,7 +19,7 @@
         <button type="submit">Registrarse</button>
       </form>
     </div>
-    <div class="form-container sign-in-container">
+    <div class="form-container sign-in-container ">
       <form method="post" action="{% url 'accounts-hanfler' %}">
         <h3>Iniciar Sesión</h3>
         {% csrf_token %}

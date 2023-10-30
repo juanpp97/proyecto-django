@@ -12,9 +12,10 @@ class Handler_Login_Registration(TemplateView):
     def get(self, request):
         login_form = InicioSesionForm()
         registration_form = RegistroForm()
-        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form})
+        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form, "LoginOrRegister": False })
 
     def post(self, request):
+        panel=False
         if 'login_form' in request.POST:
             login_form = InicioSesionForm(request,data=request.POST)
             if login_form.is_valid():
@@ -26,6 +27,7 @@ class Handler_Login_Registration(TemplateView):
                     return redirect('index')
                 else:
                     login_form.add_error(None,'Credenciales incorrectas!.')
+                    pass
             else:
                 pass
         else:
@@ -36,11 +38,13 @@ class Handler_Login_Registration(TemplateView):
                 registration_form.save()
                 return redirect('index')
             else:
+                panel = True
+
                 pass
 
         else:
             registration_form = RegistroForm()
         
-        return render(request,'accounts/combined_registration_login.html', {'registration_form': registration_form, 'login_form': login_form})
+        return render(request,'accounts/combined_registration_login.html', {'registration_form': registration_form, 'login_form': login_form,"LoginOrRegister": panel })
 
 
