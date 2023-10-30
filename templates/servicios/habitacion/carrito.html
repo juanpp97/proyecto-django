@@ -1,0 +1,69 @@
+{% extends "servicios/habitacion/base_carrito.html" %}
+{% load static %}
+
+{% block sub_contenido %}
+
+
+<ul id="lista_de_tareas" class="list-group w-100">
+
+</ul>
+
+<script>
+
+    class listaTareas {
+        constructor(){
+            this.lista_productos = JSON.parse(localStorage.getItem('lista_productos')) || []
+            this.cargarTareas();
+            this.total 
+        }
+    
+        cargarTareas(){
+            localStorage.setItem('lista_productos', JSON.stringify(this.lista_productos));
+            console.log(localStorage.setItem('lista_productos', JSON.stringify(this.lista_productos)))
+            if (this.lista_productos.length >= 1){
+                
+                let htmlTareas = this.lista_productos.reduce((html, producto, index)=> html += this.generarTareaHTML(producto,index), '')
+                htmlTareas += this.generarHTMLtotal()
+                document.querySelectorAll('.container_carrito')[0].innerHTML =`<button class="btn btn-primary btn-pedilo">Pedilo!</button>`
+                document.getElementById("lista_de_tareas").innerHTML = htmlTareas
+            } else {
+                document.getElementById("lista_de_tareas").innerHTML = '<h1 style="text-align: center">No hay productos</h1> '
+                document.querySelectorAll('.container_carrito')[0].innerHTML = `<button class="btn btn-primary btn-pedilo" disabled> no lo podes Pedir!</button>`
+            }
+        }
+        generarHTMLtotal(){
+            let precio_total = this.lista_productos.reduce((total,elemento) => total += Number(elemento.precio),0)
+            return `
+            <li class="w-100 list-group-item d-flex flex-row justify-content-between align-items-center">
+                <div>Total:</div>
+                <div class="ms-auto">$${precio_total}</div>
+            </li>
+            `
+        }
+        generarTareaHTML(producto,index){
+            return `
+            <li class="w-100 list-group-item d-flex flex-row justify-content-between align-items-center">
+                <button class="btn btn_producto btn-danger me-auto" value="index" onclick="ListaTareas.eliminarTarea(event, ${index})">X</button>
+                <div>${producto["nombre"]}</div>
+                <div>${producto["categoria"]}</div>
+                <div class="ms-auto">$${producto["precio"]}</div>
+            </li>
+            `
+        }
+
+        eliminarTarea(evento, indice){
+            evento.preventDefault();
+            this.lista_productos.splice(indice,1);
+            this.cargarTareas();
+        }
+    };
+    
+    let ListaTareas;
+    window.addEventListener('load', () => {
+        ListaTareas = new listaTareas()
+        console.log(ListaTareas)
+    
+    })
+</script>
+{% endblock sub_contenido %}
+

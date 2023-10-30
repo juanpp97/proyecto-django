@@ -1,0 +1,43 @@
+{% extends "plantilla.html" %}
+{% block titulo %} Administracion | Crear Vista {% endblock titulo %}
+{% block contenido %}
+{% load static %}
+
+<main>
+
+    <div class="container mt-4">
+        {% if messages %}
+        {% for message in messages  %}
+        <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <h4 class="h4 text-center py-2"> {{titulo}} </h4>
+        
+        <form action="" method="POST" name="form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <label for="{{field.id_for_label}}" class="col-form-label">{{field.label}}</label>
+            {{ field }}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <div class="form-text text-danger">
+                {{error|escape}}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            {% endfor %}
+           
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start py-3">
+                <button class="btn btn-success py-2 rounded-4" type="submit">Crear</button>
+                <a class="btn btn-secondary py-2 rounded-4" href="{% url "listar_hab" %}">Cancelar</a>
+              </div>
+        </form>
+    </div>
+</main>
+    
+{% endblock %}
