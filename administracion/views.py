@@ -202,12 +202,10 @@ class RoomViewDeleteView(DeleteView):
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha borrado correctamente')
         return super().form_valid(form)
+    
     def form_invalid(self, form):
         messages.error(self.request, 'Error al borrar la vista')
-        return super().form_invalid(form)
-        
-    
-    
+        return super().form_invalid(form) 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
