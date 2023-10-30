@@ -15,7 +15,14 @@
   {% block extracss %} {% endblock %}
 </head>
 
-<body>
+<body id='body'>
+<style>
+  body{opacity:0}
+  .visible{
+    opacity:1;
+    transition: all 1.5s ease;
+  }
+</style>
 
   
   {% block contenido %} {% endblock %}
@@ -27,6 +34,15 @@
   <script src="{% static 'js/validacion.js' %}"></script>
   {% endif %}
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        document.getElementById('body').classList.add('visible')
+    }, 500);
+  });
+  </script>
+
+
 
 </body>
 
