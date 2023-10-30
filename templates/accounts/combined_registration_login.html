@@ -5,20 +5,27 @@
 
   <div class="registration-form">
     <h3>Registro</h3>
-    <form method="post" action="{% url 'register' %}">
+    <form method="post" action="{% url 'accounts-hanfler' %}">
       {% csrf_token %}
+      <input type="hidden" name="registration_form" value="registration_form" id="registration_form">
       {{ registration_form.as_p }}
       <button type="submit">Registrarse</button>
     </form>
   </div>
 
+
   <div class="login-form">
     <h3>Iniciar Sesión</h3>
-    <form method="post" action="{% url 'login' %}">
+    <form method="post" action="{% url 'accounts-hanfler' %}">
       {% csrf_token %}
+      <input type="hidden" name="login_form" value="login_form" id="login_form">
       {{ login_form.as_p }}
       <button type="submit">Iniciar Sesión</button>
     </form>
   </div>
+  {% if user.is_authenticated %}
+  <h1>User: {{ user.get_username }}</h1>
+
+  {% endif %}
 {% endblock %}
 
