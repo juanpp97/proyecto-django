@@ -8,11 +8,14 @@ from allauth.forms import  InicioSesionForm, RegistroForm
 
 class Handler_Login_Registration(TemplateView):
     template_name = 'accounts/combined_registration_login.html'
-    
     def get(self, request):
+        panel = False
+        if request.GET.get('panel') == 'True':
+            panel = True
+            print(request.GET.get('panel'))
         login_form = InicioSesionForm()
         registration_form = RegistroForm()
-        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form, "LoginOrRegister": False })
+        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form, "LoginOrRegister": panel })
 
     def post(self, request):
         panel=False
