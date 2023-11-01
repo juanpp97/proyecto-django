@@ -1,13 +1,10 @@
 {% load static %}
-<header class="py-3 border-bottom bg-dark">
+<header class="header-page py-3 border-bottom bg-dark">
     <nav
-      class="container d-flex flex-md-row align-items-center justify-content-md-between justify-content-sm-center flex-column">
+      class="container ">
 
-      <a href="/" class="d-flex align-items-center ms-3 py-3 py-sm-1">
-        <img src="{% static 'img/logodjangosh.png'%}" class="logo">
-      </a>
-
-      <ul class="nav justify-content-center py-3">
+ 
+      <ul class="nav justify-content-center py-3 menu-left">
         <li class="py-1 px-lg-4 px-2"><a href="{% url "index" %}" class="nav__link" {% if active == "index" %}id="active"{% endif %}>Inicio</a></li>
 
         <li class="py-1 px-lg-4 px-2"><a href="{% url "rooms" %}" class="nav__link" {% if active == "rooms" %}id="active"{% endif %}>Habitaciones</a></li>
@@ -16,40 +13,13 @@
 
         <li class="py-1 px-lg-4 px-2"><a href="{% url "contact" %}" class="nav__link" {% if active == "contact" %}id="active"{% endif %}>Contacto</a></li>
 
-        <div class="dropdown text-end py-1 px-lg-4 px-2" data-bs-theme="dark">
-          <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
-             Administracion
-          </a>
-          <ul class="dropdown-menu text-small text-light" id="menu_admin">
-            
-            <li><h5 class="dropdown-header">Tipos de Habitación</h5></li>
-            <li><a class="dropdown-item" href="{% url "listar_hab" %}">Gestionar Tipo de Habitaciones</a></li>
-            <li><a class="dropdown-item" href="{% url "crear_hab" %}">Nueva Tipo de Habitación</a></li>
-            
-            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Vista de habitación</h5></li>
-            <li><a class="dropdown-item" href="{% url "listar_vista" %}">Gestionar Vistas</a></li>
-            <li><a class="dropdown-item" href="{% url "crear_vista" %}">Nueva Vista</a></li>
 
-            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Habitaciones</h5></li>
-            <li><a class="dropdown-item" href="">Gestionar Habitaciones</a></li>
-            <li><a class="dropdown-item" href="">Nueva Habitación</a></li>
-
-
-
-            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Tarifas</h5></li>
-            <li><a class="dropdown-item" href="#">Gestionar Tarifas</a></li>
-
-            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Reserva</h5></li>
-            <li><a class="dropdown-item" href="#">Gestionar Reservas</a></li>
-            <li><a class="dropdown-item" href="#">Nueva Reserva</a></li>
-          
-          </ul>
-          </div>
       </ul>
+
+      <a href="/" class=" d-flex align-items-center  py-3 py-sm-1">
+        <img src="{% static 'img/logo2.svg'%}" class="header_logo">
+      </a>
+      
 
       {% comment %} 
             Cuando el usuario está logueado
@@ -64,7 +34,40 @@
             </ul>
           </div> {% endcomment %}
 
-      <div class="user nav text-end justify-content-center justify-content-lg-between flex-nowrap">
+      <div class="user nav text-end  flex-nowrap menu-right">
+        <div class="dropdown text-end py-1 px-lg-4 px-2" data-bs-theme="dark">
+          <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
+             Administracion
+          </a>
+          <ul class="dropdown-menu text-small text-light" id="menu_admin">
+            
+            <li><h5 class="dropdown-header">Tipos de Habitación</h5></li>
+            <li><a class="dropdown-item" href="{% url "listar_hab" %}">Gestionar Tipo de Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url "crear_hab" %}">Nueva Tipo de Habitación</a></li>
+            
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Vista de habitación</h5></li>
+            <li><a class="dropdown-item" href="{% url "listar_vista" %}">Gestionar Vistas</a></li>
+            <li><a class="dropdown-item" href="{% url "crear_vista" %}">Nueva Vista</a></li>
+  
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Habitaciones</h5></li>
+            <li><a class="dropdown-item" href="">Gestionar Habitaciones</a></li>
+            <li><a class="dropdown-item" href="">Nueva Habitación</a></li>
+  
+  
+  
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Tarifas</h5></li>
+            <li><a class="dropdown-item" href="#">Gestionar Tarifas</a></li>
+  
+            <li><hr class="dropdown-divider border-light border-opacity-25"></li>
+            <li><h5 class="dropdown-header">Reserva</h5></li>
+            <li><a class="dropdown-item" href="#">Gestionar Reservas</a></li>
+            <li><a class="dropdown-item" href="#">Nueva Reserva</a></li>
+          
+          </ul>
+          </div>
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler' %}?panel=False" class="nav__link">Ingresar</a></li>
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler'%}?panel=True" class="nav__link">Registrarse</a></li>
       </div>
