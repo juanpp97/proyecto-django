@@ -1,8 +1,20 @@
 {% load static %}
-<header class="header-page py-3 border-bottom bg-dark">
-    <nav
-      class="container ">
+<header class="header-page py-1 bg-dark">
+  <nav class='mobile-header'>
 
+    <a href="/" class="">
+      <img src="{% static 'img/logo2.svg'%}" class="header_logo">
+    </a>
+    
+    <div>
+      <p>-</p>
+      <p>-</p>
+      <p>-</p>
+    </div>
+    
+  </nav>
+  <nav
+    class="container pc-header ">
  
       <ul class="nav justify-content-center py-3 menu-left">
         <li class="py-1 px-lg-4 px-2"><a href="{% url "index" %}" class="nav__link" {% if active == "index" %}id="active"{% endif %}>Inicio</a></li>

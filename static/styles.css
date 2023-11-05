@@ -283,3 +283,45 @@ legend, label {
 .panel-close{
     transform: translateX(-300px);
 }
+
+
+
+html::-webkit-scrollbar {
+    width: 0.3em;
+  }
+   
+  html::-webkit-scrollbar-track {
+    background-color: transparent;
+    position: absolute;
+  }
+   
+  html::-webkit-scrollbar-thumb {
+    background-color: var(--color-base);
+  }
+
+
+  @media screen and (width >= 1024px) {
+    
+    .mobile-header{
+        display: none !important;
+    }
+    
+    
+  }
+
+
+  @media screen and (  width <= 1023px) {
+  
+    .pc-header{
+        display: none !important;
+    }
+
+  }
+
+
+  @media screen and ( width <= 767px) {
+    .pc-header{
+        display: none !important;
+    }
+
+  }
