@@ -3,7 +3,7 @@ from .models import Eventos,Producto
 
 # Create your views here.
 
-def habitacion (request, tipo=None):
+def habitacion (request, tipo="comidas"):
     categorias_disponibles = Producto.objects.values_list('categoria', flat=True).distinct()
     contexto ={"tipo":tipo,}
     if tipo in categorias_disponibles:

@@ -8,23 +8,82 @@
 {% comment %} {% if user.is_authenticated %}
 <h1>User: {{ user.get_username }}</h1>
 {% endif %} {% endcomment %}
+{% if messages %}
+{% for message in messages  %}
+<div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
 <section class="contenedor">
+
   <div class="formulario-container {% if LoginOrRegister %}right-panel-active{% endif %}" id="container">
     <div class="form-container sign-up-container">
-      <form method="post" action="{% url 'accounts-hanfler' %}">
+
+
+      <ul class="error_list my-0">
+        {% for field in registration_form %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <li><span class="error_list_field fs-6">{{field.label}}:</span> {{error|escape}}</li>
+            {% endfor %}
+
+            {% endif %}
+        {% endfor %}
+    </ul>
+      <form method="post" action="{% url 'accounts-hanfler' %}" class="mt-0">
         <h3>Registro</h3>
         {% csrf_token %}
+        
+        
         <input type="hidden" name="registration_form" value="registration_form" id="registration_form">
-        {{ registration_form.as_p }}
+        {% for field in registration_form  %}
+        <p>
+        <label for="{{ field.id_for_label }}">{{field.label}}</label>
+        {{field}}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+        </p>
+        {% endfor %}
+        {% comment %} {{ registration_form.as_p }} {% endcomment %}
         <button type="submit">Registrarse</button>
       </form>
     </div>
+
+
     <div class="form-container sign-in-container ">
+
+
+      <ul class="error_list mb-0">
+        {% for field in login_form %}
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <li><span class="error_list_field fs-6">{{field.label}}:</span> {{error|escape}}</li>
+            {% endfor %}
+
+            {% endif %}
+
+        {% endfor %}
+        <li>{{login_form.non_field_errors}}</li>
+
+    </ul>
+
       <form method="post" action="{% url 'accounts-hanfler' %}">
         <h3>Iniciar Sesión</h3>
         {% csrf_token %}
         <input type="hidden" name="login_form" value="login_form" id="login_form">
-        {{ login_form.as_p }}
+        {% for field in login_form  %}
+        <p>
+        <label for="{{ field.id_for_label }}">{{field.label}}</label>
+        {{field}}
+        <small class="form-text text-muted">{{ field.help_text }}</small>
+        </p>
+        {% endfor %}
+        {% comment %} {{ login_form.as_p }} {% endcomment %}
+        {% if 'next' in request.GET %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
         <button type="submit">Iniciar Sesión</button>
       </form>
     </div>
@@ -32,7 +91,7 @@
       <div class="overlay">
         <div class="overlay-panel overlay-left">
           <img src="{% static 'img/logo2.svg' %}" class="svg-overlay"/>
-          <h1>Bienvenido devuelta!</h1>
+          <h1>Bienvenido de vuelta!</h1>
           <p>Para mantenerse conectado con nosotros, inicie sesión con su información personal</p>
           <button class="ghost" id="signIn">Iniciar Sesión</button>
         </div>

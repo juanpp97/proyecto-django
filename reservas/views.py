@@ -4,6 +4,8 @@ from dateutil.relativedelta import relativedelta
 from .forms import ReservationForm, ContactForm
 from django.contrib import messages
 from administracion.models import RoomType, RoomView, RoomImg
+from django.contrib.auth.decorators import login_required
+
 def index(request):
     context = {
         "date": datetime.now(),

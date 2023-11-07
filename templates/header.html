@@ -15,7 +15,8 @@
         <li class="py-1 px-lg-4 px-2"><a href="{% url "facilities" %}"  class="nav__link" {% if active == "facilities" %}id="active"{% endif %}>Instalaciones</a></li>
 
         <li class="py-1 px-lg-4 px-2"><a href="{% url "contact" %}" class="nav__link" {% if active == "contact" %}id="active"{% endif %}>Contacto</a></li>
-
+        {% if perms.administracion %}
+        
         <div class="dropdown text-end py-1 px-lg-4 px-2" data-bs-theme="dark">
           <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
              Administracion
@@ -49,25 +50,29 @@
           
           </ul>
           </div>
+        {% endif %}
       </ul>
 
-      {% comment %} 
-            Cuando el usuario está logueado
-            <div class="dropdown text-end py-3" data-bs-theme="dark">
-            <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="#ccc"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
-            </a>
-            <ul class="dropdown-menu text-small text-light">
-              <li><a class="dropdown-item" href="#">Panel de usuario</a></li>
-              <li><hr class="dropdown-divider border-light border-opacity-10"></li>
-              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-            </ul>
-          </div> {% endcomment %}
 
+      {% if user.is_authenticated %}
+      <div class="dropdown text-end py-3" data-bs-theme="dark">
+        <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="#ccc"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
+        </a>
+        <ul class="dropdown-menu text-small text-light">
+          <li><h5 class="dropdown-header text-center"> Hola {{user|title}} </h5></li>
+          <li><a class="dropdown-item" href="#">Panel de usuario</a></li>
+          <li><hr class="dropdown-divider border-light border-opacity-10"></li>
+          <li><a class="dropdown-item" href="{% url "logout" %}">Cerrar sesión</a></li>
+        </ul>
+      </div>
+      {% else %}
       <div class="user nav text-end justify-content-center justify-content-lg-between flex-nowrap">
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler' %}?panel=False" class="nav__link">Ingresar</a></li>
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler'%}?panel=True" class="nav__link">Registrarse</a></li>
       </div>
+      {% endif %}
+
 
 
     </nav>

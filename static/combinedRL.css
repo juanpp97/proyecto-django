@@ -75,7 +75,7 @@
   .formulario-container {
       background-color: #fff;
       position: relative;
-      overflow: hidden;
+      overflow: scroll;
       width: 100vw;
       max-width: 100%;
       min-height: 100vh;
