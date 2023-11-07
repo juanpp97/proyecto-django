@@ -3,10 +3,10 @@
 {% block contenido %}
 <main style="max-width: 80vw; margin: auto">
 <nav class="nav nav-pills flex-column flex-sm-row mt-3">
-    <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'comidas' %}active{% endif %}" aria-current="page" href="{% url 'serv-producto' tipo='comidas' %}">Comidas</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'cafeteria' %}active{% endif %}" href="{% url 'serv-producto' tipo='cafeteria' %}">Cafeteria</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'bebidas' %}active{% endif %}" href="{% url 'serv-producto' tipo='bebidas' %}">Bebidas</a>
-    <a class="flex-sm-fill text-sm-center nav-link {% if tipo == 'carrito' %}active{% endif %}" href="{% url 'serv-producto' tipo='carrito'  %}">Carrito</a>
+    <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'comidas' %}active{% endif %}" aria-current="page" href="{% url 'serv-producto' tipo='comidas' %}">Comidas</a>
+    <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'cafeteria' %}active{% endif %}" href="{% url 'serv-producto' tipo='cafeteria' %}">Cafeteria</a>
+    <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'bebidas' %}active{% endif %}" href="{% url 'serv-producto' tipo='bebidas' %}">Bebidas</a>
+    <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'carrito' %}active{% endif %}" href="{% url 'serv-producto' tipo='carrito'  %}">Carrito</a>
 
 </nav>
 <section class="d-flex align-items-end flex-column mb-3" style="min-height: 70vh;">
