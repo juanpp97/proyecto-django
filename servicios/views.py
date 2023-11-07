@@ -1,5 +1,6 @@
 from django.shortcuts import render , redirect
 from .models import Eventos,Producto
+from datetime import datetime
 
 # Create your views here.
 
@@ -32,3 +33,10 @@ def actividades(request):
         "list_eventos": model.objects.all()
     }
     return render (request, 'servicios/actividades.html',contexto)
+
+
+def inicio(request):
+    context = {
+            "date": datetime.now(),}
+
+    return render (request,'servicios/servicios_adic.html',context)
