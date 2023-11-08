@@ -13,7 +13,7 @@
   {% block extracss %} {% endblock %}
 </head>
 
-<body  data-scrollbar   >
+<body id='body'>
     <section class="panel-users">
       <section>
         <button id="panel-users-switch">></button>
@@ -44,6 +44,11 @@
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
   <script src="{% static 'js/plantilla.js' %}"></script>
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        document.getElementById('body').classList.add('visible')
+    }, 250);
+  });
     window.addEventListener('scroll', function () {
       var header = document.getElementById('miHeader');
       if (window.scrollY === 0) {
@@ -53,8 +58,6 @@
       }
   });
 
-
-   
 
   </script>
 </body>

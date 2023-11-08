@@ -2,9 +2,19 @@
     --color-base: rgb(33,37,41); 
     --color-base-50: rgb(33,37,41,0.5); 
 }
+
+
+
 html{
     scroll-behavior: smooth;
 }
+body{opacity:0}
+
+.visible{
+  opacity:1;
+  transition: all 0.5s ease-in-out;
+}
+
 .header-main{
     background-color: var(--color-base);
     position: fixed;
@@ -85,7 +95,7 @@ html{
 
 .seccion-intro {
     background-color: #fff;
-    box-shadow: 0px 0px 10px 1px #AAA;
+    /* box-shadow: 0px 0px 10px 1px #AAA; */
     position: relative;
 }
 
@@ -93,7 +103,7 @@ html{
     background-color: #fbfbfb;
     position: relative;
     z-index: 5000;
-    box-shadow: 0px 0px 10px 1px #AAA;
+    /* box-shadow: 0px 0px 10px 1px #AAA; */
 }
 
 
@@ -101,7 +111,7 @@ html{
     background-color: #fbfbfb;
     position: relative;
     z-index: 1000;
-    box-shadow: 0px 0px 10px 1px #AAA;
+    /* box-shadow: 0px 0px 10px 1px #AAA; */
 }
 
 
@@ -115,7 +125,7 @@ html{
     background-color: #fbfbfb;
     position: relative;
     z-index: 50;
-    box-shadow: 0px 0px 10px 1px #AAA;
+    /* box-shadow: 0px 0px 10px 1px #AAA; */
 
 }
 
@@ -126,7 +136,7 @@ html{
     background-position: center;
     background-repeat: no-repeat; 
     padding: 7rem 0;
-    box-shadow: inset 10px 10px 10000px #000;
+    /* box-shadow: inset 10px 10px 10000px #000; */
 }
 .imagen_hab{
     height: 200px;
@@ -137,7 +147,7 @@ html{
     background-position: center;
     background-repeat: no-repeat; 
     padding: 7rem 0;
-    box-shadow: inset 10px 10px 10000px #000;
+    /* box-shadow: inset 10px 10px 10000px #000; */
 }
 .imagen_card{
    height: 250px;
@@ -317,6 +327,7 @@ html::-webkit-scrollbar {
 }
 .contenido_uno img{
     width: 100%;
+    object-fit: contain;
 }
 
 
@@ -344,4 +355,36 @@ html::-webkit-scrollbar {
         display: none !important;
     }
 
+  }
+
+
+
+  .txt-rotating{
+    position: absolute;
+    font-size: 5rem;
+    z-index: 9;
+    top: 50%;
+    left: 55%;
+    transform: translateY(-50%);
+    color: var(--color-base);
+    
+  }
+
+  .txt-rotating-no{
+    position: absolute;
+    font-size: 10rem;
+    z-index: 9;
+    top: 50%;
+    left: 35%;
+    transform: translateY(-50%);
+    color: white;
+  }
+  .blinking-cursor {
+    user-select: none;
+    animation: blink 1s steps(2, start) infinite;
+  }
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
   }

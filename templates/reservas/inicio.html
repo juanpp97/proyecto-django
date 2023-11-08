@@ -4,7 +4,16 @@
 {% load static %}
 <main>
     <section class="contenido_uno">
-        <img src="{% static 'img/portada.webp' %}" alt="Descripción de la imagen"  data-scroll-zoom />
+        <span class="txt-rotating-no">DSH</span>
+        <span is="type-async"  class="txt-rotating" id="type-text"></span>
+        <span class="blinking-cursor">_</span>
+        {% comment %} <h1 class="txt-rotating">DSH
+            <span
+               class="txt-rotate"
+               data-period="4000"
+               data-rotate='[ "django!","suites!","hostel!" ]'></span>
+          </h1> {% endcomment %}
+        <img src="{% static 'img/facilities/instalacion_general.jpg' %}" alt="Descripción de la imagen"  data-scroll-zoom />
     </section>
     {% comment %} <section class="hero_inicio text-white text-center py-7">
         <h1 class="border-text">Una experiencia inigualable de hotelería</h1>
@@ -46,7 +55,7 @@
 
             <!-- Tarjeta de habitación 1 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/rooms/individual1.webp" %}" class="imagen_hab card-img-top" alt="Habitación de lujo">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center border-bottom py-1">Habitación Individual</h5>
@@ -64,7 +73,7 @@
 
             <!-- Tarjeta de habitación 2 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/rooms/familiar1.webp" %}" class="imagen_hab card-img-top" alt="Habitación Estándar">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center border-bottom py-1">Habitación Familiar</h5>
@@ -80,7 +89,7 @@
 
             <!-- Tarjeta de habitación 3 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/rooms/suite1.webp" %}" class="imagen_hab card-img-top" alt="Suite Familiar">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center border-bottom py-1">Suite</h5>
@@ -146,7 +155,7 @@
 
             <!-- Tarjeta de habitación 1 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow-lg h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/card_spa.webp" %}" class="card-img-top" alt="Zona de relajación">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title border-bottom py-2 text-center">Vení a relajarte</h5>
@@ -162,7 +171,7 @@
 
             <!-- Tarjeta de habitación 2 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow-lg h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/card_resto.webp" %}" class="card-img-top" alt="Restorant">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title border-bottom py-2 text-center">Restó Django Suites</h5>
@@ -177,7 +186,7 @@
 
             <!-- Tarjeta de habitación 3 -->
             <div class="col-md-4 mb-4">
-                <div class="card shadow-lg h-100">
+                <div class="card  h-100">
                     <img src="{% static "img/card_asist.webp" %}" class="card-img-top" alt="Suite Familiar">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title border-bottom py-2 text-center">Asistencia online</h5>
