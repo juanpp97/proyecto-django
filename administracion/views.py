@@ -1,7 +1,8 @@
 from typing import Any
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
 from .models import RoomType, RoomImg, RoomView
 from .forms import RoomForm, RoomViewForm
@@ -10,11 +11,16 @@ from os import path, remove, rename
 from datetime import datetime, timedelta
 # Create your views here.
 
-class RoomListView(ListView):
+class RoomListView(PermissionRequiredMixin, ListView):
     model = RoomType
     context_object_name = 'rooms_list'
+    login_url = 'accounts-hanfler'
+    permission_required = 'administracion.view_roomtype'
     template_name = 'administracion/listar_hab.html'
     ordering = ['capacity']
+    def handle_no_permission(self):
+        messages.error(self.request, "No tenes permisos flaco")
+        return redirect(reverse_lazy('index'))
     def get(self, request, *args, **kwargs):
         if 'ordering' in request.GET:
             print(request.GET["ordering"])
@@ -30,7 +36,8 @@ def rename_image(image, new_name):
     new_name = f"{new_name}{file_extension}"
     image.name = new_name
 
-class RoomCreateView(CreateView):
+class RoomCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'accounts-hanfler'
     model = RoomType
     form_class = RoomForm
     template_name = 'administracion/form_hab.html'
@@ -202,12 +209,10 @@ class RoomViewDeleteView(DeleteView):
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha borrado correctamente')
         return super().form_valid(form)
+    
     def form_invalid(self, form):
         messages.error(self.request, 'Error al borrar la vista')
-        return super().form_invalid(form)
-        
-    
-    
+        return super().form_invalid(form) 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

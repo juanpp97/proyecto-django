@@ -15,7 +15,7 @@ class RoomType(models.Model):
     num_beds = models.CharField(verbose_name="Número de camas")
     def __str__(self) -> str:
         return f"{self.name} - {self.capacity} - {self.view} - {self.num_beds}"
-
+    
 
 class RoomImg(models.Model):
     img = models.ImageField(upload_to="habitaciones/", verbose_name="Imagen de la habitacion", null=True)
@@ -25,3 +25,8 @@ class RoomImg(models.Model):
     def delete(self, using=None, keep_parents=False):
         self.img.storage.delete(self.img.name)
         super().delete()
+
+class Room(models.Model):
+    numero = models.CharField(max_length=10, verbose_name="Número de la habitación")
+    vista = models.CharField(verbose_name = "Vista de la habitación")
+    

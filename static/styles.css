@@ -3,8 +3,6 @@
     --color-base-50: rgb(33,37,41,0.5); 
 }
 
-
-
 html{
     scroll-behavior: smooth;
 }
@@ -387,4 +385,11 @@ html::-webkit-scrollbar {
     to {
       visibility: hidden;
     }
+  }
+
+
+  .acor_header_logo{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
