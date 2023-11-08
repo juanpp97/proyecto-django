@@ -1,13 +1,22 @@
 {% load static %}
-<header class="py-3 border-bottom bg-dark">
-    <nav
-      class="container d-flex flex-md-row align-items-center justify-content-md-between justify-content-sm-center flex-column">
+<header class="header-page py-1 header-main" id="miHeader">
+  <nav class='mobile-header'>
 
-      <a href="/" class="d-flex align-items-center ms-3 py-3 py-sm-1">
-        <img src="{% static 'img/logodjangosh.png'%}" class="logo">
-      </a>
-
-      <ul class="nav justify-content-center py-3">
+    <a href="/" class="acor_header_logo">
+      <img src="{% static 'img/logo2.svg'%}" class="header_logo">
+    </a>
+    
+    <div>
+      <p>-</p>
+      <p>-</p>
+      <p>-</p>
+    </div>
+    
+  </nav>
+  <nav
+    class="container pc-header ">
+ 
+      <ul class="nav justify-content-center py-3 menu-left">
         <li class="py-1 px-lg-4 px-2"><a href="{% url "index" %}" class="nav__link" {% if active == "index" %}id="active"{% endif %}>Inicio</a></li>
 
         <li class="py-1 px-lg-4 px-2"><a href="{% url "rooms" %}" class="nav__link" {% if active == "rooms" %}id="active"{% endif %}>Habitaciones</a></li>
@@ -15,8 +24,28 @@
         <li class="py-1 px-lg-4 px-2"><a href="{% url "facilities" %}"  class="nav__link" {% if active == "facilities" %}id="active"{% endif %}>Instalaciones</a></li>
 
         <li class="py-1 px-lg-4 px-2"><a href="{% url "contact" %}" class="nav__link" {% if active == "contact" %}id="active"{% endif %}>Contacto</a></li>
-        {% if perms.administracion %}
-        
+      </ul>
+
+      <a href="/" class="acor_header_logo ">
+        <img src="{% static 'img/logo2.svg'%}" class="header_logo">
+      </a>
+      
+
+      {% comment %} 
+            Cuando el usuario está logueado
+            <div class="dropdown text-end py-3" data-bs-theme="dark">
+            <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="#ccc"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
+            </a>
+            <ul class="dropdown-menu text-small text-light">
+              <li><a class="dropdown-item" href="#">Panel de usuario</a></li>
+              <li><hr class="dropdown-divider border-light border-opacity-10"></li>
+              <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            </ul>
+          </div> {% endcomment %}
+      {% if perms.administracion %}
+
+      <div class="user nav text-end  flex-nowrap menu-right">
         <div class="dropdown text-end py-1 px-lg-4 px-2" data-bs-theme="dark">
           <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
              Administracion
@@ -31,18 +60,18 @@
             <li><h5 class="dropdown-header">Vista de habitación</h5></li>
             <li><a class="dropdown-item" href="{% url "listar_vista" %}">Gestionar Vistas</a></li>
             <li><a class="dropdown-item" href="{% url "crear_vista" %}">Nueva Vista</a></li>
-
+  
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Habitaciones</h5></li>
             <li><a class="dropdown-item" href="">Gestionar Habitaciones</a></li>
             <li><a class="dropdown-item" href="">Nueva Habitación</a></li>
-
-
-
+  
+  
+  
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Tarifas</h5></li>
             <li><a class="dropdown-item" href="#">Gestionar Tarifas</a></li>
-
+  
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Reserva</h5></li>
             <li><a class="dropdown-item" href="#">Gestionar Reservas</a></li>
