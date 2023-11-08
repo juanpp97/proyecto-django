@@ -1,14 +1,12 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
-from .models import RoomType, RoomImg, RoomView
-from .forms import RoomForm, RoomViewForm
+from .models import RoomType, RoomImg, RoomView, Price
+from .forms import RoomForm, RoomViewForm, PriceForm
 from django.contrib import messages
-from os import path, remove, rename
-from datetime import datetime, timedelta
+from os import path, rename
+from datetime import datetime
 # Create your views here.
 
 class RoomListView(PermissionRequiredMixin, ListView):
@@ -58,7 +56,7 @@ class RoomCreateView(LoginRequiredMixin, CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Nuevo Tipo de Habitación"
         context["boton"] = "Crear"
-        
+
         context["date"] = datetime.now()
         return context
     
@@ -167,7 +165,7 @@ class RoomViewListView(ListView):
 class RoomViewCreateView(CreateView):
     model = RoomView
     form_class = RoomViewForm
-    template_name = 'administracion/form_vista.html'
+    template_name = 'administracion/form.html'
     success_url = reverse_lazy('listar_vista')
     def form_valid(self, form):
         messages.success(self.request, "Vista Añadida con éxito")
@@ -180,13 +178,14 @@ class RoomViewCreateView(CreateView):
         context["titulo"] = "Crear Vista de Habitación"
         context["date"] = datetime.now()
         context["boton"] = "Crear"
+        context["url"] = reverse_lazy('listar_vista')
 
         return context
 
 class RoomViewUpdateView(UpdateView):
     model = RoomView
     form_class = RoomViewForm
-    template_name = 'administracion/form_vista.html'
+    template_name = 'administracion/form.html'
     success_url = reverse_lazy('listar_vista')
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha actualizado correctamente')
@@ -199,6 +198,7 @@ class RoomViewUpdateView(UpdateView):
         context["titulo"] = "Editar Vista"
         context["date"] = datetime.now()
         context["boton"] = "Editar"
+        context["url"] = reverse_lazy('listar_vista')
         return context
     
     
@@ -223,4 +223,28 @@ class RoomViewDeleteView(DeleteView):
         return context
     
     
+    
 
+class PriceCreateView(CreateView):
+    model = Price
+    form_class = PriceForm
+    template_name = 'administracion/form.html'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, "Tarifa guardada con éxito")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Ha ocurrido un error al crear la tarifa")
+        return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Nueva Tarifa"
+        context["boton"] = "Crear"
+        context["url"] = reverse_lazy("index")
+        context["date"] = datetime.now()
+        return context
+    

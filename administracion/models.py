@@ -20,13 +20,22 @@ class RoomType(models.Model):
 class RoomImg(models.Model):
     img = models.ImageField(upload_to="habitaciones/", verbose_name="Imagen de la habitacion", null=True)
     room = models.ForeignKey(RoomType,on_delete=models.CASCADE, related_name="room_imgs")
+    
     def __str__(self) -> str:
         return f"{self.img}"
+    
     def delete(self, using=None, keep_parents=False):
         self.img.storage.delete(self.img.name)
         super().delete()
 
-class Room(models.Model):
-    numero = models.CharField(max_length=10, verbose_name="Número de la habitación")
-    vista = models.CharField(verbose_name = "Vista de la habitación")
+# class Room(models.Model):
+#     numero = models.CharField(max_length=10, verbose_name="Número de la habitación")
+#     vista = models.CharField(verbose_name = "Vista de la habitación")
     
+class Price(models.Model):
+    date_from = models.DateField(verbose_name="Desde: ")
+    date_to = models.DateField(verbose_name="Hasta: ")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor por noche (AR$)", help_text="Usar punto (.) para los decimales y no usar separador de miles")
+    
+    def __srt__(self):
+        return f"{self.date_from} - {self.date_to}: AR${self.price}"

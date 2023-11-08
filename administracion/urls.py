@@ -10,6 +10,7 @@ urlpatterns = [
     path('vista/crear', views.RoomViewCreateView.as_view(), name = 'crear_vista'),
     path('vista/editar/<int:pk>', views.RoomViewUpdateView.as_view(), name = 'editar_vista'),
     path('vista/eliminar/<int:pk>', views.RoomViewDeleteView.as_view(), name = 'eliminar_vista'),
+    path('tarifa/crear', views.PriceCreateView.as_view(), name = 'crear_tarifa'),
 
     
     

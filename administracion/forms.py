@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ValidationError 
 from dateutil.relativedelta import relativedelta
 from re import match
-from .models import RoomView, RoomImg, RoomType
+from .models import RoomView, RoomImg, RoomType, Price
 from os import path
 
 default_errors = {
@@ -43,9 +43,12 @@ class RoomForm(forms.ModelForm):
     def clean_name(self):
         if not all(char.isalpha() or char.isspace() for char in self.cleaned_data["name"]):
             raise ValidationError("El nombre ingresado no es correcto")
+        
         if RoomType.objects.exclude(name = self.instance.name).filter(name__icontains = self.cleaned_data["name"]).exists():
             raise ValidationError("La habitación ingresada ya existe en la base de datos")
+        
         return self.cleaned_data["name"]
+    
     def clean_capacity(self):
         if self.cleaned_data["capacity"] <= 0:
             raise ValidationError("El número no puede ser menor a 0")
@@ -65,6 +68,32 @@ class RoomViewForm(forms.ModelForm):
     def clean_name(self):
         if not all(char.isalpha() or char.isspace() for char in self.cleaned_data["name"]):
             raise ValidationError("El nombre ingresado no es correcto")
+        
         if RoomView.objects.exclude(name = self.instance.name).filter(name__icontains = self.cleaned_data["name"]).exists():
             raise ValidationError("La vista ingresada ya existe en la base de datos")
         return self.cleaned_data["name"]
+
+class PriceForm(forms.ModelForm):
+    class Meta:
+        model = Price
+        fields = ['date_from', 'date_to', 'price']
+        widgets = {
+            'date_from': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
+            'date_to': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
+            'price': forms.TextInput(attrs={"class": 'form-control'})
+
+        }
+        error_messages = {
+            'date_from': default_errors, 
+            'date_to': default_errors, 
+            'price': default_errors
+            }
+    def clean_price(self):
+        if self.cleaned_data["price"] < 0:
+            raise ValidationError("El valor ingresado no es válido")
+        return self.cleaned_data["price"]
+    
+    def clean_date_to(self):
+        if self.cleaned_data["date_to"] < self.cleaned_data["date_from"]:
+            raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
+        return self.cleaned_data["date_to"]
