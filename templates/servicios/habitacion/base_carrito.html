@@ -3,7 +3,7 @@
 {% block titulo %} Productos y Servicios{%endblock%}
 
 {% block contenido %}
-<main style="max-width: 80vw; margin: auto">
+<main style="max-width: 80vw; margin: 100px auto ">
 <nav class="nav nav-pills flex-column flex-sm-row mt-3">
     <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'comidas' %}active{% endif %}" aria-current="page" href="{% url 'serv-producto' tipo='comidas' %}">Comidas</a>
     <a class="flex-sm-fill text-sm-center nav-link border border-secondary {% if tipo == 'cafeteria' %}active{% endif %}" href="{% url 'serv-producto' tipo='cafeteria' %}">Cafeteria</a>
