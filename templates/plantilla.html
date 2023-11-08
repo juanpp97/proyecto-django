@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="html" >
 
 <head>
   <meta charset="UTF-8">
@@ -9,31 +9,32 @@
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
   <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
-  
-  {% comment %} framework de sliders {% endcomment %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
   {% block extracss %} {% endblock %}
 </head>
 
-<body>
-
-  <section class="panel-users">
-    <section>
-      <button id="panel-users-switch">></button>
+<body  data-scrollbar   >
+    <section class="panel-users">
+      <section>
+        <button id="panel-users-switch">></button>
+      </section>
+      <ul class="panel-users-list panel-close">
+        <li>Cliente</li>
+        <li>Trajabador</li>
+        <li>Admin</li>
+      </ul>
     </section>
-    <ul class="panel-users-list panel-close">
-      <li>Cliente</li>
-      <li>Trajabador</li>
-      <li>Admin</li>
-    </ul>
-  </section>
+  
+  
+    {% include 'header.html' %}
+    
+    {% block contenido %} {% endblock %}
+    
+    {% include 'footer.html' %}
 
 
-  {% include 'header.html' %}
-  
-  {% block contenido %} {% endblock %}
-  
-  {% include 'footer.html' %}
+
+
 
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -42,7 +43,21 @@
   {% endif %}
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
   <script src="{% static 'js/plantilla.js' %}"></script>
+  <script>
+    window.addEventListener('scroll', function () {
+      var header = document.getElementById('miHeader');
+      if (window.scrollY === 0) {
+          header.style.backgroundColor = 'rgba(33,37,41, 1)'; // Fondo oscuro en la parte superior
+      } else {
+          header.style.backgroundColor = 'rgba(33,37,41, 0.3)'; // Fondo más transparente al desplazarse hacia abajo
+      }
+  });
 
+
+   
+
+  </script>
 </body>
+  {% comment %} ;{renderByPixels:true} {% endcomment %}
 
 </html>
