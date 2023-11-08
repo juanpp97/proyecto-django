@@ -32,6 +32,9 @@ body{opacity:0}
 .header-page ,.nav__link{
  font-size: 0.8rem !important;
 }
+#miHeader:hover{
+    background-color: var(--color-base) !important;
+}
 .menu-left{
     margin-right: auto;
     width: 426px;
