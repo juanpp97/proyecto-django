@@ -108,8 +108,8 @@ class PriceForm(forms.ModelForm):
         date_from = self.cleaned_data["date_from"]
         date_to = self.cleaned_data["date_to"] 
         for price in prices:
-            if (date_to <= price.date_to and date_to >= price.date_from) or (date_from >= price.date_from and date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
-                
+            if(price.date_from <= date_to <= price.date_to) or (price.date_from <= date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
+
                 self.add_error(None, f'Rango de fecha inválido. Rango superpuesto: {price.date_from.strftime("%d/%m/%Y")} a {price.date_to.strftime("%d/%m/%Y")}')
 
                 raise ValidationError("")
