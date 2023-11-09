@@ -11,10 +11,10 @@ from django.contrib import messages
 
 class Handler_Login_Registration(TemplateView):
     template_name = 'accounts/combined_registration_login.html'
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect(reverse_lazy('index'))
-        return super().dispatch(request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         return redirect(reverse_lazy('index'))
+    #     return super().dispatch(request, *args, **kwargs)
     def get(self, request):
 
         panel = False

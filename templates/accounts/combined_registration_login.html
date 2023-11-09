@@ -22,8 +22,8 @@
   <div class="formulario-container {% if LoginOrRegister %}right-panel-active{% endif %}" id="container">
     <div class="form-container sign-up-container">
 
-
-      <ul class="error_list my-0">
+{% if form.errors %}      
+<ul class="error_list my-0">
         {% for field in registration_form %}
             {% if field.errors %}
             {% for error in field.errors %}
@@ -33,6 +33,8 @@
             {% endif %}
         {% endfor %}
     </ul>
+{% endif %}
+
       <form method="post" action="{% url 'accounts-hanfler' %}" class="mt-0">
         <h3>Registro</h3>
         {% csrf_token %}

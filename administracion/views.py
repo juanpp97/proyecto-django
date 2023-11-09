@@ -70,6 +70,7 @@ class RoomUpdateView(UpdateView):
 
     def form_valid(self, form):
         room = form.save(commit=False)
+
         try:
             #Si está presente el campo imagenes para borrar
             if 'imgs_delete' in form.fields:
@@ -223,17 +224,27 @@ class RoomViewDeleteView(DeleteView):
         return context
     
     
+class PriceListView(ListView):
+    model = Price
+    template_name = 'administracion/listar_tarifas.html'
+    context_object_name = 'prices_list'
+    ordering = ["room_type", "date_from"]
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["date"] = datetime.now()
+        return context
     
+
 
 class PriceCreateView(CreateView):
     model = Price
     form_class = PriceForm
     template_name = 'administracion/form.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar_tarifa')
 
     def form_valid(self, form):
         self.object = form.save()
-        messages.success(self.request, "Tarifa guardada con éxito")
+        messages.success(self.request, "Tarifa creada con éxito")
         return super().form_valid(form)
     
     def form_invalid(self, form):
@@ -244,7 +255,60 @@ class PriceCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Nueva Tarifa"
         context["boton"] = "Crear"
-        context["url"] = reverse_lazy("index")
+        context["url"] = reverse_lazy("listar_tarifa")
         context["date"] = datetime.now()
+        return context
+    
+
+
+class PriceUpdateView(UpdateView):
+    model = Price
+    form_class = PriceForm
+    template_name = 'administracion/form.html'
+    success_url = reverse_lazy('listar_tarifa')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, "Tarifa guardada con éxito")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Ha ocurrido un error al guardar la tarifa")
+        return super().form_invalid(form)
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        price = self.get_object()
+        initial['date_from'] = price.date_from.strftime('%Y-%m-%d')
+        initial['date_to'] = price.date_to.strftime('%Y-%m-%d')
+        initial['room_type'] = price.room_type.name
+        return initial
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Editar Tarifa"
+        context["boton"] = "Guardar"
+        context["url"] = reverse_lazy("listar_tarifa")
+        context["date"] = datetime.now()
+        return context
+    
+    
+class PriceDeleteView(DeleteView):
+    model = Price
+    template_name = 'administracion/eliminar.html'
+    success_url = reverse_lazy('listar_tarifa')
+    def form_valid(self, form):
+        messages.success(self.request, 'La tarifa se ha borrado correctamente')
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error al borrar la tarifa')
+        return super().form_invalid(form) 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["date"] = datetime.now()
+        context["titulo"] = "Eliminar Tarifa"
+        context["url"] = reverse_lazy("listar_tarifa")
+        context["aviso"] = f"¿Está seguro que desea eliminar permanentemente la tarifa {self.object}?"
         return context
     

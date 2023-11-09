@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from django.forms import ValidationError 
 from dateutil.relativedelta import relativedelta
@@ -74,19 +75,22 @@ class RoomViewForm(forms.ModelForm):
         return self.cleaned_data["name"]
 
 class PriceForm(forms.ModelForm):
+    room_type = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all(), to_field_name='name')
     class Meta:
         model = Price
-        fields = ['date_from', 'date_to', 'price']
+        fields = ['date_from', 'date_to', 'price', 'room_type']
         widgets = {
             'date_from': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
             'date_to': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
-            'price': forms.TextInput(attrs={"class": 'form-control'})
+            'price': forms.TextInput(attrs={"class": 'form-control'}),
 
         }
         error_messages = {
             'date_from': default_errors, 
             'date_to': default_errors, 
-            'price': default_errors
+            'price': default_errors,
+            'room_type': default_errors,
+
             }
     def clean_price(self):
         if self.cleaned_data["price"] < 0:
@@ -97,3 +101,22 @@ class PriceForm(forms.ModelForm):
         if self.cleaned_data["date_to"] < self.cleaned_data["date_from"]:
             raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
         return self.cleaned_data["date_to"]
+    def clean(self):
+
+        prices = Price.objects.filter(room_type = self.cleaned_data["room_type"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
+
+        date_from = self.cleaned_data["date_from"]
+        date_to = self.cleaned_data["date_to"] 
+        for price in prices:
+            if (date_to <= price.date_to and date_to >= price.date_from) or (date_from >= price.date_from and date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
+                
+                self.add_error(None, f'Rango de fecha inválido. Rango superpuesto: {price.date_from.strftime("%d/%m/%Y")} a {price.date_to.strftime("%d/%m/%Y")}')
+
+                raise ValidationError("")
+
+
+        return super().clean()
+    
+    def __init__(self, *args, **kwargs):
+        super(PriceForm, self).__init__(*args, **kwargs)
+        self.fields['room_type'].label_from_instance = lambda obj: obj.name

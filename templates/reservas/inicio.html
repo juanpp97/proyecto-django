@@ -82,8 +82,10 @@
                         <h5 class="card-title text-center border-bottom py-1">Habitación Familiar</h5>
                         <p class="card-text">El tipo de habitación diseñada para disfrutar al máximo de tus vacaciones
                             en familia.</p>
-                                <a class="btn btn-outline-secondary mt-auto" href="{% url "rooms" %}">Ver más</a>
-                    </div>
+                            <form  class="align-self-end" action="{% url 'rooms' %}" method="get">
+                                <button class="btn btn-outline-secondary mt-auto" type="submit">Ver más</button>
+                            </form>
+                        </div>
                 </div>
             </div>
 
