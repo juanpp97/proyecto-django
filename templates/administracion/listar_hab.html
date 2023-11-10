@@ -2,8 +2,9 @@
 {% block titulo %} Administracion | Habitaciones {% endblock titulo %}
 {% block contenido %}
 {% load static %}
-
+{% include "administracion/style.html" %}
 <main>
+{% if perms.administracion.view_roomtype %}
     {% if messages %}
     {% for message in messages  %}
     <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
@@ -15,9 +16,13 @@
     <div class="container mt-4">
         <h4 class="h4 text-center py-2"> Tipos de Habitaciones </h4>
         <div class="d-flex gap-4">
-
+            {% if perms.administracion.add_roomtype %}
             <a class="btn btn-success py-2 rounded-4" href="{% url "crear_hab" %}">+ Nueva Habitacion</a>
+            {% endif %}
+
+            {% if perms.administracion.add_roomview %}
             <a class="btn btn-success py-2 rounded-4" href="{% url "crear_vista" %}">+ Nueva Vista</a>
+            {% endif %}
             
         </div>
         <section class="pt-1 pb-3">
@@ -28,7 +33,9 @@
                     <th>Capacidad</th>
                     <th>Vista</th>
                     <th>Camas</th>
+                    {% if perms.administracion.change_roomtype or perms.administracion.delete_roomtype %}
                     <th>Acciones</th>
+                    {% endif %}
                   </tr>
                 </thead>
                 <tbody>
@@ -43,11 +50,14 @@
                     </td>
                         <td>{{room.num_beds}}</td>
                         <td>
-
+                        {% if perms.administracion.change_roomtype %}
                         <a href="{% url "editar_hab" room.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
+                        {% endif %}
+
+                        {% if perms.administracion.delete_roomtype %}
                         <a href="{% url "eliminar_hab" room.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
-                        
+                        {% endif %}
                     </td>
                         </tr>
                     {% endfor %}
@@ -56,6 +66,8 @@
               </table>
         </section>
     </div>
+{% endif %}
+   
 
 
 </main>

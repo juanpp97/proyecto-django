@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from .forms import ReservationForm, ContactForm
@@ -67,7 +67,11 @@ def contact(request):
         }
     return render(request, "reservas/contacto.html", context)
 
+
 def reservation(request, id_hab):
+    if not request.user.is_authenticated:
+        messages.error(request, "Debes iniciar sesión para acceder")
+        return redirect('accounts-hanfler')
     rooms = [
         {
         "id": 1,

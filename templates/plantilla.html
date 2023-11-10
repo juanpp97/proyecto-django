@@ -14,17 +14,15 @@
 </head>
 
 <body id='body'>
+    {% comment %} ponganle un display none o un opacity 0 o corten el script  porque me va a dar error en js {% endcomment %}
     <section class="panel-users">
-      <section>
         <button id="panel-users-switch">></button>
-      </section>
-      <ul class="panel-users-list panel-close">
-        <li>Cliente</li>
-        <li>Trajabador</li>
-        <li>Admin</li>
-      </ul>
+        <ul class="panel-users-list panel-close">
+          <li>Cliente</li>
+          <li>Trajabador</li>
+          <li>Admin</li>
+        </ul>
     </section>
-  
   
     {% include 'header.html' %}
     
@@ -44,11 +42,13 @@
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
   <script src="{% static 'js/plantilla.js' %}"></script>
   <script>
+
     document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function() {
         document.getElementById('body').classList.add('visible')
-    }, 250);
-  });
+
+    }, 100);
+
     window.addEventListener('scroll', function () {
       var header = document.getElementById('miHeader');
       if (window.scrollY === 0) {
@@ -59,8 +59,7 @@
   });
 
 
+  });
   </script>
 </body>
-  {% comment %} ;{renderByPixels:true} {% endcomment %}
-
 </html>

@@ -1,48 +1,60 @@
-from typing import Any
-from django.http import HttpRequest, HttpResponse
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
-from .models import RoomType, RoomImg, RoomView
-from .forms import RoomForm, RoomViewForm
+from .models import RoomType, RoomImg, RoomView, Price
+from .forms import RoomForm, RoomViewForm, PriceForm
 from django.contrib import messages
-from os import path, remove, rename
-from datetime import datetime, timedelta
+from os import path, rename
+from datetime import datetime
 # Create your views here.
+    
+def rename_image(image, new_name):
+    _, file_extension = path.splitext(image.name)
+    new_name = f"{new_name}{file_extension}"
+    image.name = new_name
+
 
 class RoomListView(PermissionRequiredMixin, ListView):
     model = RoomType
+
     context_object_name = 'rooms_list'
-    login_url = 'accounts-hanfler'
+
     permission_required = 'administracion.view_roomtype'
+
     template_name = 'administracion/listar_hab.html'
+
     ordering = ['capacity']
+
     def handle_no_permission(self):
-        messages.error(self.request, "No tenes permisos flaco")
         return redirect(reverse_lazy('index'))
+    
     def get(self, request, *args, **kwargs):
         if 'ordering' in request.GET:
             print(request.GET["ordering"])
             self.ordering = [request.GET["ordering"]]
         return super().get(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["date"] = datetime.now()
         return context
-    
-def rename_image(image, new_name):
-    file_name, file_extension = path.splitext(image.name)
-    new_name = f"{new_name}{file_extension}"
-    image.name = new_name
 
-class RoomCreateView(LoginRequiredMixin, CreateView):
-    login_url = 'accounts-hanfler'
+class RoomCreateView(PermissionRequiredMixin, CreateView):
     model = RoomType
+
     form_class = RoomForm
+
     template_name = 'administracion/form_hab.html'
+
     success_url = reverse_lazy('listar_hab')
 
+    permission_required = 'administracion.add_roomtype'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
+    
     def form_valid(self, form):
         self.object = form.save()
         if self.request.FILES:
@@ -51,27 +63,37 @@ class RoomCreateView(LoginRequiredMixin, CreateView):
                 RoomImg.objects.create(img = image, room = self.object)
         messages.success(self.request, "Habitación guardada con éxito")
         return super().form_valid(form)
+    
     def form_invalid(self, form):
         messages.error(self.request, "Ha ocurrido un error al crear la habitación")
         return super().form_invalid(form)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Nuevo Tipo de Habitación"
         context["boton"] = "Crear"
-        
         context["date"] = datetime.now()
         return context
     
 
 
-class RoomUpdateView(UpdateView):
+class RoomUpdateView(PermissionRequiredMixin ,UpdateView):
     model = RoomType
+
     form_class = RoomForm
+
     template_name = 'administracion/form_hab.html'
+
     success_url = reverse_lazy('listar_hab')
+
+    permission_required = 'administracion.change_roomtype'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
         room = form.save(commit=False)
+
         try:
             #Si está presente el campo imagenes para borrar
             if 'imgs_delete' in form.fields:
@@ -124,11 +146,19 @@ class RoomUpdateView(UpdateView):
         return context
     
         
-class RoomDeleteView(DeleteView):
+class RoomDeleteView(PermissionRequiredMixin ,DeleteView):
     model = RoomType
+
     template_name = 'administracion/eliminar.html'
+
     success_url = reverse_lazy('listar_hab')
+
     context_object_name = 'room'
+
+    permission_required = 'administracion.delete_roomtype'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
         try:
@@ -154,10 +184,19 @@ class RoomDeleteView(DeleteView):
         return context
     
 
-class RoomViewListView(ListView):
+class RoomViewListView(LoginRequiredMixin, ListView):
     model = RoomView
+
     template_name = 'administracion/listar_vistas.html'
+
     context_object_name = 'views_list'
+
+    login_url = 'accounts-hanfler'
+
+    def handle_no_permission(self):
+        messages.error(self.request, "Debes iniciar sesión para acceder")
+        return super().handle_no_permission()
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["date"] = datetime.now()
@@ -166,46 +205,62 @@ class RoomViewListView(ListView):
 
 class RoomViewCreateView(CreateView):
     model = RoomView
+
     form_class = RoomViewForm
-    template_name = 'administracion/form_vista.html'
+
+    template_name = 'administracion/form.html'
+
     success_url = reverse_lazy('listar_vista')
+
     def form_valid(self, form):
         messages.success(self.request, "Vista Añadida con éxito")
         return super().form_valid(form)
+    
     def form_invalid(self, form):
         messages.error(self.request, "Ha ocurrido un error al crear la vista")
         return super().form_invalid(form)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Crear Vista de Habitación"
         context["date"] = datetime.now()
         context["boton"] = "Crear"
-
+        context["url"] = reverse_lazy('listar_vista')
         return context
 
 class RoomViewUpdateView(UpdateView):
     model = RoomView
+
     form_class = RoomViewForm
-    template_name = 'administracion/form_vista.html'
+
+    template_name = 'administracion/form.html'
+
     success_url = reverse_lazy('listar_vista')
+
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha actualizado correctamente')
         return super().form_valid(form)
+    
     def form_invalid(self, form):
         messages.error(self.request, 'Error al actualizar la vista')
         return super().form_invalid(form)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["titulo"] = "Editar Vista"
         context["date"] = datetime.now()
         context["boton"] = "Editar"
+        context["url"] = reverse_lazy('listar_vista')
         return context
     
     
 class RoomViewDeleteView(DeleteView):
     model = RoomView
+
     template_name = 'administracion/eliminar.html'
+
     success_url = reverse_lazy('listar_vista')
+
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha borrado correctamente')
         return super().form_valid(form)
@@ -223,4 +278,104 @@ class RoomViewDeleteView(DeleteView):
         return context
     
     
+class PriceListView(ListView):
+    model = Price
 
+    template_name = 'administracion/listar_tarifas.html'
+
+    context_object_name = 'prices_list'
+
+    ordering = ["room_type", "date_from"]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["date"] = datetime.now()
+        return context
+    
+
+
+class PriceCreateView(CreateView):
+    model = Price
+
+    form_class = PriceForm
+
+    template_name = 'administracion/form.html'
+
+    success_url = reverse_lazy('listar_tarifa')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, "Tarifa creada con éxito")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Ha ocurrido un error al crear la tarifa")
+        return super().form_invalid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Nueva Tarifa"
+        context["boton"] = "Crear"
+        context["url"] = reverse_lazy("listar_tarifa")
+        context["date"] = datetime.now()
+        return context
+    
+
+
+class PriceUpdateView(UpdateView):
+    model = Price
+
+    form_class = PriceForm
+
+    template_name = 'administracion/form.html'
+
+    success_url = reverse_lazy('listar_tarifa')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        messages.success(self.request, "Tarifa guardada con éxito")
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, "Ha ocurrido un error al guardar la tarifa")
+        return super().form_invalid(form)
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        price = self.get_object()
+        initial['date_from'] = price.date_from.strftime('%Y-%m-%d')
+        initial['date_to'] = price.date_to.strftime('%Y-%m-%d')
+        initial['room_type'] = price.room_type.name
+        return initial
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["titulo"] = "Editar Tarifa"
+        context["boton"] = "Guardar"
+        context["url"] = reverse_lazy("listar_tarifa")
+        context["date"] = datetime.now()
+        return context
+    
+    
+class PriceDeleteView(DeleteView):
+    model = Price
+
+    template_name = 'administracion/eliminar.html'
+
+    success_url = reverse_lazy('listar_tarifa')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'La tarifa se ha borrado correctamente')
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error al borrar la tarifa')
+        return super().form_invalid(form) 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["date"] = datetime.now()
+        context["titulo"] = "Eliminar Tarifa"
+        context["url"] = reverse_lazy("listar_tarifa")
+        context["aviso"] = f"¿Está seguro que desea eliminar permanentemente la tarifa {self.object}?"
+        return context
+    

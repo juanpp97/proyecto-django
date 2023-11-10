@@ -6,8 +6,7 @@
     <section class="contenido_uno">
         <span class="txt-rotating-no">DSH</span>
         <span is="type-async"  class="txt-rotating" id="type-text"></span>
-        <span class="blinking-cursor">_</span>
-      
+        {% comment %} <span class="blinking-cursor">_</span> {% endcomment %}
         <img src="{% static 'img/facilities/instalacion_general.jpg' %}" alt="Descripción de la imagen"  data-scroll-zoom />
     </section>
     {% if messages %}
@@ -28,7 +27,7 @@
                 <div class="col-md-6">
                     <div class="my-4">
                         <!-- Agrega la ruta de la imagen en el atributo "src" -->
-                        <img src="{% static "img/portada.webp" %}" alt="Descripción de la imagen" class="img-fluid rounded">
+                        <img src="{% static "img/portada.webp" %}" alt="Descripción de la imagen" class="img-fluid rounded" >
                     </div>
                 </div>
                 <!-- Columna de la descripción (col-md-6) -->
@@ -82,8 +81,10 @@
                         <h5 class="card-title text-center border-bottom py-1">Habitación Familiar</h5>
                         <p class="card-text">El tipo de habitación diseñada para disfrutar al máximo de tus vacaciones
                             en familia.</p>
-                                <a class="btn btn-outline-secondary mt-auto" href="{% url "rooms" %}">Ver más</a>
-                    </div>
+                            <form  class="align-self-end" action="{% url 'rooms' %}" method="get">
+                                <button class="btn btn-outline-secondary mt-auto" type="submit">Ver más</button>
+                            </form>
+                        </div>
                 </div>
             </div>
 
@@ -206,6 +207,6 @@
             </div>
     </section>
 
+      </main>
 
-</main>
 {% endblock %}

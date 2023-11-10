@@ -45,21 +45,29 @@
           </div> {% endcomment %}
       {% if perms.administracion %}
 
-      <div class="user nav text-end  flex-nowrap menu-right">
+      <div class="user nav text-end align-items-center flex-nowrap menu-right">
         <div class="dropdown text-end py-1 px-lg-4 px-2" data-bs-theme="dark">
           <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false" class="nav__link">
              Administracion
           </a>
           <ul class="dropdown-menu text-small text-light" id="menu_admin">
-            
+            {% if perms.administracion.view_roomtype %}
             <li><h5 class="dropdown-header">Tipos de Habitación</h5></li>
             <li><a class="dropdown-item" href="{% url "listar_hab" %}">Gestionar Tipo de Habitaciones</a></li>
+            {% if perms.administracion.add_roomtype %}
             <li><a class="dropdown-item" href="{% url "crear_hab" %}">Nueva Tipo de Habitación</a></li>
-            
+            {% endif %}
+            {% endif %}
+
+            {% if perms.administracion.view_roomview %}
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
-            <li><h5 class="dropdown-header">Vista de habitación</h5></li>
+            <li><h5 class="dropdown-header">Vistas de habitación</h5></li>
+            
             <li><a class="dropdown-item" href="{% url "listar_vista" %}">Gestionar Vistas</a></li>
+            {% if perms.administracion.add_roomview %}
             <li><a class="dropdown-item" href="{% url "crear_vista" %}">Nueva Vista</a></li>
+            {% endif %}
+            {% endif %}
   
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Habitaciones</h5></li>
@@ -67,11 +75,13 @@
             <li><a class="dropdown-item" href="">Nueva Habitación</a></li>
   
   
-  
+            {% if perms.administracion.view_price %}
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Tarifas</h5></li>
-            <li><a class="dropdown-item" href="#">Gestionar Tarifas</a></li>
+            <li><a class="dropdown-item" href="{% url "listar_tarifa" %}">Gestionar Tarifas</a></li>
+            {% endif %}
   
+
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Reserva</h5></li>
             <li><a class="dropdown-item" href="#">Gestionar Reservas</a></li>
@@ -84,6 +94,7 @@
 
 
       {% if user.is_authenticated %}
+
       <div class="dropdown text-end py-3" data-bs-theme="dark">
         <a href = "#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="30" height="30" fill="#ccc"><path d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"/><path d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z" /></svg>
@@ -95,11 +106,14 @@
           <li><a class="dropdown-item" href="{% url "logout" %}">Cerrar sesión</a></li>
         </ul>
       </div>
+
       {% else %}
+      
       <div class="user nav text-end justify-content-center justify-content-lg-between flex-nowrap">
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler' %}?panel=False" class="nav__link">Ingresar</a></li>
         <li class="py-1 px-2"><a href="{% url 'accounts-hanfler'%}?panel=True" class="nav__link">Registrarse</a></li>
       </div>
+      
       {% endif %}
 
 
