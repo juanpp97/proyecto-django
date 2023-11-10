@@ -283,7 +283,6 @@ legend, label {
 }
 .panel-users{
     position: fixed;
-    width: 250px;
     color: white;
     z-index: 9999999;
     top: 50%;
@@ -297,7 +296,8 @@ legend, label {
     padding: 8px;
     transition: all 0.3s ease;
     opacity: 0.5;
-
+    position: absolute;
+    width: 150px;
 }
 .panel-users-list:hover{
     opacity: 1;
