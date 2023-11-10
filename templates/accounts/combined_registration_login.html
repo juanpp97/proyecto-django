@@ -1,5 +1,7 @@
 {% extends "accounts/base_accounts.html" %}
 {% load static %}
+{%block titulo%} Panel de inicio {%endblock%}
+
 {% block extracss %}
 <link rel="stylesheet" type="text/css" href="{% static 'combinedRL.css' %}"> 
 {% endblock %}
@@ -8,46 +10,86 @@
 {% comment %} {% if user.is_authenticated %}
 <h1>User: {{ user.get_username }}</h1>
 {% endif %} {% endcomment %}
-{% if messages %}
-{% for message in messages  %}
-<div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    {{message}}
-</div>
-{% endfor %}
-{% endif %}
+
+
+
+
 
 <section class="contenedor">
 
-    <div class="modal show fade mt-6" tabindex="-1" id="modal" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button type="button" class="btn-close" id="closeModal"></button>
-          </div>
-          <div class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-              
+  {% for message in messages  %}
+{% if message.tags == "success"%}
+<div class="modal show fade mt-6" tabindex="-1" id="modal" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+
+        <h5 class="modal-title text-success">{{message}}</h5>
+        <button type="button" class="btn-close" id="closeModal"></button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endfor %}
+
+
+  {% if registration_form.errors or login_form.errors %}
+  <div class="modal show fade mt-6" tabindex="-1" id="modal" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error en el formulario</h5>
+          <button type="button" class="btn-close" id="closeModal"></button>
         </div>
+        <div class="modal-body">
+          <ul class="error_list mb-0">
+            {%if login_form.errors%}
+            {% for field in login_form %}
+                {% if field.errors %}
+                {% for error in field.errors %}
+                <li ><span class="error_list_field fs-6 ">{{field.label}}:</span> {{error|escape}}</li>
+                {% endfor %}
+    
+                {% endif %}
+    
+            {% endfor %}
+            <li>{{login_form.non_field_errors}}</li>
+    
+        </ul>
+        {%endif%}
+
+        <ul class="error_list mb-0">
+          {%if registration_form.errors%}
+          {% for field in registration_form %}
+              {% if field.errors %}
+              {% for error in field.errors %}
+              <li><span class="error_list_field fs-6">{{field.label}}:</span> {{error|escape}}</li>
+              {% endfor %}
+  
+              {% endif %}
+  
+          {% endfor %}
+          <li>{{registration_form.non_field_errors}}</li>
+  
+      </ul>
+      {%endif%}
+
+        </div>
+            
       </div>
     </div>
+  </div>
+  {% endif %}
+
   <div class="formulario-container {% if LoginOrRegister %}right-panel-active{% endif %}" id="container">
     <div class="form-container sign-up-container">
 
-{% if form.errors %}      
-<ul class="error_list my-0">
-        {% for field in registration_form %}
-            {% if field.errors %}
-            {% for error in field.errors %}
-            <li><span class="error_list_field fs-6">{{field.label}}:</span> {{error|escape}}</li>
-            {% endfor %}
 
-            {% endif %}
-        {% endfor %}
-    </ul>
-{% endif %}
 
       <form method="post" action="{% url 'accounts-hanfler' %}" class="mt-0">
         <h3>Registro</h3>
@@ -56,14 +98,14 @@
         
         <input type="hidden" name="registration_form" value="registration_form" id="registration_form">
         {% for field in registration_form  %}
-        <p>
+        <p class="my-3">
         <label for="{{ field.id_for_label }}">{{field.label}}</label>
         {{field}}
         <small class="form-text text-muted">{{ field.help_text }}</small>
         </p>
         {% endfor %}
         {% comment %} {{ registration_form.as_p }} {% endcomment %}
-        <button type="submit">Registrarse</button>
+        <button class="mt-2" type="submit">Registrarse</button>
       </form>
     </div>
 
@@ -71,19 +113,7 @@
     <div class="form-container sign-in-container ">
 
 
-      <ul class="error_list mb-0">
-        {% for field in login_form %}
-            {% if field.errors %}
-            {% for error in field.errors %}
-            <li><span class="error_list_field fs-6">{{field.label}}:</span> {{error|escape}}</li>
-            {% endfor %}
-
-            {% endif %}
-
-        {% endfor %}
-        <li>{{login_form.non_field_errors}}</li>
-
-    </ul>
+     
 
       <form method="post" action="{% url 'accounts-hanfler' %}">
         <h3>Iniciar Sesión</h3>
@@ -121,28 +151,35 @@
     </div>
   </div>
 </section>
-  <script>
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
-    
-    signUpButton.addEventListener('click', () => {
-      container.classList.add("right-panel-active");
-    });
-    
-    signInButton.addEventListener('click', () => {
-      container.classList.remove("right-panel-active");
-    });
-    boton = document.querySelector("#closeModal");
-    modal = document.querySelector("#modal");
+<script>
+  const signUpButton = document.getElementById('signUp');
+  const signInButton = document.getElementById('signIn');
+  const container = document.getElementById('container');
+  
+  signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+  });
+  
+  signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+  });
 
-    boton.addEventListener("click", () =>{
-        if(modal.classList.contains("show")){
-            modal.classList.remove("show")
-        }else{
-            modal.classList.add("show")
+  {% if registration_form.errors or login_form.errors or messages%}
+  boton = document.querySelector("#closeModal");
+  modal = document.querySelector("#modal");
+
+  boton.addEventListener("click", () =>{
+      if(modal.classList.contains("show")){
+          modal.classList.remove("show")
+          modal.style.display = "none"
+      }else{
+          modal.classList.add("show")
+          modal.style.display = "block"
+        
         }
-    })
-  </script>
+      })
+  {% endif %}
+
+  </script>
 {% endblock %}
 
