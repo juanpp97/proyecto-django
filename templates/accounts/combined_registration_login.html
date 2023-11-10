@@ -19,6 +19,20 @@
 
 <section class="contenedor">
 
+    <div class="modal show fade mt-6" tabindex="-1" id="modal" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" id="closeModal"></button>
+          </div>
+          <div class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+              
+        </div>
+      </div>
+    </div>
   <div class="formulario-container {% if LoginOrRegister %}right-panel-active{% endif %}" id="container">
     <div class="form-container sign-up-container">
 
@@ -119,7 +133,16 @@
     signInButton.addEventListener('click', () => {
       container.classList.remove("right-panel-active");
     });
+    boton = document.querySelector("#closeModal");
+    modal = document.querySelector("#modal");
 
+    boton.addEventListener("click", () =>{
+        if(modal.classList.contains("show")){
+            modal.classList.remove("show")
+        }else{
+            modal.classList.add("show")
+        }
+    })
   </script>
 {% endblock %}
 

@@ -76,6 +76,8 @@ class RoomViewForm(forms.ModelForm):
 
 class PriceForm(forms.ModelForm):
     room_type = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all(), to_field_name='name')
+    room_view = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), queryset=RoomView.objects.all(), to_field_name='name')
+
     class Meta:
         model = Price
         fields = ['date_from', 'date_to', 'price', 'room_type']
@@ -102,7 +104,8 @@ class PriceForm(forms.ModelForm):
             raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
         return self.cleaned_data["date_to"]
     def clean(self):
-
+        print(self.cleaned_data["room_type"].view.all())
+        raise ValidationError("Debugger")
         prices = Price.objects.filter(room_type = self.cleaned_data["room_type"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
 
         date_from = self.cleaned_data["date_from"]
@@ -119,4 +122,4 @@ class PriceForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(PriceForm, self).__init__(*args, **kwargs)
-        self.fields['room_type'].label_from_instance = lambda obj: obj.name
+        self.fields['room_type'].label_from_instance = lambda obj: f"{obj.name}"
