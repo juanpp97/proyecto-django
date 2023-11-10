@@ -28,10 +28,7 @@ class RoomImg(models.Model):
         self.img.storage.delete(self.img.name)
         super().delete()
 
-# class Room(models.Model):
-#     numero = models.CharField(max_length=10, verbose_name="Número de la habitación")
-#     vista = models.CharField(verbose_name = "Vista de la habitación")
-    
+
 class Price(models.Model):
     date_from = models.DateField(verbose_name="Desde: ")
     date_to = models.DateField(verbose_name="Hasta: ")

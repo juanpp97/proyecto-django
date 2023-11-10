@@ -5,6 +5,8 @@
 {% include "administracion/style.html" %}
 
 <main>
+{% if perms.administracion.view_price %}
+
     {% if messages %}
     {% for message in messages  %}
     <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
@@ -17,9 +19,9 @@
         
         <h4 class="h4 text-center py-2"> Tarifas </h4>
         <div class="d-flex gap-4">
-
+            {% if perms.administracion.add_price %}
             <a class="btn btn-success py-2 rounded-4" href="{% url "crear_tarifa" %}">+ Nueva Tarifa</a>
-            
+            {% endif %}
         </div>
         <section class="pt-1 pb-3">
             <table class="table table-hover table-striped">
@@ -29,8 +31,10 @@
                     <th>Hasta</th>
                     <th>Valor por noche</th>
                     <th>Tipo de Habitación</th>
+                    {% if perms.administracion.change_price or perms.administracion.delete_price %}
                     <th>Acciones</th>
-                  </tr>
+                    {% endif %}
+                </tr>
                 </thead>
                 <tbody>
                     {% for price in prices_list %}
@@ -40,11 +44,14 @@
                         <td>AR${{price.price}}</td>
                         <td>{{price.room_type.name}}</td>
                         <td>
-
+                        {% if perms.administracion.add_price %}
                         <a href="{% url "editar_tarifa" price.id %} " title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
+                        {% endif %}
+
+                        {% if perms.administracion.delete_price %}
                         <a href="{% url "eliminar_tarifa" price.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
-                        
+                        {% endif %}
                     </td>
                         </tr>
                     {% endfor %}
@@ -54,6 +61,6 @@
         </section>
     </div>
 
-
+{% endif %}
 </main>
 {% endblock contenido %}

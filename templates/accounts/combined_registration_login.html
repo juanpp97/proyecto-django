@@ -15,19 +15,17 @@
 
 
 
-{% endfor %}
-
 <section class="contenedor">
 
-  {% for message in messages  %}
-{% if message.tags == "success"%}
+{% for message in messages  %}
+{% if message.tags == "success" or message.tags == "error" and request.method == "GET" %}
 <div class="modal show fade mt-6" tabindex="-1" id="modal" style="display: block;">
   <div class="modal-dialog">
     <div class="modal-content">
       
       <div class="modal-header">
 
-        <h5 class="modal-title text-success">{{message}}</h5>
+        <h5 class="modal-title text-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %}">{{message}}</h5>
         <button type="button" class="btn-close" id="closeModal"></button>
 
       </div>
@@ -35,6 +33,7 @@
     </div>
   </div>
 </div>
+
 {% endif %}
 
 {% endfor %}
@@ -146,8 +145,10 @@
           <button class="ghost" id="signIn">Iniciar Sesión</button>
         </div>
         <div class="overlay-panel overlay-right">
-          <img src="{% static 'img/logo2.svg' %}" class="svg-overlay"/>
-          <h1>Hola!</h1>
+          <a href="{% url "index" %}">
+            <img src="{% static 'img/logo2.svg' %}" class="svg-overlay"/>
+          </a>
+          <h1>Bienvenido!</h1>
           <p>Introduce tus datos personales y comienza tu viaje con nosotros.</p>
           <button class="ghost" id="signUp">Registrarse</button>
         </div>
