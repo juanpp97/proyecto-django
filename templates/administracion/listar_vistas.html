@@ -5,6 +5,8 @@
 {% include "administracion/style.html" %}
 
 <main>
+{% if perms.administracion.view_roomview %}
+
     {% if messages %}
     {% for message in messages  %}
     <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
@@ -16,14 +18,19 @@
     <div class="container mt-4">
         <h4 class="h4 text-center py-2"> Listado de Vistas de habitaciones </h4>
         <div class="d-flex gap-4">
+            {% if perms.administracion.add_roomview %}
             <a class="btn btn-success py-2 rounded-4 ms-5" href="{% url "crear_vista" %}">+ Nueva Vista</a>
+            {% endif %}
         </div>
         <section class="pt-1 pb-3 px-5">
             <table class="table table-hover table-striped">
                 <thead class="table-light">
                   <tr>
                     <th>Vista</th>
+                    {% if perms.administracion.change_roomview or perms.administracion.delete_roomview %}
+
                     <th class="text-end">Acciones</th>
+                    {% endif %}
                   </tr>
                 </thead>
                 <tbody>
@@ -31,11 +38,14 @@
                     <tr>
                         <td>{{view.name}}</td>
                         <td class="text-end">
-
+                        {% if perms.administracion.change_roomview %}
                         <a href="{% url "editar_vista" view.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
+                        {% endif %}
+
+                        {% if perms.administracion.delete_roomview %}
                         <a href="{% url "eliminar_vista" view.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
-                        
+                        {% endif %}
                     </td>
                         </tr>
                     {% endfor %}
@@ -45,6 +55,6 @@
         </section>
     </div>
 
-
+{% endif %}
 </main>
 {% endblock contenido %}
