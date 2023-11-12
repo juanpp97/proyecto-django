@@ -113,7 +113,7 @@
 
 
     <!-- Carrousel -->
-    <section class="seccion_carousel h-100">
+    <section class="seccion_carousel ">
 
         <div id="carouselExampleIndicators" class="carousel slide py-2">
             <div class="carousel-indicators">
@@ -124,15 +124,15 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner py-2" style="height: 500px">
+            <div class="carousel-inner py-2 img-fluid" style="height: 450px;">
                 <div class="carousel-item active">
-                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                    <img src="{% static "img/inicio_3.webp" %}" class="rounded">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                    <img src="{% static "img/inicio_2.webp" %}" class="rounded">
                 </div>
                 <div class="carousel-item">
-                    <img src="{% static "img/portada.webp" %}" class="d-block rounded object-fit-cover">
+                    <img src="{% static "img/inicio_1.webp" %}" class="rounded">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -155,7 +155,7 @@
         <div class="row container">
 
 
-            <!-- Tarjeta de habitación 1 -->
+            <!-- Tarjeta de Spa 1 -->
             <div class="col-md-4 mb-4">
                 <div class="card  h-100">
                     <img src="{% static "img/card_spa.webp" %}" class="card-img-top" alt="Zona de relajación">
@@ -171,7 +171,7 @@
 
 
 
-            <!-- Tarjeta de habitación 2 -->
+            <!-- Tarjeta de Restaurante 2 -->
             <div class="col-md-4 mb-4">
                 <div class="card  h-100">
                     <img src="{% static "img/card_resto.webp" %}" class="card-img-top" alt="Restorant">
@@ -186,7 +186,7 @@
             </div>
 
 
-            <!-- Tarjeta de habitación 3 -->
+            <!-- Tarjeta de servicio en habitaacion 3 -->
             <div class="col-md-4 mb-4">
                 <div class="card  h-100">
                     <img src="{% static "img/card_asist.webp" %}" class="card-img-top" alt="Suite Familiar">
@@ -203,7 +203,7 @@
 
             <!-- Boton "Ver mas" -->
             <div class="d-grid gap-2 col-12 mx-auto">
-                <button class="btn btn-dark fs-5" type="button">Conocé nuestros servicios</button>
+                <button class="btn btn-dark fs-5" type="button"><a  class="text-white text-decoration-none"  href=" {% url 'facilities' %}">Conocé nuestros servicios</a></button>
             </div>
     </section>
 
