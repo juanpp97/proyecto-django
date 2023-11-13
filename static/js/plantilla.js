@@ -52,7 +52,7 @@ function scrollZoom() {
     observer.observe(image);
 
     // Set initial image scale on page load
-    image.style.transform = `scale(${1 + scaleAmount * percentageSeen(image)})`;
+    image.style.transform = `scale(${1.12 })`;
 
     // Only fires if IntersectionObserver is intersecting
     window.addEventListener("scroll", () => {
@@ -60,7 +60,7 @@ function scrollZoom() {
         scrollPosY = window.scrollY;
         // console.log(scrollPosY)
 
-        image.style.transform = `scale(${1 +
+        image.style.transform = `scale(${1+
           scaleAmount * percentageSeen(image)})`;
       }
     });
