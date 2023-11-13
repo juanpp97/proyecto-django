@@ -41,7 +41,6 @@ function scrollZoom() {
     threshold: 0
   };
 
-  // Create separate IntersectionObservers and scroll event listeners for each image so that we can individually apply the scale only if the image is visible
   images.forEach(image => {
     let isVisible = false;
     const observer = new IntersectionObserver((elements, self) => {
@@ -51,15 +50,11 @@ function scrollZoom() {
     }, observerConfig);
     observer.observe(image);
 
-    // Set initial image scale on page load
     image.style.transform = `scale(${1.12 })`;
 
-    // Only fires if IntersectionObserver is intersecting
     window.addEventListener("scroll", () => {
       if (isVisible) {
         scrollPosY = window.scrollY;
-        // console.log(scrollPosY)
-
         image.style.transform = `scale(${1+
           scaleAmount * percentageSeen(image)})`;
       }

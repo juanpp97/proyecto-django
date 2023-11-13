@@ -413,26 +413,24 @@ html::-webkit-scrollbar {
     left: 50%;
     transform: translateX(-50%);
   }
-  .barrita{position: relative;}
-  .barrita::after {
-    content: " ";
+
+  #body > main > div:nth-child(2) > div > div > div:nth-child(1) > h6::before{display: none;}
+  .section-title{position: relative; padding: 1px;}
+  .section-title::after,.section-title::before{
+
+    background-color: var(--color-base);
     position: absolute;
     height: 2px;
-    width:45px;
-    top: 50%;
-    margin-left: 10px;
-    transform: translateY(-50%);
-    background-color: var(--color-base);
-}
-
-/* 
-.section-title::after {
-    position: absolute;
     content: "";
     width: 45px;
-    height: 2px;
     top: 50%;
-    right: -55px;
-    margin-top: -1px;
-    background: var(--primary);
-} */
+  } 
+
+  .section-title::after{margin-left: 10px;}
+  .section-title::before{margin-left: -55px;}
+
+  .image_card_habitaciones{
+    max-height: 190px;
+    width: 100%;
+    object-fit: cover;
+  }
