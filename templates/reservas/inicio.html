@@ -113,7 +113,7 @@
 
 
     <!-- Carrousel -->
-    <section class="seccion_carousel ">
+    {% comment %} <section class="seccion_carousel ">
 
         <div id="carouselExampleIndicators" class="carousel slide py-2">
             <div class="carousel-indicators">
@@ -146,8 +146,12 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-    </section>
+    </section> {% endcomment %}
 
+    
+    <section  class="contenido_dos data-scroll-out">
+        <img src="{% static 'img/inicio_2.webp' %}" class="rounded"  data-scroll-out>
+    </section>
 
     <!-- Sección de adicionales -->
     <section class="d-flex flex-column row-gap-3 align-items-center border-bottom py-2 text-center seccion_add container-fluid py-3">
