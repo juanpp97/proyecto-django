@@ -325,8 +325,25 @@ html::-webkit-scrollbar {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    background-color: var(--color-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 .contenido_uno img{
+    width: 100%;
+    height: 100%;
+    transform: scale(1.12);
+    user-select: none;
+    transition: all 0.1 ease;
+}
+.contenido_dos{
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+}
+.contenido_dos img{
     width: 100%;
     object-fit: contain;
 }
@@ -396,3 +413,26 @@ html::-webkit-scrollbar {
     left: 50%;
     transform: translateX(-50%);
   }
+  .barrita{position: relative;}
+  .barrita::after {
+    content: " ";
+    position: absolute;
+    height: 2px;
+    width:45px;
+    top: 50%;
+    margin-left: 10px;
+    transform: translateY(-50%);
+    background-color: var(--color-base);
+}
+
+/* 
+.section-title::after {
+    position: absolute;
+    content: "";
+    width: 45px;
+    height: 2px;
+    top: 50%;
+    right: -55px;
+    margin-top: -1px;
+    background: var(--primary);
+} */
