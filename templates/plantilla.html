@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block titulo %} {% endblock %}</title>  
   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'animate.css' %}"> 
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
   <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
   <link rel="shortcut icon" href="{%static 'img/icono.png'%}" type="png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  
   {% block extracss %} {% endblock %}
 </head>
-
 <body id='body'>
     {% comment %} ponganle un display none o un opacity 0 o corten el script  porque me va a dar error en js {% endcomment %}
     <section class="panel-users">
@@ -37,13 +38,18 @@
 
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  {% comment %} <script src="https://unpkg.com/scrollreveal"></script> {% endcomment %}
+  <script src="{% static 'js/wow.js' %}"></script>
+
   {% if active == "reservation" %}
   <script src="{% static 'js/validacion.js' %}"></script>
   {% endif %}
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
   <script src="{% static 'js/plantilla.js' %}"></script>
   <script>
+    new WOW().init();
 
+    
     document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function() {
         document.getElementById('body').classList.add('visible')

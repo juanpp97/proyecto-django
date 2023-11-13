@@ -9,7 +9,25 @@ botton.addEventListener('click',()=>{
     panel.classList.toggle('panel-close')
 
 })
+function percentageSeen(element) {
+  const parent = element.parentNode;
+  const viewportHeight = window.innerHeight;
+  const scrollY = window.scrollY;
+  const elPosY = parent.getBoundingClientRect().top + scrollY;
+  const borderHeight = parseFloat(getComputedStyle(parent).getPropertyValue('border-bottom-width')) + parseFloat(getComputedStyle(element).getPropertyValue('border-top-width'));
+  const elHeight = parent.offsetHeight + borderHeight;
 
+  if (elPosY > scrollY + viewportHeight) {
+    return 0;
+  } else if (elPosY + elHeight < scrollY) {
+    return 100;
+  } else {
+    const distance = scrollY + viewportHeight - elPosY;
+    let percentage = distance / ((viewportHeight + elHeight) / 100);
+    percentage = Math.round(percentage);
+    return percentage;
+  }
+}
 
 let scaleAmount = 0.5;
 
@@ -23,7 +41,6 @@ function scrollZoom() {
     threshold: 0
   };
 
-  // Create separate IntersectionObservers and scroll event listeners for each image so that we can individually apply the scale only if the image is visible
   images.forEach(image => {
     let isVisible = false;
     const observer = new IntersectionObserver((elements, self) => {
@@ -31,48 +48,49 @@ function scrollZoom() {
         isVisible = element.isIntersecting;
       });
     }, observerConfig);
-
     observer.observe(image);
 
-    // Set initial image scale on page load
-    image.style.transform = `scale(${1 + scaleAmount * percentageSeen(image)})`;
+    image.style.transform = `scale(${1.12 })`;
 
-    // Only fires if IntersectionObserver is intersecting
     window.addEventListener("scroll", () => {
       if (isVisible) {
-        scrollPosY = window.pageYOffset;
-        image.style.transform = `scale(${1 +
+        scrollPosY = window.scrollY;
+        image.style.transform = `scale(${1+
           scaleAmount * percentageSeen(image)})`;
       }
     });
   });
+}
+function scrollZoomOut() {
+  const imagesOut = document.querySelectorAll("[data-scroll-out]");
+  let scrollPosY = 0;
+  scaleAmount = scaleAmount/2;
 
-  // Calculates the "percentage seen" based on when the image first enters the screen until the moment it leaves
-  // Here, we get the parent node position/height instead of the image since it's in a container that has a border, but
-  // if your container has no extra height, you can simply get the image position/height
-  function percentageSeen(element) {
-    const parent = element.parentNode;
-    const viewportHeight = window.innerHeight;
-    const scrollY = window.scrollY;
-    const elPosY = parent.getBoundingClientRect().top + scrollY;
-    const borderHeight = parseFloat(getComputedStyle(parent).getPropertyValue('border-bottom-width')) + parseFloat(getComputedStyle(element).getPropertyValue('border-top-width'));
-    const elHeight = parent.offsetHeight + borderHeight;
+  const observerConfig = {
+    rootMargin: "0% 0% 0% 0%",
+    threshold: 0
+  };
 
-    if (elPosY > scrollY + viewportHeight) {
-      // If we haven't reached the image yet
-      return 0;
-    } else if (elPosY + elHeight < scrollY) {
-      // If we've completely scrolled past the image
-      return 100;
-    } else {
-      // When the image is in the viewport
-      const distance = scrollY + viewportHeight - elPosY;
-      let percentage = distance / ((viewportHeight + elHeight) / 100);
-      percentage = Math.round(percentage);
+  // Create separate IntersectionObservers and scroll event listeners for each image so that we can individually apply the scale only if the image is visible
+  imagesOut.forEach(image_out => {
+    let isVisible = false;
+    const observer = new IntersectionObserver((elements, self) => {
+      elements.forEach(element => {
+        isVisible = element.isIntersecting;
+      });
+    }, observerConfig);
+    observer.observe(image_out);
+    image_out.style.transform = `scale(${1.3})`;
 
-      return percentage;
-    }
-  }
+    window.addEventListener("scroll", () => {
+      if (isVisible) {
+        scrollPosY = window.scrollY;
+
+        image_out.style.transform = `scale(${1.3 - scaleAmount * percentageSeen(image_out)})`;
+      }
+    });
+  });
+
 }
 
 async function init () {
@@ -109,11 +127,11 @@ async function init () {
       }
     }
   }
-  
   customElements.define('type-async', TypeAsync, { extends: 'span' })
 
 
 window.onload = function (){
 scrollZoom();
+scrollZoomOut();
 init()
 }
