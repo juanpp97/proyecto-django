@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-secondary py-3 px-5 mt-2 " href="">Descubre tu próxima estadía en DSH </a>
+                    <!-- <a class="btn btn-primary py-3 px-5 mt-2 " href="">Descubre tu próxima estadía en DSH </a> -->
                 </div>
                 <div class="col-lg-6">
                     <div class="row g-3">
@@ -75,11 +75,11 @@
             </div>
         </div>
     </div>
-    <div class="container-xxl py-5">
+    <div class="container-xxl ">
         <div class="container">
             <div class="text-center wow fadeInUp position-relative barrita-rooms" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
                 <h6 class="section-title text-center text-primary text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Nuestras Habitaciones</h6>
-                <h1 class="mb-5">Algunas de nuestras habitaciones </h1>
+                <h1 class="mb-5">Elige la suite que más se adapte a vos</h1>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
@@ -104,7 +104,7 @@
                                 <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Baño</small>
                                 <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                             </div>
-                            <p class="text-body mb-3">La clase de habitación ideal, ya sea de paso o estancia prolongada.</p>
+                            <p class="text-body mb-3">La habitación individual ideal, ya sea de paso o estancia prolongada.</p>
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
                             </div>
@@ -174,69 +174,138 @@
         </div>
     </div>
     
+    <section>
+        <div class="d-grid gap-2">
+        <button type="button" class="btn mb-5"><a class="btn btn-primary py-3 px-5 mt-5 " href="">Descubre tu próxima estadía en DSH </a></button>
+        
+      </div></section>
 
     
     <section  class="contenido_dos data-scroll-out">
         <img src="{% static 'img/inicio_2.webp' %}" class="rounded"  data-scroll-out>
     </section>
 
-    <!-- Sección de adicionales -->
-    <section class="d-flex flex-column row-gap-3 align-items-center border-bottom py-2 text-center seccion_add container-fluid py-3">
-        <h2 class="text-center">Nuestros servicios</h2>
-        <div class="row container">
+    <section>
 
-
-            <!-- Tarjeta de Spa 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card  h-100">
-                    <img src="{% static "img/card_spa.webp" %}" class="card-img-top" alt="Zona de relajación">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title border-bottom py-2 text-center">Vení a relajarte</h5>
-                        <p class="card-text text-start">Nuestro Spa Acqua Di Django, cuenta con piscina climatizada, sala de relax,
-                            sauna, vestuarios, y servicio de masajes (arancelados).También te esperamos en nuestro SUM y
-                            gimnasio con amplia variedad de maquinas a tú disposición</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp position-relative barrita-rooms" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                    <h6 class="section-title text-center text-primary text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Exclusivo Room-service</h6>
+                    <h1 class="mb-5">Tu proxima elección a un click de distancia </h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp " data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                        <div class="room-item shadow  overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid image_card_habitaciones" src="{% static "img/card_spa.webp" %}" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Disponible con tu reserva</small>
+                            </div>
+                            <div class="p-4 mt-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="mb-0">Vení a relajarte</h5>
+                                    <div class="ps-2">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Sector Vip para residentes</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Vestuarios individuales</small>
+                                    <small><i class="fa fa-wifi text-primary me-2"></i>Zona Wifi</small>
+                                </div>
+                                <p class="text-body mb-3">Descubre Spa "Acqua Di Django", zona con piscina climatizada,  sauna, vestuarios, y servicio de masajes (arancelados). Te esperamos en nuestro SUM y
+                                    gimnasio con variedad de maquinas a tú disposición</p>
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="room-item shadow  overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid image_card_habitaciones" src="{% static "img/card_resto.webp" %}" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Abierto a todo público</small>
+                            </div>
+                            <div class="p-4 mt-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="mb-0">Restó Django Suites</h5>
+                                    <div class="ps-2">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Sector Vip para residentes</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Barra exclusiva</small>
+                                    <small><i class="fa fa-wifi text-primary me-2"></i>Menú Ejecutivo</small>
+                                </div>
+                                <p class="text-body mb-3">En nuestro Restaurante "DjangoSuites" podés disfrutar no sólo de un
+                                    completo desayuno buffet, sino de múltiples opciones para almuerzo, merienda y cena y una
+                                    completa carta de vinos.</p>
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                        <div class="room-item shadow  overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid image_card_habitaciones" src="{% static "img/card_asist.webp" %}" alt="">
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Tu información a un click</small>
+                            </div>
+                            <div class="p-4 mt-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h5 class="mb-0">Asistencia online</h5>
+                                    <div class="ps-2">
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                        <small class="fa fa-star text-primary"></small>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Solo para húespedes</small>
+                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Revisá tus gastos</small>
+                                    <small><i class="fa fa-wifi text-primary me-2"></i>Aplicación dedicada</small>
+                                </div>
+                                <p class="text-body mb-3">En cada habitación vas a poder
+                                    consultar sobre tu reserva, servicios adicionales, solicitar servicio a la habitación y
+                                    conocer todos los aranceles con comodidad y rapidez.</p>
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-
-
-            <!-- Tarjeta de Restaurante 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card  h-100">
-                    <img src="{% static "img/card_resto.webp" %}" class="card-img-top" alt="Restorant">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title border-bottom py-2 text-center">Restó Django Suites</h5>
-                        <p class="card-text text-start">En nuestro Restaurante "DjangoSuites" podés disfrutar no sólo de un
-                            completo desayuno buffet, sino de múltiples opciones para almuerzo, merienda y cena y una
-                            completa carta de vinos.</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Tarjeta de servicio en habitaacion 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card  h-100">
-                    <img src="{% static "img/card_asist.webp" %}" class="card-img-top" alt="Suite Familiar">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title border-bottom py-2 text-center">Asistencia online</h5>
-                        <p class="card-text text-start">En cada habitación vas a poder
-                            consultar sobre tu reserva, servicios adicionales, solicitar servicio a la habitación y
-                            conocer todos los aranceles con comodidad y rapidez.</p>
-                        <button type="button" class="btn btn-outline-secondary mt-auto align-self-end">Ver más</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Boton "Ver mas" -->
-            <div class="d-grid gap-2 col-12 mx-auto">
-                <button class="btn btn-dark fs-5" type="button"><a  class="text-white text-decoration-none"  href=" {% url 'facilities' %}">Conocé nuestros servicios</a></button>
-            </div>
     </section>
+
+
+    <section>
+        <div class="d-grid gap-2">
+        <button type="button" class="btn mb-3"><a class="btn btn-primary py-3 px-5 mt-2 " href="">Conocé nuestra oferta y variedad de actividades </a></button>
+        </div>
+    </section>
+
+
+
+
+
+
+
+   
 
       </main>
 
