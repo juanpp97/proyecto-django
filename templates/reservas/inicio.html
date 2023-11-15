@@ -4,8 +4,8 @@
 {% load static %}
 <main>
     <section class="contenido_uno">
-        <span class="txt-rotating-no">DSH</span>
-        <span is="type-async"  class="txt-rotating" id="type-text"></span>
+        <span class="txt-rotating-no text-dark">DSH</span>
+        <span is="type-async"  class="txt-rotating text-success" id="type-text"></span>
         {% comment %} <span class="blinking-cursor">_</span> {% endcomment %}
         <img src="{% static 'img/facilities/instalacion_general.jpg' %}" alt="Descripción de la imagen"  data-scroll-zoom />
     </section>
@@ -22,24 +22,24 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <h6 class="section-title text-start text-primary text-uppercase barrita">Sobre Nosotros</h6>
+                    <h6 class="section-title text-start text-success text-uppercase barrita">Sobre Nosotros</h6>
                     <h1 class="mb-4">Bienvenido a <span class=" text-uppercase">Django Hotel Suites</span></h1>
                     <p class="mb-4">Descubre la fusión perfecta de lujo y comodidad en el corazón de la ciudad. Con seis tipos de habitaciones exquisitamente diseñadas, piscina y jacuzzi, un restaurante que celebra sabores auténticos, y servicios personalizados, en Django Hotel Suites creamos experiencias inolvidables. Únete a nosotros y sumérgete en un mundo donde la elegancia y la comodidad danzan en armonía.</p>
                     <div class="row g-3 pb-4">
                         <div class="col-sm-4 wow fadeIn" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-4">
-                                    <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
-                                    <h2 class="mb-1" data-toggle="counter-up">Más de 350</h2>
-                                    <p class="mb-0">Habitaciones disponibles</p>
+                                    <i class="fa fa-hotel fa-2x text-success mb-2"></i>
+                                    <h2 class="mb-1" data-toggle="counter-up">350</h2>
+                                    <p class="mb-0">Habitaciones</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-4">
-                                    <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
-                                    <h2 class="mb-1" data-toggle="counter-up">Más de 2175</h2>
+                                    <i class="fa fa-users-cog fa-2x text-success mb-2"></i>
+                                    <h2 class="mb-1" data-toggle="counter-up">2175</h2>
                                     <p class="mb-0">Reseñas Positivas</p>
                                 </div>
                             </div>
@@ -47,14 +47,14 @@
                         <div class="col-sm-4 wow fadeIn" data-wow-delay="0.9s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
                             <div class="border rounded p-1">
                                 <div class="border rounded text-center p-4">
-                                    <i class="fa fa-users fa-2x text-primary mb-2"></i>
-                                    <h2 class="mb-1" data-toggle="counter-up">Más de 2000</h2>
-                                    <p class="mb-0">Huéspedes recibidos</p>
+                                    <i class="fa fa-users fa-2x text-success mb-2"></i>
+                                    <h2 class="mb-1" data-toggle="counter-up">2000</h2>
+                                    <p class="mb-0">Clientes</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <a class="btn btn-primary py-3 px-5 mt-2 " href="">Descubre tu próxima estadía en DSH </a> -->
+                    <!-- <a class="btn btn-dark py-3 px-5 mt-2 " href="">Descubre tu próxima estadía en DSH </a> -->
                 </div>
                 <div class="col-lg-6">
                     <div class="row g-3">
@@ -68,7 +68,7 @@
                             <img class="img-fluid  w-50 wow zoomIn" data-wow-delay="0.5s" src="{% static 'img/inicio_2.webp' %}" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">
                         </div>
                         <div class="col-6 text-start">
-                            <img class="img-fluid  w-75 wow zoomIn" data-wow-delay="0.7s" src="{% static 'img/icono.png' %}" style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
+                            <img class="img-fluid  w-75 wow zoomIn" data-wow-delay="0.7s" src="{% static 'img/inicio_3.webp' %}" style="visibility: visible; animation-delay: 0.7s; animation-name: zoomIn;">
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
     <div class="container-xxl ">
         <div class="container">
             <div class="text-center wow fadeInUp position-relative barrita-rooms" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-                <h6 class="section-title text-center text-primary text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Nuestras Habitaciones</h6>
+                <h6 class="section-title text-center text-success text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Nuestras Habitaciones</h6>
                 <h1 class="mb-5">Elige la suite que más se adapte a vos</h1>
             </div>
             <div class="row g-4">
@@ -86,27 +86,27 @@
                     <div class="room-item shadow  overflow-hidden">
                         <div class="position-relative">
                             <img class="img-fluid image_card_habitaciones" src="{% static "img/rooms/individual1.webp" %}" alt="">
-                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Desde $20000/Noche</small>
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Desde $20000/Noche</small>
                         </div>
                         <div class="p-4 mt-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5 class="mb-0">Suite Individual</h5>
                                 <div class="ps-2">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>1 Cama</small>
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>1 Baño</small>
-                                <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-success me-2"></i>1 Cama</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-success me-2"></i>1 Baño</small>
+                                <small><i class="fa fa-wifi text-success me-2"></i>Wifi</small>
                             </div>
                             <p class="text-body mb-3">La habitación individual ideal, ya sea de paso o estancia prolongada.</p>
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -115,28 +115,28 @@
                     <div class="room-item shadow  overflow-hidden">
                         <div class="position-relative">
                             <img class="img-fluid image_card_habitaciones" src="{% static "img/rooms/suite1.webp" %}" alt="">
-                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Desde $30000/Noche</small>
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Desde $30000/Noche</small>
                         </div>
                         <div class="p-4 mt-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5 class="mb-0">Suite Clásica Double </h5>
                                 <div class="ps-2">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>de 2/3 camas</small>
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Baños</small>
-                                <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-success me-2"></i>de 2/3 camas</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-success me-2"></i>2 Baños</small>
+                                <small><i class="fa fa-wifi text-success me-2"></i>Wifi</small>
                             </div>
                             <p class="text-body mb-3">El tipo de habitación diseñada para disfrutar  de tus vacaciones
                                 en familia.</p>
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -145,27 +145,27 @@
                     <div class="room-item shadow  overflow-hidden">
                         <div class="position-relative">
                             <img class="img-fluid image_card_habitaciones" src="{% static "img/rooms/suite1.webp" %}" alt="">
-                            <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Desde $55000/Noche</small>
+                            <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Desde $55000/Noche</small>
                         </div>
                         <div class="p-4 mt-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h5 class="mb-0">Suite Familiar</h5>
                                 <div class="ps-2">
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
-                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
+                                    <small class="fa fa-star text-success"></small>
                                 </div>
                             </div>
                             <div class="d-flex mb-3">
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>2/3 Camas</small>
-                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>2 Baños</small>
-                                <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bed text-success me-2"></i>2/3 Camas</small>
+                                <small class="border-end me-3 pe-3"><i class="fa fa-bath text-success me-2"></i>2 Baños</small>
+                                <small><i class="fa fa-wifi text-success me-2"></i>Wifi</small>
                             </div>
                             <p class="text-body mb-3">Una habitación especialmente pensada para familias más exigentes.</p>
                             <div class="d-flex justify-content-between">
-                                <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                             </div>
                         </div>
                     </div>
@@ -175,10 +175,10 @@
     </div>
     
     <section>
-        <div class="d-grid gap-2">
-        <button type="button" class="btn mb-5"><a class="btn btn-primary py-3 px-5 mt-5 " href="">Descubre tu próxima estadía en DSH </a></button>
-        
-      </div></section>
+        <div class="d-grid gap-2 wow fadeInUp" data-wow-delay="0.6s">
+            <button type="button" class="btn mb-5"><a class="btn btn-dark py-3 px-5 mt-5 " href="">Descubre tu próxima estadía en DSH </a></button>    
+        </div>
+    </section>
 
     
     <section  class="contenido_dos data-scroll-out">
@@ -190,7 +190,7 @@
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp position-relative barrita-rooms" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-                    <h6 class="section-title text-center text-primary text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Exclusivo Room-service</h6>
+                    <h6 class="section-title text-center text-success text-uppercase header-line-room barrita-rooms barrita-rooms-right barrita-rooms-left">Exclusivo Room-service</h6>
                     <h1 class="mb-5">Tu proxima elección a un click de distancia </h1>
                 </div>
                 <div class="row g-4">
@@ -198,28 +198,22 @@
                         <div class="room-item shadow  overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid image_card_habitaciones" src="{% static "img/card_spa.webp" %}" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Disponible con tu reserva</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Disponible con tu reserva</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
                                     <h5 class="mb-0">Vení a relajarte</h5>
-                                    <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
+                                   
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Sector Vip para residentes</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Vestuarios individuales</small>
-                                    <small><i class="fa fa-wifi text-primary me-2"></i>Zona Wifi</small>
+                                    <small class="border-end me-3 pe-3">Sector Vip para residentes</small>
+                                    <small class="border-end me-3 pe-3">Vestuarios individuales</small>
+                                    <small>Zona Wifi</small>
                                 </div>
-                                <p class="text-body mb-3">Descubre Spa "Acqua Di Django", zona con piscina climatizada,  sauna, vestuarios, y servicio de masajes (arancelados). Te esperamos en nuestro SUM y
-                                    gimnasio con variedad de maquinas a tú disposición</p>
+                                <p class="text-body mb-3">Descubre Spa "Acqua Di Django", zona con piscina climatizada,  sauna, vestuarios, y servicio de masajes. Te esperamos en nuestro SUM y
+                                    gimnasio a tú disposición</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                    <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
@@ -228,29 +222,23 @@
                         <div class="room-item shadow  overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid image_card_habitaciones" src="{% static "img/card_resto.webp" %}" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Abierto a todo público</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Abierto a todo público</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
                                     <h5 class="mb-0">Restó Django Suites</h5>
-                                    <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
+                                   
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Sector Vip para residentes</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Barra exclusiva</small>
-                                    <small><i class="fa fa-wifi text-primary me-2"></i>Menú Ejecutivo</small>
+                                    <small class="border-end me-3 pe-3">Sector Vip para residentes</small>
+                                    <small class="border-end me-3 pe-3">Barra exclusiva</small>
+                                    <small>Menú Ejecutivo</small>
                                 </div>
                                 <p class="text-body mb-3">En nuestro Restaurante "DjangoSuites" podés disfrutar no sólo de un
                                     completo desayuno buffet, sino de múltiples opciones para almuerzo, merienda y cena y una
                                     completa carta de vinos.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                    <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
@@ -259,29 +247,23 @@
                         <div class="room-item shadow  overflow-hidden">
                             <div class="position-relative">
                                 <img class="img-fluid image_card_habitaciones" src="{% static "img/card_asist.webp" %}" alt="">
-                                <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white  py-1 px-3 ms-4">Tu información a un click</small>
+                                <small class="position-absolute start-0 top-100 translate-middle-y bg-success text-white  py-1 px-3 ms-4">Tu información a un click</small>
                             </div>
                             <div class="p-4 mt-2">
                                 <div class="d-flex justify-content-between mb-3">
                                     <h5 class="mb-0">Asistencia online</h5>
-                                    <div class="ps-2">
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                        <small class="fa fa-star text-primary"></small>
-                                    </div>
+                                   
                                 </div>
                                 <div class="d-flex mb-3">
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bed text-primary me-2"></i>Solo para húespedes</small>
-                                    <small class="border-end me-3 pe-3"><i class="fa fa-bath text-primary me-2"></i>Revisá tus gastos</small>
-                                    <small><i class="fa fa-wifi text-primary me-2"></i>Aplicación dedicada</small>
+                                    <small class="border-end me-3 pe-3">Solo para húespedes</small>
+                                    <small class="border-end me-3 pe-3">Revisá tus gastos</small>
+                                    <small>Aplicación dedicada</small>
                                 </div>
                                 <p class="text-body mb-3">En cada habitación vas a poder
                                     consultar sobre tu reserva, servicios adicionales, solicitar servicio a la habitación y
                                     conocer todos los aranceles con comodidad y rapidez.</p>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary w-100  py-2 px-4" href="">Ver Detalles</a>
+                                    <a class="btn btn-sm btn-dark w-100  py-2 px-4" href="">Ver Detalles</a>
                                 </div>
                             </div>
                         </div>
@@ -294,15 +276,71 @@
 
 
     <section>
-        <div class="d-grid gap-2">
-        <button type="button" class="btn mb-3"><a class="btn btn-primary py-3 px-5 mt-2 " href="">Conocé nuestra oferta y variedad de actividades </a></button>
+        <div class="d-grid gap-2 wow fadeInUp" data-wow-delay="0.6s" >
+            <button type="button" class="btn mb-3"><a class="btn btn-dark py-3 px-5 mt-2 " href="">Conocé nuestra oferta y variedad de actividades </a></button>
         </div>
     </section>
 
 
 
 
-
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                <h6 class="section-title text-center text-success text-uppercase">Conocé a NUESTRO EQUIPO DE ALTA CALIDAD Y VELOCIDAD</h6>
+                <h1 class="mb-5">Grupo 2 <span class="text-success text-uppercase">CAC</span></h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                    <div class="rounded shadow overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="https://avatars.githubusercontent.com/u/79938359" style="filter: grayscale(1);" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-github "></i></a>
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fa fa-briefcase"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0 ">Lautaro Rivadero</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                    <div class="rounded shadow overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="https://placehold.co/600x400/webp" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0 ">Full Name</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                    <div class="rounded shadow overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="https://placehold.co/600x400/webp" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-dark mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0 ">Full Name</h5>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
    
