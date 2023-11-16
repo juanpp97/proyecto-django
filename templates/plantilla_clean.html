@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="html" >
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %} {% endblock %}</title>  
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'animate.css' %}"> 
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
+  <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
+  <link rel="shortcut icon" href="{%static 'img/icono.png'%}" type="png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  {% block extracss %} {% endblock %}
+</head>
+<body id='body'>
+    {% comment %} ponganle un display none o un opacity 0 o corten el script  porque me va a dar error en js {% endcomment %}
+    {% comment %} <section class="panel-users">
+        <button id="panel-users-switch">></button>
+        <ul class="panel-users-list panel-close">
+          <li>Cliente</li>
+          <li>Trajabador</li>
+          <li>Admin</li>
+        </ul>
+    </section>
+   {% endcomment %}
+
+    
+    {% block contenido %} {% endblock %}
+    
+
+
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  {% comment %} <script src="https://unpkg.com/scrollreveal"></script> {% endcomment %}
+  <script src="{% static 'js/wow.js' %}"></script>
+
+  {% if active == "reservation" %}
+  <script src="{% static 'js/validacion.js' %}"></script>
+  {% endif %}
+  <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
+  <script src="{% static 'js/plantilla.js' %}"></script>
+  <script>
+    new WOW().init();
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        document.getElementById('body').classList.add('visible')
+    }, 100);
+  });
+  </script>
+</body>
+</html>
