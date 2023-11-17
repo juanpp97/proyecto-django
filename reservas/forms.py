@@ -2,6 +2,11 @@ from django import forms
 from django.forms import ValidationError 
 from dateutil.relativedelta import relativedelta
 from re import match
+# Autenticación
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import fields, PasswordInput
+from django.utils.translation import gettext_lazy
+
 #Sobreescribo los mensajes de error por defecto del form
 default_errors = {
     'required': 'Este campo es obligatorio',
@@ -158,3 +163,20 @@ class ContactForm(forms.Form):
         return data
     
 
+class RegistroForm(UserCreationForm):
+    password1 = fields.CharField(
+        label= gettext_lazy("Password"),
+        strip=False,
+        widget=PasswordInput(attrs={"autocomplete": "new-password"}),
+        help_text="Ingresa una contraseña segura"
+    )
+    password2 = fields.CharField(
+        label = gettext_lazy("Password confirmation"),
+        widget = PasswordInput(attrs={"autocomplete": "new-password"}),
+        strip = False,
+        help_text = gettext_lazy("Confirma tu contraseña"),
+    )
+
+
+class InicioSesionForm(AuthenticationForm):
+    pass

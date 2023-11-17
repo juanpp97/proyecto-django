@@ -191,7 +191,7 @@ class RoomViewListView(LoginRequiredMixin, ListView):
 
     context_object_name = 'views_list'
 
-    login_url = 'accounts-hanfler'
+    login_url = 'accounts_handler'
 
     def handle_no_permission(self):
         messages.error(self.request, "Debes iniciar sesión para acceder")

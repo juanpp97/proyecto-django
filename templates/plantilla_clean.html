@@ -17,7 +17,7 @@
 </head>
 <body id='body'>
     {% comment %} ponganle un display none o un opacity 0 o corten el script  porque me va a dar error en js {% endcomment %}
-    <section class="panel-users">
+    {% comment %} <section class="panel-users">
         <button id="panel-users-switch">></button>
         <ul class="panel-users-list panel-close">
           <li>Cliente</li>
@@ -25,15 +25,11 @@
           <li>Admin</li>
         </ul>
     </section>
-  
-    {% include 'header.html' %}
+   {% endcomment %}
+
     
     {% block contenido %} {% endblock %}
     
-    {% include 'footer.html' %}
-
-
-
 
 
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
@@ -48,24 +44,10 @@
   <script src="{% static 'js/plantilla.js' %}"></script>
   <script>
     new WOW().init();
-
-    
     document.addEventListener("DOMContentLoaded", function() {
       setTimeout(function() {
         document.getElementById('body').classList.add('visible')
-
     }, 100);
-
-    window.addEventListener('scroll', function () {
-      var header = document.getElementById('miHeader');
-      if (window.scrollY === 0) {
-          header.style.backgroundColor = 'rgba(33,37,41, 1)'; // Fondo oscuro en la parte superior
-      } else {
-          header.style.backgroundColor = 'rgba(33,37,41, 0.5)'; // Fondo más transparente al desplazarse hacia abajo
-      }
-  });
-
-
   });
   </script>
 </body>

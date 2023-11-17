@@ -1,4 +1,4 @@
-{% extends "accounts/base_accounts.html" %}
+{% extends "base_accounts.html" %}
 {% load static %}
 {%block titulo%} Panel de inicio {%endblock%}
 
@@ -92,7 +92,7 @@
 
 
 
-      <form method="post" action="{% url 'accounts-hanfler' %}" class="mt-0">
+      <form method="post" action="{% url 'accounts_handler' %}" class="mt-0">
         <h3>Registrarse</h3>
         {% csrf_token %}
         
@@ -116,7 +116,7 @@
 
      
 
-      <form method="post" action="{% url 'accounts-hanfler' %}">
+      <form method="post" action="{% url 'accounts_handler' %}">
         <h3>Iniciar Sesión</h3>
         {% csrf_token %}
         <input type="hidden" name="login_form" value="login_form" id="login_form">

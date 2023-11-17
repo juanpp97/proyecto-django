@@ -5,6 +5,11 @@ from .forms import ReservationForm, ContactForm
 from django.contrib import messages
 from administracion.models import RoomType, RoomView, RoomImg
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login,authenticate
+from django.views.generic import View
+from django.urls import reverse_lazy
+from .forms import  InicioSesionForm, RegistroForm
+from django.contrib.auth.views import LogoutView
 
 def index(request):
     context = {
@@ -25,7 +30,7 @@ def rooms(request):
 
 def facilities(request):
     context = {
-        "hero":{"title":"DSH","content":"Queremos que tu estancia en nuestro exuberante hotel sea realmente inolvidable. Por eso prestamos especial atención a todas tus necesidades para que podamos asegurarte una experiencia única. habitaciones exquisitamente diseñadas, piscina y jacuzzi, un restaurante que celebra sabores auténticos, y servicios personalizados, en Django Hotel Suites creamos experiencias inolvidables. Únete a nosotros y sumérgete en un mundo donde la elegancia y la comodidad danzan en armonía."},
+        "hero":{"title":"DSH","content":"Queremos que tu estancia en nuestro  hotel sea realmente inolvidable. Por eso prestamos especial atención a todas tus necesidades para que podamos asegurarte una experiencia única. habitaciones exquisitamente diseñadas, piscina y jacuzzi, un restaurante que celebra sabores auténticos, y servicios personalizados, en Django Hotel Suites creamos experiencias inolvidables. Únete a nosotros y sumérgete en un mundo donde la elegancia y la comodidad danzan en armonía."},
         "date": datetime.now(),
         "active": "facilities",
         "imagenes": [
@@ -39,10 +44,10 @@ def facilities(request):
             ],
         "cards":[
             {"title":"Habitaciones","img":"img/facilities/instalaciones_05.webp","comentario":"Sumérgete en la opulencia y el confort con nuestras Habitaciones de Lujo. Cada detalle ha sido diseñado con elegancia para brindarte una experiencia de alojamiento excepcional. Disfruta de una estancia inolvidable en un entorno de lujo y comodidad incomparables."},
-            {"title":"Restaurantes & bares","img":"img/facilities/instalaciones_RESTAURANTE&BAR.webp","comentario":"Explora una deliciosa variedad de sabores en nuestros exclusivos restaurantes y bares. Desde la cocina gourmet hasta cócteles artesanales, te invitamos a saborear una experiencia culinaria excepcional en un entorno encantador. Descubre un festín para tus sentidos en nuestro hotel."},
-            {"title":"YATES","img":"img/facilities/instalaciones_YATES.webp","comentario":"¡Explora las maravillas del mar con nuestra gama de servicios náuticos! Desde emocionantes paseos en motos acuáticas hasta relajantes viajes en lancha y barco, tenemos todo lo que necesitas para una experiencia inolvidable en el agua. ¡Prepárate para navegar hacia la diversión y la aventura!"},
+            {"title":"Restaurant y Bar exclusivos","img":"img/facilities/instalaciones_RESTAURANTE&BAR.webp","comentario":"Explora una deliciosa variedad de sabores en nuestros exclusivos restaurantes y bares. Desde la cocina gourmet hasta cócteles artesanales, te invitamos a saborear una experiencia culinaria excepcional en un entorno encantador. Descubre un festín para tus sentidos en nuestro hotel."},
+            {"title":"PASEOS POR MAR","img":"img/facilities/instalaciones_YATES.webp","comentario":"¡Explora las maravillas del mar con nuestra gama de servicios náuticos! Desde emocionantes paseos en motos acuáticas hasta relajantes viajes en lancha y barco, tenemos todo lo que necesitas para una experiencia inolvidable en el agua. ¡Prepárate para navegar hacia la diversión y la aventura!"},
             {"title":"SPA","img":"img/facilities/instalaciones_ESPA.webp","comentario":"Descubre la tranquilidad y el encanto de nuestro oasis ESPA. Un lugar donde el bienestar y la relajación te esperan en cada rincón. ¡Sumérgete en una experiencia rejuvenecedora que te dejará renovado y revitalizado!"},
-            {"title":"Ambientes Climatizados","img":"img/facilities/instalaciones_05.webp","comentario":"Relájate y sumérgete en la comodidad de nuestros Ambientes Climatizados, donde disfrutarás de la frescura y la relajación constante de una piscina cerrada. Un refugio perfecto para escapar del calor y disfrutar de un ambiente agradable en cualquier época del año. ¡Tu oasis personal de serenidad!"},
+            {"title":"Ambientes Climatizados","img":"img/facilities/instalaciones_05.webp","comentario":"Relájate y sumérgete en la comodidad de nuestros ambientes climatizados, donde disfrutarás de la frescura y la relajación constante de una piscina cerrada. Un refugio perfecto para escapar del calor y disfrutar de un ambiente agradable en cualquier época del año. ¡Tu oasis personal de serenidad!"},
             {"title":"GYM","img":"img/facilities/instalaciones_GYM.webp","comentario":"Encuentra el equilibrio perfecto entre relajación y actividad en nuestro moderno gimnasio. Mantén tu rutina de ejercicios, disfruta de equipos de primera calidad y mantente en forma durante tu estancia. En nuestro hotel, el bienestar es una prioridad, incluso cuando estás de viaje."},
             {"title":"Playa privada","img":"img/facilities/instalaciones_PLAYAPRIVADA.webp","comentario":"Disfruta de la serenidad y la exclusividad en nuestro paraíso junto al mar. Nuestra playa privada te ofrece un rincón de tranquilidad y belleza donde puedes relajarte, tomar el sol y sumergirte en las aguas cristalinas. ¡Tu escape perfecto a la orilla del mar te espera!"},
         ]
@@ -71,7 +76,7 @@ def contact(request):
 def reservation(request, id_hab):
     if not request.user.is_authenticated:
         messages.error(request, "Debes iniciar sesión para acceder")
-        return redirect('accounts-hanfler')
+        return redirect('accounts_handler')
     rooms = [
         {
         "id": 1,
@@ -194,3 +199,56 @@ def reservation(request, id_hab):
     }
     
     return render(request, "reservas/reserva.html", context)
+
+
+
+class Login_RegistrationView(View):
+    template_name = 'reservas/combined_registration_login.html'
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('index'))
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request):
+        panel = False
+        if request.GET.get('panel') == 'True':
+            panel = True
+        login_form = InicioSesionForm()
+        registration_form = RegistroForm()
+        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form, "LoginOrRegister": panel })
+
+    def post(self, request):
+        panel=False
+        if 'login_form' in request.POST:
+            login_form = InicioSesionForm(request, data = request.POST)
+            if login_form.is_valid():
+                username = login_form.cleaned_data['username']
+                password = login_form.cleaned_data['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None: 
+                    login(request,user)
+                    if 'next' in request.POST:
+                        return redirect(request.POST['next'])
+                    return redirect('index')
+                else:
+                    messages.error(request, "Error al iniciar sesión")
+            else:
+                messages.error(request, "Error al iniciar sesión")
+        else:
+            login_form = InicioSesionForm()
+        if 'registration_form' in request.POST:
+            registration_form = RegistroForm(request.POST)
+            if registration_form.is_valid():
+                registration_form.save()
+                panel = False
+                messages.success(request, "Usuario creado correctamente")
+                return redirect('accounts_handler')
+            else:
+                panel = True
+                messages.error(request, "Se ha producido un error al crear el usuario")
+        else:
+            registration_form = RegistroForm()
+        
+        return render(request, self.template_name, {'registration_form': registration_form, 'login_form': login_form,"LoginOrRegister": panel })
+
+

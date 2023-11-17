@@ -1,6 +1,30 @@
 :root  {
     --color-base: rgb(33,37,41); 
     --color-base-50: rgb(33,37,41,0.5); 
+    --color-teal: #20c997;
+}
+/* 
+.btn-success {
+    --bs-btn-color: #fff !important;
+    --bs-btn-bg: #12dc7e !important;
+    --bs-btn-border-color: #0fb467 !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #37d38a !important;
+    --bs-btn-hover-border-color: #51cb92 !important;
+    --bs-btn-focus-shadow-rgb: 60, 153, 110 !important;
+    --bs-btn-active-color: #fff !important;
+    --bs-btn-active-bg: #079a56 !important;
+    --bs-btn-active-border-color: #036d3b !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+    --bs-btn-disabled-color: #fff !important;
+    --bs-btn-disabled-bg: #72b294 !important;
+    --bs-btn-disabled-border-color: #6f9f89 !important;
+  } */
+.bg-teal{
+    background-color: var(--bs-teal);
+}
+.text-teal {
+    color: var(--bs-teal);
 }
 
 html{
@@ -384,8 +408,9 @@ html::-webkit-scrollbar {
     top: 50%;
     left: 55%;
     transform: translateY(-50%);
-    color: var(--color-base);
-    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+    font-style: normal;
   }
 
   .txt-rotating-no{
@@ -396,6 +421,7 @@ html::-webkit-scrollbar {
     left: 35%;
     transform: translateY(-50%);
     color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
   .blinking-cursor {
     user-select: none;
@@ -413,26 +439,30 @@ html::-webkit-scrollbar {
     left: 50%;
     transform: translateX(-50%);
   }
-  .barrita{position: relative;}
-  .barrita::after {
-    content: " ";
+
+  #body > main > div:nth-child(2) > div > div > div:nth-child(1) > h6::before{display: none;}
+  .section-title{position: relative; padding: 1px;}
+  .section-title::after,.section-title::before{
+
+    background-color: var(--color-base);
     position: absolute;
     height: 2px;
-    width:45px;
-    top: 50%;
-    margin-left: 10px;
-    transform: translateY(-50%);
-    background-color: var(--color-base);
-}
-
-/* 
-.section-title::after {
-    position: absolute;
     content: "";
     width: 45px;
-    height: 2px;
     top: 50%;
-    right: -55px;
-    margin-top: -1px;
-    background: var(--primary);
-} */
+  } 
+
+  .section-title::after{margin-left: 10px;}
+  .section-title::before{margin-left: -55px;}
+
+  .image_card_habitaciones{
+    max-height: 190px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+
+
+  .home_card_room{
+    min-height: 540px;
+  }
