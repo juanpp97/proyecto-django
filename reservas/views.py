@@ -71,7 +71,7 @@ def contact(request):
 def reservation(request, id_hab):
     if not request.user.is_authenticated:
         messages.error(request, "Debes iniciar sesión para acceder")
-        return redirect('accounts-hanfler')
+        return redirect('accounts_handler')
     rooms = [
         {
         "id": 1,

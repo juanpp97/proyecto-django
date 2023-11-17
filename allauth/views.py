@@ -11,10 +11,10 @@ from django.contrib import messages
 
 class Handler_Login_Registration(TemplateView):
     template_name = 'accounts/combined_registration_login.html'
-    # def dispatch(self, request, *args, **kwargs):
-    #     if request.user.is_authenticated:
-    #         return redirect(reverse_lazy('index'))
-    #     return super().dispatch(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('index'))
+        return super().dispatch(request, *args, **kwargs)
     def get(self, request):
 
         panel = False
@@ -40,10 +40,8 @@ class Handler_Login_Registration(TemplateView):
                     return redirect('index')
                 else:
                     login_form.add_error(None,'Credenciales incorrectas!.')
-                    pass
             else:
                 messages.error(request, "Error al iniciar sesión")
-
         else:
             login_form = InicioSesionForm()
         if 'registration_form' in request.POST:
@@ -52,7 +50,7 @@ class Handler_Login_Registration(TemplateView):
                 registration_form.save()
                 panel = False
                 messages.success(request, "Usuario creado correctamente")
-                return redirect('accounts-hanfler')
+                return redirect('accounts_handler')
             else:
                 panel = True
                 messages.error(request, "Se ha producido un error al crear el usuario")
