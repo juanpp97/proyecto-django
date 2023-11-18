@@ -3,6 +3,7 @@
 {% block contenido %}
 {% load static %}
 {% include "administracion/style.html" %}
+{% load custom_filters %}
 
 <main>
 {% if perms.administracion.view_price %}
@@ -42,7 +43,7 @@
                     <tr>
                         <td>{{price.date_from|date:"d F o"}}</td>
                         <td>{{price.date_to|date:"d F o"}}</td>
-                        <td>AR${{price.price}}</td>
+                        <td>AR${{price.price|miles}}</td>
                         <td>{{price.room_type.name}}</td>
                         <td>{{price.room_view.name}}</td>
                         <td>
