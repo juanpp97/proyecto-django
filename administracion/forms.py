@@ -92,6 +92,7 @@ class PriceForm(forms.ModelForm):
             'date_to': default_errors, 
             'price': default_errors,
             'room_type': default_errors,
+            'room_view': default_errors,
 
             }
     def clean_price(self):
@@ -104,20 +105,13 @@ class PriceForm(forms.ModelForm):
             raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
         return self.cleaned_data["date_to"]
     def clean(self):
-        print(self.cleaned_data["room_type"].view.all())
-        raise ValidationError("Debugger")
-        prices = Price.objects.filter(room_type = self.cleaned_data["room_type"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
-
+        prices = Price.objects.filter(room_type = self.cleaned_data["room_type"], room_view = self.cleaned_data["room_view"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
         date_from = self.cleaned_data["date_from"]
         date_to = self.cleaned_data["date_to"] 
         for price in prices:
             if(price.date_from <= date_to <= price.date_to) or (price.date_from <= date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
-
                 self.add_error(None, f'Rango de fecha inválido. Rango superpuesto: {price.date_from.strftime("%d/%m/%Y")} a {price.date_to.strftime("%d/%m/%Y")}')
-
                 raise ValidationError("")
-
-
         return super().clean()
     
     def __init__(self, *args, **kwargs):

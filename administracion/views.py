@@ -184,14 +184,17 @@ class RoomDeleteView(PermissionRequiredMixin ,DeleteView):
         return context
     
 
-class RoomViewListView(LoginRequiredMixin, ListView):
+class RoomViewListView(PermissionRequiredMixin, ListView):
     model = RoomView
 
     template_name = 'administracion/listar_vistas.html'
 
     context_object_name = 'views_list'
 
-    login_url = 'accounts_handler'
+    permission_required = 'administracion.view_roomview'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def handle_no_permission(self):
         messages.error(self.request, "Debes iniciar sesión para acceder")
@@ -203,7 +206,7 @@ class RoomViewListView(LoginRequiredMixin, ListView):
         return context
     
 
-class RoomViewCreateView(CreateView):
+class RoomViewCreateView(PermissionRequiredMixin, CreateView):
     model = RoomView
 
     form_class = RoomViewForm
@@ -211,6 +214,11 @@ class RoomViewCreateView(CreateView):
     template_name = 'administracion/form.html'
 
     success_url = reverse_lazy('listar_vista')
+
+    permission_required = 'administracion.add_roomview'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
         messages.success(self.request, "Vista Añadida con éxito")
@@ -228,7 +236,7 @@ class RoomViewCreateView(CreateView):
         context["url"] = reverse_lazy('listar_vista')
         return context
 
-class RoomViewUpdateView(UpdateView):
+class RoomViewUpdateView(PermissionRequiredMixin, UpdateView):
     model = RoomView
 
     form_class = RoomViewForm
@@ -236,6 +244,11 @@ class RoomViewUpdateView(UpdateView):
     template_name = 'administracion/form.html'
 
     success_url = reverse_lazy('listar_vista')
+    
+    permission_required = 'administracion.change_roomview'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha actualizado correctamente')
@@ -260,6 +273,11 @@ class RoomViewDeleteView(DeleteView):
     template_name = 'administracion/eliminar.html'
 
     success_url = reverse_lazy('listar_vista')
+    
+    permission_required = 'administracion.delete_roomview'
+
+    def handle_no_permission(self):
+        return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
         messages.success(self.request, 'La vista se ha borrado correctamente')
