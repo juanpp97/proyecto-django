@@ -3,6 +3,7 @@
 {% block contenido %}
 {% load static %}
 {% include "administracion/style.html" %}
+{% load custom_filters %}
 
 <main>
 {% if perms.administracion.view_price %}
@@ -31,6 +32,7 @@
                     <th>Hasta</th>
                     <th>Valor por noche</th>
                     <th>Tipo de Habitación</th>
+                    <th>Vista</th>
                     {% if perms.administracion.change_price or perms.administracion.delete_price %}
                     <th>Acciones</th>
                     {% endif %}
@@ -41,8 +43,9 @@
                     <tr>
                         <td>{{price.date_from|date:"d F o"}}</td>
                         <td>{{price.date_to|date:"d F o"}}</td>
-                        <td>AR${{price.price}}</td>
+                        <td>AR${{price.price|miles}}</td>
                         <td>{{price.room_type.name}}</td>
+                        <td>{{price.room_view.name}}</td>
                         <td>
                         {% if perms.administracion.add_price %}
                         <a href="{% url "editar_tarifa" price.id %} " title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">

@@ -54,7 +54,7 @@ body{opacity:0}
     flex: 1;
 }
 .header-page ,.nav__link{
- font-size: 0.8rem !important;
+ font-size: 0.92rem !important;
 }
 #miHeader:hover{
     background-color: var(--color-base) !important;
