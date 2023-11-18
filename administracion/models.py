@@ -34,6 +34,6 @@ class Price(models.Model):
     date_to = models.DateField(verbose_name="Hasta: ")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor por noche (AR$)", help_text="Usar punto (.) para los decimales y no usar separador de miles")
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, verbose_name="Tipo de Habitación")
-    room_view = models.ForeignKey(RoomView, on_delete=models.CASCADE, verbose_name="Vista de la Habitación")
+   
     def __str__(self):
         return f"{self.date_from} a {self.date_to}: AR${self.price}"

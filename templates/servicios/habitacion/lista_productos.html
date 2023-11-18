@@ -6,7 +6,11 @@
   <div class="row row-cols-auto gap-3 justify-content-center " style="height: 100%;">
     {% for producto in list_productos  %}
     <div class="card text-center bg-light " style="width: 18rem; max-height: 27rem; min-height: 27rem">
-        <img src="https://placehold.co/600x400/webp" class="card-img-top mt-1" alt="...">
+      {%if producto.imagen %}
+        <img src="{{producto.imagen.url}}" class="card-img-top mt-1" alt="...">
+        {%else%}
+        <img src="https://placehold.co/600x400/webp" class="card-img-top mt-1" alt="...">
+      {%endif%}
         <div class="card-body">
           <h5 class="card-title">{{producto.nombre}}</h5>
           <p class="card-text"> ARS${{producto.precio}}</p>
