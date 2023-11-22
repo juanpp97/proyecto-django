@@ -76,11 +76,11 @@ class RoomViewForm(forms.ModelForm):
 
 class PriceForm(forms.ModelForm):
     room_type = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all(), to_field_name='name')
-    room_view = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), queryset=RoomView.objects.all(), to_field_name='name')
+    room_view = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), queryset=RoomView.objects.all(), label="Vista de la habitación")
 
     class Meta:
         model = Price
-        fields = ['date_from', 'date_to', 'price', 'room_type']
+        fields = ['date_from', 'date_to', 'price', 'room_type', 'room_view']
         widgets = {
             'date_from': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
             'date_to': forms.DateInput(attrs={"class": "form-control", "type": "date"}), 
@@ -92,6 +92,7 @@ class PriceForm(forms.ModelForm):
             'date_to': default_errors, 
             'price': default_errors,
             'room_type': default_errors,
+            'room_view': default_errors,
 
             }
     def clean_price(self):
@@ -99,24 +100,22 @@ class PriceForm(forms.ModelForm):
             raise ValidationError("El valor ingresado no es válido")
         return self.cleaned_data["price"]
     
-    def clean_date_to(self):
-        if self.cleaned_data["date_to"] < self.cleaned_data["date_from"]:
-            raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
-        return self.cleaned_data["date_to"]
-    def clean(self):
-        print(self.cleaned_data["room_type"].view.all())
-        raise ValidationError("Debugger")
-        prices = Price.objects.filter(room_type = self.cleaned_data["room_type"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
 
+    def clean(self):
+        if self.cleaned_data["date_to"] < self.cleaned_data["date_from"]:
+            self.add_error('date_to', f'La fecha ingresada debe ser mayor a "Desde"')
+            raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
+        
+        prices = Price.objects.filter(room_type = self.cleaned_data["room_type"], room_view = self.cleaned_data["room_view"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
         date_from = self.cleaned_data["date_from"]
         date_to = self.cleaned_data["date_to"] 
+        
         for price in prices:
             if(price.date_from <= date_to <= price.date_to) or (price.date_from <= date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
-
                 self.add_error(None, f'Rango de fecha inválido. Rango superpuesto: {price.date_from.strftime("%d/%m/%Y")} a {price.date_to.strftime("%d/%m/%Y")}')
-
                 raise ValidationError("")
-
+        if not RoomType.objects.filter(name = self.cleaned_data["room_type"].name, view = self.cleaned_data["room_view"]).exists():
+            self.add_error('room_view', f'La vista seleccionada no corresponde a la habitación')
 
         return super().clean()
     

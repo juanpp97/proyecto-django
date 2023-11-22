@@ -3,7 +3,23 @@
     --color-base-50: rgb(33,37,41,0.5); 
     --color-teal: #20c997;
 }
-
+/* 
+.btn-success {
+    --bs-btn-color: #fff !important;
+    --bs-btn-bg: #12dc7e !important;
+    --bs-btn-border-color: #0fb467 !important;
+    --bs-btn-hover-color: #fff !important;
+    --bs-btn-hover-bg: #37d38a !important;
+    --bs-btn-hover-border-color: #51cb92 !important;
+    --bs-btn-focus-shadow-rgb: 60, 153, 110 !important;
+    --bs-btn-active-color: #fff !important;
+    --bs-btn-active-bg: #079a56 !important;
+    --bs-btn-active-border-color: #036d3b !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125) !important;
+    --bs-btn-disabled-color: #fff !important;
+    --bs-btn-disabled-bg: #72b294 !important;
+    --bs-btn-disabled-border-color: #6f9f89 !important;
+  } */
 .bg-teal{
     background-color: var(--bs-teal);
 }
@@ -38,7 +54,7 @@ body{opacity:0}
     flex: 1;
 }
 .header-page ,.nav__link{
- font-size: 0.8rem !important;
+ font-size: 0.92rem !important;
 }
 #miHeader:hover{
     background-color: var(--color-base) !important;

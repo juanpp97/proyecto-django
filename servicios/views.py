@@ -20,12 +20,6 @@ def habitacion (request, tipo="comidas"):
         return render(request,'servicios/habitacion/carrito.html',contexto)
     
 
-# def carrito (request):
-#         return render(request,'servicios/habitacion/carrito.html',context={})
-
-
-
-
 
 def actividades(request):
     model = Eventos

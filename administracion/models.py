@@ -33,7 +33,19 @@ class Price(models.Model):
     date_from = models.DateField(verbose_name="Desde: ")
     date_to = models.DateField(verbose_name="Hasta: ")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Valor por noche (AR$)", help_text="Usar punto (.) para los decimales y no usar separador de miles")
-    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, verbose_name="Tipo de Habitación")
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, verbose_name="Tipo de Habitación", related_name="type")
     room_view = models.ForeignKey(RoomView, on_delete=models.CASCADE, verbose_name="Vista de la Habitación")
     def __str__(self):
-        return f"{self.date_from} a {self.date_to}: AR${self.price}"
+        return f"{self.room_type.name} ({self.room_view.name}): {self.date_from} a {self.date_to}: AR${self.price}"
+
+# class Room(models.Model):
+#     class EstadoChoices(models.TextChoices):
+#         ACTIVO = 'A', 'Activo'
+#         INACTIVO = 'I', 'Inactivo'
+#         MANTENIMIENTO = 'M', 'Mantenimiento'
+#     number = models.CharField(max_length=10, verbose_name="Número de habitación")
+#     status = models.CharField(max_length=1, choices=EstadoChoices.choices)
+#     type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='type')
+#     view = models.ForeignKey(RoomView, on_delete=models.CASCADE, related_name='view')
+
+    

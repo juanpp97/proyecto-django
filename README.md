@@ -6,3 +6,4 @@
 * Juan Pablo Peñaloza
 * Lautaro Marcelo Rivadero Aquino
 
+![image](https://github.com/juanpp97/proyecto-django/DER_administracion.png)
