@@ -1,20 +1,58 @@
 {% extends "plantilla_clean.html" %}
+{% load static %}
 
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'panel_usuario.css'%}">  
+{% endblock %}
+{% block contenido %}
+<main>
+    <section class="panel_header wow fadeIn">
+        <div class="panel_header-logo">
+            <img src="{% static 'img/logo2.svg' %}" alt="logo DSH"/>
+        </div>
+        <div class="panel_header-info">
+            <p>Nombre Apellido</p>
+        </div>
+        <div class="panel_header-reserva">
+            <p class="nombre">RESERVA</p>
+            <p class="id">id: <strong>21931239120sdalkad</strong></p>
+            <p class="detalles">ver detalles</p>
+        </div>
+    </section>
+    <section  class="panel_contenido">
+        <section class="wow zoomIn fadeIn">
+            <i class="fas fa-concierge-bell icon"></i>
+            <p></p>
+        </section>
+        <section class="wow zoomIn fadeIn">
+            <i class="fas fa-calendar icon"></i>
+            <p></p>
+        </section>
+        <section class="wow zoomIn fadeIn">
+            <i class="fas fa-spa icon"></i>
+            <p></p>
+        </section>
+        <section class="wow zoomIn fadeIn">
+            <i class="fas fa-dumbbell icon"></i>
+            <p></p>
+        </section>
+    </section>
+    <section class="panel_service wow zoomIn fadeIn">
+      <i class="fas fa-comments icon"></i>
+      <p></p>
+    </section>
+    {% comment %} <section>
+        <h1></h1>
+    </section>
+    <section>
+        EXANPLE
 
-{% block content %}
-    <section>
         <h1></h1>
     </section>
     <section>
+        EXANPLE
+
         <h1></h1>
-    </section>
-    <section>
-        <h1></h1>
-    </section>
-    <section>
-        <h1></h1>
-    </section>
-    <section>
-        <h1></h1>
-    </section>
+    </section> {% endcomment %}
+</main>
 {% endblock  %}

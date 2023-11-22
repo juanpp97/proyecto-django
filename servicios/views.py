@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from .models import Eventos,Producto
 from datetime import datetime
-
+from django.views.generic import TemplateView
 # Create your views here.
 
 def habitacion (request, tipo="comidas"):
@@ -40,3 +40,9 @@ def inicio(request):
             "date": datetime.now(),}
 
     return render (request,'servicios/servicios_adic.html',context)
+
+class PanelView(TemplateView):
+    template_name = "servicios/panel/panel_usuario.html"
+
+    def post(self,request):
+        return render(request,self.template_name,{})

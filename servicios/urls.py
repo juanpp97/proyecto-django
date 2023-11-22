@@ -7,7 +7,5 @@ urlpatterns = [
     path('habitacion/productos/<str:tipo>', views.habitacion, name="serv-producto"),
     # path('habitacion/carrito', views.carrito, name="serv-carrito"),
     path('actividades/', views.actividades, name='actividades'),
-    
-    
-    
+    path('panel/', views.PanelView.as_view(), name='panel'),
 ]
