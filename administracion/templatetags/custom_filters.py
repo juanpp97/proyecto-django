@@ -6,7 +6,6 @@ register = template.Library()
 @register.filter
 def miles(value):
     value = str(value)
-    print(value)
     entero, decimal = value.split(".")
     lista = []
     for index in range(-1, -(len(entero)+1), -1):
@@ -16,3 +15,6 @@ def miles(value):
     lista = lista[::-1]
     return "".join(lista) + "," + decimal
 
+@register.filter
+def create_range(value):
+    return range(value)
