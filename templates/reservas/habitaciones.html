@@ -4,7 +4,7 @@
 {% load static %}
 {% load custom_filters %}
 
-<main>
+<main>  
 
     <!-- Encabezado de la página -->
     <section class="hero_habitaciones text-white text-center py-7">
@@ -60,11 +60,19 @@
                         <p class="description"><strong>Capacidad: </strong> {{room.capacity}} persona{% if room.capacity > 1 %}s{% endif %}</p>
                         <p class="description"><strong>Camas: </strong> {{room.num_beds}}</p>
                         <p class="description"><strong>Vista: </strong> {% for view in room.view.all %}{% if forloop.counter0 == 0 %}{{view}}{% else %}, {{view}}{% endif %}{% endfor %} </p>
+
+                        
                     </div>
                     
                 </div>
                 <div class="d-flex align-content-end justify-content-lg-between flex-lg-row flex-column justify-content-center align-items-lg-center mt-3 p-3">
-                    <span class="price align-self-center py-3 py-lg-0"> $20000 por noche</span>
+                    {% if room.price %}
+                    <span class="price align-self-center py-3 py-lg-0"> ARS${{room.price|miles}} por noche</span>
+                    {% else %}
+                    <span class="price align-self-center py-3 py-lg-0"> ARS$*********** por noche</span>
+
+                    {% endif %}
+                    
                     <a class="btn btn-success text-center" href="{% url "reservation" 1 %}">Reservar</a>
                 </div>
             </div>

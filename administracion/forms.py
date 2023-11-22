@@ -106,10 +106,10 @@ class PriceForm(forms.ModelForm):
             self.add_error('date_to', f'La fecha ingresada debe ser mayor a "Desde"')
             raise ValidationError("La fecha ingresada debe ser mayor a \"Desde\"")
         
-
         prices = Price.objects.filter(room_type = self.cleaned_data["room_type"], room_view = self.cleaned_data["room_view"]).exclude(date_from = self.instance.date_from, date_to = self.instance.date_to, price = self.instance.price)
         date_from = self.cleaned_data["date_from"]
         date_to = self.cleaned_data["date_to"] 
+        
         for price in prices:
             if(price.date_from <= date_to <= price.date_to) or (price.date_from <= date_from <= price.date_to) or (date_from <= price.date_from and date_to >= price.date_to):
                 self.add_error(None, f'Rango de fecha inválido. Rango superpuesto: {price.date_from.strftime("%d/%m/%Y")} a {price.date_to.strftime("%d/%m/%Y")}')

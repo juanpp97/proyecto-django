@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 from .forms import ReservationForm, ContactForm
 from django.contrib import messages
-from administracion.models import RoomType, RoomView, RoomImg
+from administracion.models import RoomType, RoomView, RoomImg, Price
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,authenticate
 from django.views.generic import View
 from django.urls import reverse_lazy
 from .forms import  InicioSesionForm, RegistroForm
 from django.contrib.auth.views import LogoutView
+from django.db.models import Subquery, OuterRef, Min
 
 def index(request):
     context = {
@@ -19,10 +20,16 @@ def index(request):
     return render(request, "reservas/inicio.html", context)
 
 def rooms(request):
+    
     if request.method == "GET":
-        rooms_list = RoomType.objects.all().order_by('capacity')
+        today = datetime.now()
+        #Se agrega a cada objeto RoomType el precio que le corresponde
+        #Para ello se hace un Subquery que utiliza la clave primaria del queryset externo como room_type. Luego solo se trae el precio y nos quedamos con el primer valor
+        room_types = RoomType.objects.annotate(price=Subquery(Price.objects.filter(room_type=OuterRef('pk'), date_from__lte = today.strftime("%Y-%m-%d"), date_to__gte = today.strftime("%Y-%m-%d") ).values('price')[:1]))
+
+        rooms_list = room_types.order_by('price')
     context = {
-            "date": datetime.now(),
+            "date": today.date,
             "active": "rooms",
             "rooms_list": rooms_list,
         }
