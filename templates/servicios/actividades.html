@@ -18,12 +18,12 @@
       <div class="swiper-slide">
         <img
           class="swiper-imagen"
-          src="{{evento.imagen}}"
-          alt="{{ dato.titulo }}"
+          src="{{evento.imagen.url}}"
+          alt="{{ evento.titulo }}"
         />
-        <section class="slide-content-actividades">
+        <section style="overflow:scroll;" class="slide-content-actividades">
           <h2>{{evento.titulo}}</h2>
-          <p>{{evento.fecha}}</p>
+          <p>{{evento.fecha|date:"d F o"}}</p>
           <p>{{evento.informacion}}</p>
           <div class="buttons">
             <a>Detalles</a>
