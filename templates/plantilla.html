@@ -1,3 +1,4 @@
+{% load compress %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es" class="html" >
@@ -6,13 +7,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block titulo %} {% endblock %}</title>  
-  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
-  <link rel="stylesheet" type="text/css" href="{% static 'animate.css' %}"> 
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
-  <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
+ 
   <link rel="shortcut icon" href="{%static 'img/icono.png'%}" type="png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">  
+ 
+  {% compress css file boostrap %}
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
+  {% endcompress %}
+  {% compress css file alertify %}
+  <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
+  {% endcompress %}
+  {% compress css file base%}
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'animate.css' %}"> 
+  {% endcompress %}
+  
   {% block extracss %} {% endblock %}
 </head>
 <body id='body'>
@@ -30,17 +40,22 @@
     {% block contenido %} {% endblock %}
     {% include 'footer.html' %}
 
-
-  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    {% compress js %}
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    {% endcompress %}
+    {% compress js %}
+    <script src="{% static 'js/wow.js' %}"></script>
+    <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
+    {% endcompress %}
+    {% compress js %}
+    <script src="{% static 'js/plantilla.js' %}"></script>
+    {% endcompress %}
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   {% comment %} <script src="https://unpkg.com/scrollreveal"></script> {% endcomment %}
-  <script src="{% static 'js/wow.js' %}"></script>
 
   {% if active == "reservation" %}
   <script src="{% static 'js/validacion.js' %}"></script>
   {% endif %}
-  <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
-  <script src="{% static 'js/plantilla.js' %}"></script>
   <script>
     new WOW().init();
     document.addEventListener("DOMContentLoaded", function() {
