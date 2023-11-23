@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import os #compressor
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -39,7 +41,33 @@ INSTALLED_APPS = [
     'reservas',
     'servicios',
     'administracion',
+
+    'compressor', #add compressor app
 ]
+
+# COPRESSOR 
+COMPRESS_ENABLED = True
+COMPRESS_PRECOMPILERS = (    
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+STATICFILES_FINDERS = ( 
+    'django.contrib.staticfiles.finders.FileSystemFinder',  
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',    
+    'compressor.finders.CompressorFinder',
+    # 'compressor.js.JsCompressor'
+)
+COMPRESS_JS_FILTERS = [
+     'compressor.filters.jsmin.CleanCSSFilter'
+]
+COMPRESS_CSS_FILTERS = [
+     'compressor.filters.cssmin.CSSMinFilter',
+]
+# STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "static/compressor"
+
+COMPRESS_ROOT = STATIC_ROOT
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

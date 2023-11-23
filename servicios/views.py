@@ -11,8 +11,9 @@ def habitacion (request, tipo="comidas"):
         list_productos = Producto.objects.filter(categoria= tipo)
         contexto ={
             "tipo":tipo,
-            "list_productos":list_productos
+            "list_productos":list_productos   
         }
+        print(list_productos)
         return render(request,'servicios/habitacion/lista_productos.html',contexto)
     elif tipo == 'carrito':
         return render(request,'servicios/habitacion/carrito.html',contexto)
@@ -40,3 +41,19 @@ class PanelView(TemplateView):
 
     def post(self,request):
         return render(request,self.template_name,{})
+
+
+
+
+
+
+def json_carrito(request):
+    context = {"date": datetime.now(),}
+    if request.POST:
+        
+
+        pass
+
+    return render (request,'servicios/servicios_adic.html',context)
+
+

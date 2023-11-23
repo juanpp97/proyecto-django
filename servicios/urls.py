@@ -8,4 +8,5 @@ urlpatterns = [
     # path('habitacion/carrito', views.carrito, name="serv-carrito"),
     path('actividades/', views.actividades, name='actividades'),
     path('panel/', views.PanelView.as_view(), name='panel'),
+    path('json/carrito', views.actividades, name='actividades'),
 ]
