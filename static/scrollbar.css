@@ -1,0 +1,15 @@
+:root  {
+    --color-base: rgb(33,37,41); 
+    --color-base-50: rgb(33,37,41,0.5); 
+    --color-teal: #20c997;
+}
+html::-webkit-scrollbar {
+    width: 0.3em;
+  }
+html::-webkit-scrollbar-track {
+    background-color: transparent;
+    position: absolute;
+}
+html::-webkit-scrollbar-thumb {
+    background-color: var(--color-base);
+}

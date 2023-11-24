@@ -14,15 +14,11 @@ class Eventos(models.Model):
     
 
 class Producto(models.Model):
-
     opciones_categoria = [('comidas','comidas'),('cafeteria','cafeteria' ),('bebidas','bebidas')]
-
     nombre = models.CharField(verbose_name="nombre", max_length=100 , null= False, blank=False)
     categoria = models.CharField(verbose_name="categoria", max_length=100 , null= False, blank=False , choices= opciones_categoria)
     precio = models.IntegerField(verbose_name="precio", null= False, blank=False)
     imagen = models.ImageField(verbose_name= "imagen", upload_to="productos/")
-   
-   
 
     def __str__(self):
         return f"{self.nombre}, {self.categoria},{self.precio}"
