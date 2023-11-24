@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'reservas',
     'servicios',
     'administracion',
-
     'compressor', #add compressor app
 ]
 
