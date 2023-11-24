@@ -82,7 +82,7 @@ class RoomTypeUpdateView(PermissionRequiredMixin ,UpdateView):
 
     form_class = RoomTypeForm
 
-    template_name = 'administracion/form_type_hab.html'
+    template_name = 'administracion/form_tipo_hab.html'
 
     success_url = reverse_lazy('listar_tipo_hab')
 
@@ -363,7 +363,6 @@ class PriceUpdateView(UpdateView):
         price = self.get_object()
         initial['date_from'] = price.date_from.strftime('%Y-%m-%d')
         initial['date_to'] = price.date_to.strftime('%Y-%m-%d')
-        initial['room_type'] = price.room_type.name
         return initial
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

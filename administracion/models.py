@@ -43,9 +43,7 @@ class Price(models.Model):
     def __str__(self):
         return f"{self.room_type.name} ({self.room_view.name}): {self.date_from} a {self.date_to}: AR${self.price}"
 
-class ActivasManager(models.Manager):
-    def get_queryset(self) -> QuerySet:
-        return super().get_queryset().filter(status = Room.EstadoChoices.ACTIVO)
+
 
 class Room(models.Model):
     class EstadoChoices(models.TextChoices):
@@ -56,6 +54,5 @@ class Room(models.Model):
     status = models.CharField(max_length=1, choices=EstadoChoices.choices, verbose_name="Estado")
     type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='room_type')
     view = models.ForeignKey(RoomView, on_delete=models.CASCADE, related_name='room_view')
-    activas = ActivasManager()
 
     
