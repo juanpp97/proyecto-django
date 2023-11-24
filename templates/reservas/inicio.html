@@ -11,7 +11,7 @@
     </section>
     {% if messages %}
     {% for message in messages  %}
-    <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{message.tags}}{% endif %} alert-dismissible text-center text__error">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         {{message}}
     </div>

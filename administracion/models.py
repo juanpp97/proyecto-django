@@ -14,8 +14,12 @@ class RoomType(models.Model):
     capacity = models.IntegerField(verbose_name='Capacidad Máxima')
     view = models.ManyToManyField(RoomView, verbose_name="Vista")
     num_beds = models.CharField(verbose_name="Número de camas")
+
+    def display_view(self):
+        return ', '.join([romview.name for romview in self.view.all()])
+
     def __str__(self) -> str:
-        return f"{self.name} - {self.capacity} - {self.view} - {self.num_beds}"
+        return f"{self.name} - {self.capacity} - {self.num_beds}"
     
 
 class RoomImg(models.Model):

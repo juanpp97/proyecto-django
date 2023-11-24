@@ -17,12 +17,14 @@
             class="container row justify-content-md-between justify-content-center justify-content-lg-around row-gap-5 column-gap-lg-2 mt-5 text-center mx-auto">
 
             {% for room in rooms_list %}
-            <div class="col-xl-3 col-lg-4 col-md-5 col-sm-9 col-9 card p-0 shadow rounded-4" id="{{room.id}}">
+            <div class="col-xl-3 col-lg-4 col-md-5 col-sm-9 col-9 card p-0 shadow " id="{{room.id}}">
                 <!-- Carousel de las cards -->
                 {% if room.room_imgs.count == 0  %}
-                <img src="/media/habitaciones/generica.webp" alt="{{room.name}}" class="imagen_card rounded-top-4">
+                <img src="/media/habitaciones/generica.webp" alt="{{room.name}}" class="imagen_card ">
+                <img src="{{room.hab_imgs.ruta.url}}" alt="{{room.name}}" class="imagen_card ">
+
                 {% elif room.hab_imgs.count == 1 %}
-                <img src="{{room.hab_imgs.ruta.url}}" alt="{{room.name}}" class="imagen_card rounded-top-4">
+                <img src="{{room.hab_imgs.ruta.url}}" alt="{{room.name}}" class="imagen_card ">
                 {% else %}
                 
                 <div id="control{{room.id}}" class="carousel carousel-light slide card_carousel">
@@ -34,7 +36,7 @@
                     <div class="carousel-inner">
                         {% for image in room.room_imgs.all %}
                         <div class="carousel-item{% if forloop.counter0 == 0 %} active{% endif %}">
-                            <img src="{{image.img.url}}" alt="{{room.name}}" class="imagen_card rounded-top-4">
+                            <img src="{{image.img.url}}" alt="{{room.name}}" class="imagen_card ">
                         </div>
                         {% endfor %}
                     </div>

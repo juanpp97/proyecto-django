@@ -66,7 +66,7 @@ STATIC_ROOT = BASE_DIR / "static/compressor"
 
 COMPRESS_ROOT = STATIC_ROOT
 
-
+FIXTURE_DIRS =  [BASE_DIR/"fixtures"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
