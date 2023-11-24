@@ -3,7 +3,7 @@ from django import forms
 from django.forms import ValidationError 
 from dateutil.relativedelta import relativedelta
 from re import match
-from .models import RoomView, RoomImg, RoomType, Price
+from .models import RoomView, RoomImg, RoomType, Price, Room
 from os import path
 
 default_errors = {
@@ -14,7 +14,7 @@ default_errors = {
 }
 
 
-class RoomForm(forms.ModelForm):
+class RoomTypeForm(forms.ModelForm):
     view = forms.ModelMultipleChoiceField(queryset=RoomView.objects.all(), widget=forms.CheckboxSelectMultiple(), error_messages = default_errors, label="Vista de la habitacion")
     
     imgs = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control', 'multiple': True}), required=False, label="Imagenes de la habitacion")
@@ -75,7 +75,7 @@ class RoomViewForm(forms.ModelForm):
         return self.cleaned_data["name"]
 
 class PriceForm(forms.ModelForm):
-    room_type = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all(), to_field_name='name')
+    room_type = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all())
     room_view = forms.ModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), queryset=RoomView.objects.all(), label="Vista de la habitación")
 
     class Meta:
@@ -122,3 +122,37 @@ class PriceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PriceForm, self).__init__(*args, **kwargs)
         self.fields['room_type'].label_from_instance = lambda obj: f"{obj.name}"
+
+
+class MyModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return f"{obj.name}"
+
+class RoomForm(forms.ModelForm):
+    type = MyModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), label='Tipo de Habitación', queryset=RoomType.objects.all())
+    view = MyModelChoiceField(widget=forms.Select(attrs={"class": 'form-select'}), queryset=RoomView.objects.all(), label="Vista de la habitación")
+
+    class Meta:
+        model = Room
+        fields = ['number', 'status', 'type', 'view']
+        widgets = {
+            'number': forms.TextInput(attrs={"class": "form-control"}), 
+            'status': forms.Select(attrs={"class": "form-select"}), 
+
+        }
+        error_messages = {
+            'number': default_errors, 
+            'status': default_errors, 
+            'type': default_errors,
+            'view': default_errors,
+
+            } 
+    def clean_number(self):
+        if Room.objects.filter(number = self.cleaned_data["number"]).exclude(number = self.instance.number).exists():
+            raise ValidationError("Ese número de habitación ya existe")
+        return self.cleaned_data["number"]
+    def clean(self):
+        if not RoomType.objects.filter(name = self.cleaned_data["type"].name, view = self.cleaned_data["view"]).exists():
+            self.add_error('view', f'La vista seleccionada no corresponde a la habitación')
+
+        return super().clean()

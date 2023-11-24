@@ -68,12 +68,11 @@
             <li><a class="dropdown-item" href="{% url "crear_vista" %}">Nueva Vista</a></li>
             {% endif %}
             {% endif %}
-{% comment %}   
+
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>
             <li><h5 class="dropdown-header">Habitaciones</h5></li>
-            <li><a class="dropdown-item" href="">Gestionar Habitaciones</a></li>
-            <li><a class="dropdown-item" href="">Nueva Habitación</a></li>
-   {% endcomment %}
+            <li><a class="dropdown-item" href="{% url "listar_hab" %}">Gestionar Habitaciones</a></li>
+            <li><a class="dropdown-item" href="{% url "crear_hab" %}">Nueva Habitación</a></li>
   
             {% if perms.administracion.view_price %}
             <li><hr class="dropdown-divider border-light border-opacity-25"></li>

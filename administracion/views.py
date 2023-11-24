@@ -1,10 +1,10 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
-from .models import RoomType, RoomImg, RoomView, Price
-from .forms import RoomForm, RoomViewForm, PriceForm
+from .models import RoomType, RoomImg, RoomView, Price, Room
+from .forms import RoomTypeForm, RoomViewForm, PriceForm, RoomForm
 from django.contrib import messages
 from os import path, rename
 from datetime import datetime
@@ -44,7 +44,7 @@ class RoomTypeListView(PermissionRequiredMixin, ListView):
 class RoomTypeCreateView(PermissionRequiredMixin, CreateView):
     model = RoomType
 
-    form_class = RoomForm
+    form_class = RoomTypeForm
 
     template_name = 'administracion/form_tipo_hab.html'
 
@@ -80,7 +80,7 @@ class RoomTypeCreateView(PermissionRequiredMixin, CreateView):
 class RoomTypeUpdateView(PermissionRequiredMixin ,UpdateView):
     model = RoomType
 
-    form_class = RoomForm
+    form_class = RoomTypeForm
 
     template_name = 'administracion/form_type_hab.html'
 
@@ -398,13 +398,13 @@ class PriceDeleteView(DeleteView):
         return context
 
 class RoomListView(PermissionRequiredMixin, ListView):
-    model = RoomView
+    model = Room
 
-    template_name = 'administracion/listar_vistas.html'
+    template_name = 'administracion/listar_habitaciones.html'
 
-    context_object_name = 'views_list'
+    context_object_name = 'rooms'
 
-    permission_required = 'administracion.view_roomview'
+    permission_required = 'administracion.view_room'
 
     def handle_no_permission(self):
         return redirect(reverse_lazy('index'))
@@ -420,91 +420,91 @@ class RoomListView(PermissionRequiredMixin, ListView):
     
 
 class RoomCreateView(PermissionRequiredMixin, CreateView):
-    model = RoomView
+    model = Room
 
-    form_class = RoomViewForm
+    form_class = RoomForm
 
     template_name = 'administracion/form.html'
 
-    success_url = reverse_lazy('listar_vista')
+    success_url = reverse_lazy('listar_hab')
 
-    permission_required = 'administracion.add_roomview'
+    permission_required = 'administracion.add_room'
 
     def handle_no_permission(self):
         return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
-        messages.success(self.request, "Vista Añadida con éxito")
+        messages.success(self.request, "Habitación Creada con éxito")
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        messages.error(self.request, "Ha ocurrido un error al crear la vista")
+        messages.error(self.request, "Ha ocurrido un error al crear la habitación")
         return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titulo"] = "Crear Vista de Habitación"
+        context["titulo"] = "Crear Habitación"
         context["date"] = datetime.now()
         context["boton"] = "Crear"
-        context["url"] = reverse_lazy('listar_vista')
+        context["url"] = reverse_lazy('listar_hab')
         return context
 
 class RoomUpdateView(PermissionRequiredMixin, UpdateView):
-    model = RoomView
+    model = Room
 
-    form_class = RoomViewForm
+    form_class = RoomForm
 
     template_name = 'administracion/form.html'
 
-    success_url = reverse_lazy('listar_vista')
+    success_url = reverse_lazy('listar_hab')
     
-    permission_required = 'administracion.change_roomview'
+    permission_required = 'administracion.change_room'
 
     def handle_no_permission(self):
         return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
-        messages.success(self.request, 'La vista se ha actualizado correctamente')
+        messages.success(self.request, 'La habitación se ha actualizado correctamente')
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        messages.error(self.request, 'Error al actualizar la vista')
+        messages.error(self.request, 'Error al actualizar la habitación')
         return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["titulo"] = "Editar Vista"
+        context["titulo"] = "Editar Habitación"
         context["date"] = datetime.now()
         context["boton"] = "Editar"
-        context["url"] = reverse_lazy('listar_vista')
+        context["url"] = reverse_lazy('listar_hab')
         return context
     
     
 class RoomDeleteView(DeleteView):
-    model = RoomView
+    model = Room
 
     template_name = 'administracion/eliminar.html'
 
-    success_url = reverse_lazy('listar_vista')
+    success_url = reverse_lazy('listar_hab')
     
-    permission_required = 'administracion.delete_roomview'
+    permission_required = 'administracion.delete_room'
 
     def handle_no_permission(self):
         return redirect(reverse_lazy('index'))
 
     def form_valid(self, form):
-        messages.success(self.request, 'La vista se ha borrado correctamente')
+        messages.success(self.request, 'La habitación se ha borrado correctamente')
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        messages.error(self.request, 'Error al borrar la vista')
+        messages.error(self.request, 'Error al borrar la habitación')
         return super().form_invalid(form) 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["date"] = datetime.now()
-        context["titulo"] = "Eliminar Vista"
-        context["url"] = reverse_lazy("listar_vista")
-        context["aviso"] = f"¿Está seguro que desea eliminar permanentemente la vista {self.object.name}?"
+        context["titulo"] = "Eliminar Habitación"
+        context["url"] = reverse_lazy("listar_hab")
+        context["aviso"] = f"¿Está seguro que desea eliminar permanentemente la habitacion {self.object.number} - {self.object.type.name} - {self.object.view.name}?"
         return context
     

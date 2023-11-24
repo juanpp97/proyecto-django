@@ -14,7 +14,10 @@ urlpatterns = [
     path('tarifa/crear', views.PriceCreateView.as_view(), name = 'crear_tarifa'),
     path('tarifa/editar/<int:pk>', views.PriceUpdateView.as_view(), name = 'editar_tarifa'),
     path('tarifa/eliminar/<int:pk>', views.PriceDeleteView.as_view(), name = 'eliminar_tarifa'),
-
+    path('habitaciones/', views.RoomListView.as_view(), name = 'listar_hab'),
+    path('habitaciones/crear', views.RoomCreateView.as_view(), name = 'crear_hab'),
+    path('habitaciones/editar/<int:pk>', views.RoomUpdateView.as_view(), name = 'editar_hab'),
+    path('habitaciones/eliminar/<int:pk>', views.RoomDeleteView.as_view(), name = 'eliminar_hab'),
     
     
 ] 

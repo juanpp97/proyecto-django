@@ -21,7 +21,7 @@
         <h4 class="h4 text-center py-2"> Tarifas </h4>
         <div class="d-flex gap-4">
             {% if perms.administracion.add_room %}
-            <a class="btn btn-success py-2 rounded-4" href="{% url "" %}">+ Nueva Habitación</a>
+            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_hab" %}">+ Nueva Habitación</a>
             {% endif %}
         </div>
         <section class="pt-1 pb-3">
@@ -38,23 +38,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for price in prices_list %}
+                    {% for room in rooms %}
                     <tr>
-                        <td>{{price.date_from|date:"d F o"}}</td>
-                        <td>{{price.date_to|date:"d F o"}}</td>
-                        <td>AR${{price.price|miles}}</td>
-                        <td>{{price.room_type.name}}</td>
-                        <td>{{price.room_view.name}}</td>
+                        <td>{{room.number}}</td>
+                        <td>{{room.type.name}}</td>
+                        <td>{{room.view.name}}</td>
+                        <td>{{room.get_status_display}}</td>
                         {% if perms.administracion.change_room or perms.administracion.delete_room %}
-
                         <td>
                         {% if perms.administracion.change_room %}
-                        <a href="{% url "editar_tarifa" price.id %} " title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
+                        <a href="{% url "editar_hab" room.id %} " title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
                         {% endif %}
 
                         {% if perms.administracion.delete_room %}
-                        <a href="{% url "eliminar_tarifa" price.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
+                        <a href="{% url "eliminar_hab" room.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
                         {% endif %}
                     </td>
                     {% endif %}

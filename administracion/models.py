@@ -41,15 +41,15 @@ class Price(models.Model):
 
 class ActivasManager(models.Manager):
     def get_queryset(self) -> QuerySet:
-        return super().get_queryset().filter(estado = Room.EstadoChoices.ACTIVO)
+        return super().get_queryset().filter(status = Room.EstadoChoices.ACTIVO)
 
 class Room(models.Model):
     class EstadoChoices(models.TextChoices):
         ACTIVO = 'A', 'Activo'
         INACTIVO = 'I', 'Inactivo'
-        MANTENIMIENTO = 'M', 'Mantenimiento'
+        MANTENIMIENTO = 'M', 'En Mantenimiento'
     number = models.CharField(max_length=10, verbose_name="Número de habitación")
-    status = models.CharField(max_length=1, choices=EstadoChoices.choices)
+    status = models.CharField(max_length=1, choices=EstadoChoices.choices, verbose_name="Estado")
     type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='room_type')
     view = models.ForeignKey(RoomView, on_delete=models.CASCADE, related_name='room_view')
     activas = ActivasManager()
