@@ -6,49 +6,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block titulo %} {% endblock %}</title>  
-  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'scrollbar.css' %}"> 
   <link rel="stylesheet" type="text/css" href="{% static 'animate.css' %}"> 
-  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">  
+  {% comment %} <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">   {% endcomment %}
   <link rel="stylesheet" href="{% static 'alertifyjs/css/alertify.min.css'%}">  
   <link rel="shortcut icon" href="{%static 'img/icono.png'%}" type="png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/> {% endcomment %}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  {% comment %} <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">   {% endcomment %}
+
   {% block extracss %} {% endblock %}
 </head>
 <body id='body'>
-    {% comment %} ponganle un display none o un opacity 0 o corten el script  porque me va a dar error en js {% endcomment %}
-    {% comment %} <section class="panel-users">
-        <button id="panel-users-switch">></button>
-        <ul class="panel-users-list panel-close">
-          <li>Cliente</li>
-          <li>Trajabador</li>
-          <li>Admin</li>
-        </ul>
-    </section>
-   {% endcomment %}
-
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    new WOW().init();
+  });
+  </script>
+ 
     
     {% block contenido %} {% endblock %}
     
 
-
+    {% comment %} <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/solid.js" integrity="sha384-/BxOvRagtVDn9dJ+JGCtcofNXgQO/CCCVKdMfL115s3gOgQxWaX/tSq5V8dRgsbc" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/fontawesome.js" integrity="sha384-dPBGbj4Uoy1OOpM4+aRGfAOc0W37JkROT+3uynUgTHZCHZNMHfGXsmmvYTffZjYO" crossorigin="anonymous"></script> {% endcomment %}
   <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js'%}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-  {% comment %} <script src="https://unpkg.com/scrollreveal"></script> {% endcomment %}
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> {% endcomment %}
   <script src="{% static 'js/wow.js' %}"></script>
-
-  {% if active == "reservation" %}
-  <script src="{% static 'js/validacion.js' %}"></script>
-  {% endif %}
   <script src="{% static 'alertifyjs/alertify.min.js'%}"></script>
-  <script src="{% static 'js/plantilla.js' %}"></script>
-  <script>
-    new WOW().init();
-    document.addEventListener("DOMContentLoaded", function() {
-      setTimeout(function() {
-        document.getElementById('body').classList.add('visible')
-    }, 100);
-  });
-  </script>
 </body>
 </html>
