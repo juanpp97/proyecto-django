@@ -37,6 +37,8 @@
                     {% for view in views_list %}
                     <tr>
                         <td>{{view.name}}</td>
+                        {% if perms.administracion.change_roomview or perms.administracion.delete_roomview %}
+
                         <td class="text-end">
                         {% if perms.administracion.change_roomview %}
                         <a href="{% url "editar_vista" view.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
@@ -47,6 +49,7 @@
                         <a href="{% url "eliminar_vista" view.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
                         {% endif %}
                     </td>
+                    {% endif %}
                         </tr>
                     {% endfor %}
     

@@ -1,5 +1,6 @@
 from typing import Any
 from django.db import models
+from django.db.models.query import QuerySet
 
 # Create your models here.
 
@@ -38,14 +39,19 @@ class Price(models.Model):
     def __str__(self):
         return f"{self.room_type.name} ({self.room_view.name}): {self.date_from} a {self.date_to}: AR${self.price}"
 
-# class Room(models.Model):
-#     class EstadoChoices(models.TextChoices):
-#         ACTIVO = 'A', 'Activo'
-#         INACTIVO = 'I', 'Inactivo'
-#         MANTENIMIENTO = 'M', 'Mantenimiento'
-#     number = models.CharField(max_length=10, verbose_name="Número de habitación")
-#     status = models.CharField(max_length=1, choices=EstadoChoices.choices)
-#     type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='type')
-#     view = models.ForeignKey(RoomView, on_delete=models.CASCADE, related_name='view')
+class ActivasManager(models.Manager):
+    def get_queryset(self) -> QuerySet:
+        return super().get_queryset().filter(estado = Room.EstadoChoices.ACTIVO)
+
+class Room(models.Model):
+    class EstadoChoices(models.TextChoices):
+        ACTIVO = 'A', 'Activo'
+        INACTIVO = 'I', 'Inactivo'
+        MANTENIMIENTO = 'M', 'Mantenimiento'
+    number = models.CharField(max_length=10, verbose_name="Número de habitación")
+    status = models.CharField(max_length=1, choices=EstadoChoices.choices)
+    type = models.ForeignKey(RoomType, on_delete=models.CASCADE, related_name='room_type')
+    view = models.ForeignKey(RoomView, on_delete=models.CASCADE, related_name='room_view')
+    activas = ActivasManager()
 
     

@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from .forms import ReservationForm, ContactForm
 from django.contrib import messages
-from administracion.models import RoomType, RoomView, RoomImg, Price
+from administracion.models import RoomType, Price
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,authenticate
 from django.views.generic import View
 from django.urls import reverse_lazy
 from .forms import  InicioSesionForm, RegistroForm
-from django.contrib.auth.views import LogoutView
-from django.db.models import Subquery, OuterRef, Min
+from django.db.models import Subquery, OuterRef
+from django.db.models.functions import Coalesce
 
 def index(request):
     context = {
@@ -25,13 +25,23 @@ def rooms(request):
         today = datetime.now()
         #Se agrega a cada objeto RoomType el precio que le corresponde
         #Para ello se hace un Subquery que utiliza la clave primaria del queryset externo como room_type. Luego solo se trae el precio y nos quedamos con el primer valor
-        room_types = RoomType.objects.annotate(price=Subquery(Price.objects.filter(room_type=OuterRef('pk'), date_from__lte = today.strftime("%Y-%m-%d"), date_to__gte = today.strftime("%Y-%m-%d") ).values('price')[:1]))
-
-        rooms_list = room_types.order_by('price')
+        room_types = RoomType.objects.annotate(
+            price=Coalesce(
+                Subquery(
+                    Price.objects.filter(
+                        room_type=OuterRef('pk'),
+                        date_from__lte=today.strftime("%Y-%m-%d"),
+                        date_to__gte=today.strftime("%Y-%m-%d")
+                    ).values('price')[:1]
+                ),
+                Subquery(Price.objects.filter(room_type=OuterRef('pk')).values('price')[:1])
+            )
+        ).order_by('price')
+      
     context = {
             "date": today.date,
             "active": "rooms",
-            "rooms_list": rooms_list,
+            "rooms_list": room_types,
         }
     return render(request, 'reservas/habitaciones.html', context)
 

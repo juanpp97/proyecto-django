@@ -17,7 +17,7 @@
         <h4 class="h4 text-center py-2"> Tipos de Habitaciones </h4>
         <div class="d-flex gap-4">
             {% if perms.administracion.add_roomtype %}
-            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_hab" %}">+ Nueva Habitacion</a>
+            <a class="btn btn-success py-2 rounded-4" href="{% url "crear_tipo_hab" %}">+ Nueva Habitacion</a>
             {% endif %}
 
             {% if perms.administracion.add_roomview %}
@@ -49,16 +49,20 @@
                         {% endfor %}
                     </td>
                         <td>{{room.num_beds}}</td>
+                        {% if perms.administracion.change_roomtype or perms.administracion.delete_roomtype %}
+
                         <td>
                         {% if perms.administracion.change_roomtype %}
-                        <a href="{% url "editar_hab" room.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
+                        <a href="{% url "editar_tipo_hab" room.id %}" title="Editar" class="btn btn-warning p-2 pt-1"> <img src="{% static "img/editar.svg" %}" alt="">
                         </a>
                         {% endif %}
 
                         {% if perms.administracion.delete_roomtype %}
-                        <a href="{% url "eliminar_hab" room.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
+                        <a href="{% url "eliminar_tipo_hab" room.id %}" title="Eliminar" class="btn btn-danger p-2 pt-1"><img src="{% static "img/borrar.svg" %}" alt=""></a>   
                         {% endif %}
                     </td>
+                    {% endif %}
+
                         </tr>
                     {% endfor %}
     
